@@ -2,20 +2,20 @@ import Image from "next/image"
 
 export function CategoryIconsOccasions() {
   const categories = [
-    { name: "Eid Collection", image: "/images/eid.png" },
-    { name: "Onam Gifts", image: "/images/onam.png" },
-    { name: "Diwali Gifts", image: "/images/diwali.png" },
-    { name: "Raksha Bandhan", image: "/images/raksha-bandhan.png" },
-    { name: "Christmas Gifts", image: "/images/christmas.png" },
-    { name: "Valentine's Day", image: "/images/valentine.png" },
-    { name: "New Year Gifts", image: "/images/newyear.png" },
-    { name: "All Occasions", image: "/images/all-occasions.png" },
+    { name: "Eid Collection", image: "/images/specialOccasion/eid.png" },
+    { name: "Onam Gifts", image: "/images/specialOccasion/onam.png" },
+    { name: "Diwali Gifts", image: "/images/specialOccasion/diwali.png" },
+    { name: "Raksha Bandhan", image: "/images/specialOccasion/raksha-bandhan.png" },
+    { name: "Christmas Gifts", image: "/images/specialOccasion/christmas.png" },
+    { name: "Valentine's Day", image: "/images/specialOccasion/valentine.png" },
+    { name: "New Year Gifts", image: "/images/specialOccasion/newyear.png" },
+    { name: "All Occasions", image: "/images/specialOccasion/all-occasions.png" },
   ]
 
   return (
-    <section className="py-8 md:py-12 bg-white border-b border-border/40">
+    <section className=" md:py-5 bg-white border-b border-border/40">
       <div className="container mx-auto px-4">
-        <div className="flex overflow-x-auto pb-4 md:pb-0 hide-scrollbar gap-4 md:gap-6 justify-start lg:justify-center">
+        <div className="flex overflow-x-auto pb-4 md:pb-0 hide-scrollbar gap-4 md:gap-15 justify-start lg:justify-center">
           {categories.map((cat, index) => (
             <div
               key={index}

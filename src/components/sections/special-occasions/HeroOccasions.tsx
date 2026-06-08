@@ -28,13 +28,16 @@ export function HeroOccasions() {
               <Heart className="w-5 h-5" />
             </div>
 
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight ">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
               <span className="text-black text-nowrap">
                 Special Occasions,
               </span>
               <br />
+              <span className="text-black text-nowrap">
+                Special{" "}
+              </span>
               <span className="text-primary text-nowrap">
-                Special Memories
+                Memories
               </span>
             </h1>
 
