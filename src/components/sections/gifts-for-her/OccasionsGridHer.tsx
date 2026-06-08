@@ -17,7 +17,7 @@ const occasions = [
     description: "Celebrate your beautiful journey",
     bgColor: "bg-[#FFF5F5]",
     titleColor: "text-red-500",
-    imagePlaceholder: "Heart Box", 
+    imagePlaceholder: "Heart Box",
     image: "/images/occassion/scarlet-occasionbox2.png",
   },
   {
@@ -46,7 +46,8 @@ export function OccasionsGridHer() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-heading font-bold flex items-center justify-center gap-2">
-            Gifts For Every Occasion <Heart className="w-5 h-5 text-primary fill-transparent" />
+            Gifts For Every Occasion{" "}
+            <Heart className="w-5 h-5 text-primary fill-transparent" />
           </h2>
         </div>
 
@@ -57,26 +58,30 @@ export function OccasionsGridHer() {
               className={`${occ.bgColor} rounded-3xl p-6 relative overflow-hidden group hover:shadow-md transition-shadow flex flex-col h-full min-h-[220px]`}
             >
               {occ.image && (
-                <Image
-                  src={occ.image}
-                  alt={occ.title}
-                  fill
-                  className="object-cover"
-                />
+                <div className="absolute inset-0">
+                  <Image
+                    src={occ.image}
+                    alt={occ.title}
+                    fill
+                    className="object-cover object-center"
+                  />
+                </div>
               )}
 
               <div className="absolute inset-0 bg-white/10 pointer-events-none" />
 
-              <div className="relative z-10 w-2/3">
+              <div className="relative z-10 max-w-[55%] flex flex-col h-full">
                 <h3 className={`font-bold text-xl mb-2 ${occ.titleColor}`}>
                   {occ.title}
                 </h3>
+
                 <p className="text-sm text-muted-foreground mb-6 line-clamp-2">
                   {occ.description}
                 </p>
+
                 <Link
                   href={`/gifts-for-her/${occ.id}`}
-                  className="inline-flex items-center text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors"
+                  className="inline-flex items-center text-xs font-bold uppercase tracking-wider hover:text-primary transition-colors mt-auto"
                 >
                   Shop Now{" "}
                   <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />

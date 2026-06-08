@@ -2,7 +2,7 @@ import { Grip, UserRound, Sparkles, Baby, Gift, Package, Home } from "lucide-rea
 
 export function GalleryFilter() {
   const tabs = [
-    { id: "all", label: "All Creations", icon: <Grip className="w-4 h-4" />, active: true },
+    { id: "all", label: "All Creations", icon: <Grip className="w-0 h-0" />, active: true },
     { id: "him", label: "For Him", icon: <UserRound className="w-4 h-4" />, active: false },
     { id: "her", label: "For Her", icon: <Sparkles className="w-4 h-4" />, active: false },
     { id: "kids", label: "Kids & Babies", icon: <Baby className="w-4 h-4" />, active: false },
@@ -24,7 +24,7 @@ export function GalleryFilter() {
                   : "bg-white text-foreground/70 border-border hover:border-primary/50 hover:text-primary"
               }`}
             >
-              {tab.icon}
+              <span className="text-[#8059BB]">{tab.icon}</span>
               {tab.label}
             </button>
           ))}
