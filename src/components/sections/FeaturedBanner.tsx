@@ -1,11 +1,21 @@
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 export function FeaturedBanner() {
   return (
-    <section className="py-8 md:py-16 bg-white">
+    <section className="py-8 md:py-12">
       <div className="container mx-auto px-4">
-        <div className="rounded-3xl bg-[#FDF8EB] overflow-hidden flex flex-col md:flex-row">
-          <div className="p-8 md:p-16 flex-1 flex flex-col justify-center">
+        <div className="rounded-3xl bg-[#FDF8EB] overflow-hidden flex flex-col md:flex-row relative min-h-[400px] md:min-h-[450px] lg:min-h-[480px]">
+          {/* Background Image */}
+          <Image
+            src="/images/scarlet-bestseller-banner.png"
+            alt="New Born Gift Sets Bestseller Banner"
+            fill
+            className="object-cover z-0"
+            priority
+          />
+          
+          <div className="p-8 md:p-12 lg:p-16 md:w-1/2 flex flex-col justify-center relative z-10">
             <div className="inline-block px-3 py-1 bg-white rounded-full text-xs font-semibold tracking-widest text-primary uppercase mb-6 w-max">
               Best Seller
             </div>
@@ -19,15 +29,9 @@ export function FeaturedBanner() {
               Shop Now
             </Button>
           </div>
-          <div className="flex-1 min-h-[300px] md:min-h-[400px] relative bg-[#f5efe6] flex items-center justify-center p-8">
-            {/* Fallback image placeholder */}
-            <div className="text-center bg-white/60 backdrop-blur p-6 rounded-2xl border border-white">
-              <p className="font-heading text-2xl italic text-primary">Hello World</p>
-              <p className="text-sm font-medium mt-2">Personalized Onesie Set</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
   )
 }
+
