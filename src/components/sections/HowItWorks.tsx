@@ -1,6 +1,6 @@
 export function HowItWorks() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-8 md:py-12">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
           Personalize Your Gift in 3 Simple Steps
@@ -54,43 +54,60 @@ export function HowItWorks() {
 
 function GiftBoxIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-      <polyline points="20 12 20 22 4 22 4 12" />
-      <rect width="20" height="5" x="2" y="7" />
-      <line x1="12" x2="12" y1="22" y2="7" />
-      <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z" />
-      <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
+      {/* Lid */}
+      <rect x="3" y="8" width="18" height="4" rx="1" />
+      {/* Box */}
+      <path d="M5 12v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8" />
+      {/* Ribbon */}
+      <path d="M12 8v14" />
+      {/* Bow */}
+      <path d="M12 8A3 3 0 0 0 9 5c-1.5 0-3 1.5-3 3s1.5 3 3 3h3" />
+      <path d="M12 8A3 3 0 0 1 15 5c1.5 0 3 1.5 3 3s-1.5 3-3 3h-3" />
     </svg>
   )
 }
 
 function PersonalizeIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-      <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
-      <path d="m15 5 4 4" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
+      {/* Needle body */}
+      <path d="M5 19L17 7" />
+      {/* Eye of the needle */}
+      <path d="M17 7c.8-.8 2-.8 2.8 0 .8.8.8 2 0 2.8L17 7z" />
+      <circle cx="18" cy="6" r="0.75" fill="currentColor" />
+      {/* Scarlet Thread loop */}
+      <path d="M18 6c2-2 4-1 4 2s-3 4-6 4-5-3-7-3-4 2-4 4" strokeWidth="1.5" />
     </svg>
   )
 }
 
 function DeliveryIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-      <rect width="16" height="12" x="2" y="8" rx="2" ry="2" />
-      <circle cx="5.5" cy="18.5" r="2.5" />
-      <circle cx="14.5" cy="18.5" r="2.5" />
-      <path d="M18 8h3a1 1 0 0 1 1 1v4h-4" />
-      <path d="M18 13h4" />
-      <path d="M6 16v-4" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
+      {/* Fast Delivery Van */}
+      <path d="M2 9h13v8H2z" />
+      <path d="M15 9h4.5l3.5 3.5V17h-8z" />
+      {/* Wheels */}
+      <circle cx="6" cy="17" r="2.5" />
+      <circle cx="17" cy="17" r="2.5" />
+      {/* Windshield */}
+      <path d="M16 12h4" />
+      {/* Motion/speed lines */}
+      <path d="M2 6h3" />
+      <path d="M1 9h2" />
+      <path d="M2 12h2" />
     </svg>
   )
 }
 
 function ArrowRightIcon() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-8 h-8">
-      <path d="M5 12h14" />
-      <path d="m12 5 7 7-7 7" />
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-16 h-8 text-primary/40">
+      {/* Smooth wavy dotted path */}
+      <path d="M2 12 C 12 4, 18 20, 28 12 C 34 8, 40 10, 44 12" strokeDasharray="5 5" />
+      {/* Arrowhead */}
+      <path d="m40 8 4 4-4 4" />
     </svg>
   )
 }
