@@ -3,66 +3,74 @@ import Link from "next/link"
 
 export function Hero() {
   return (
-    <section className="relative overflow-hidden bg-secondary">
-      {/* Decorative background elements */}
-      <div className="absolute top-1/4 left-1/4 w-4 h-4 text-pink-400 opacity-50 transform rotate-45">
-        <HeartIcon />
-      </div>
-      <div className="absolute top-1/3 right-1/3 w-6 h-6 text-pink-400 opacity-50">
-        <HeartIcon />
+    <section className="relative overflow-hidden bg-[#faeef9] w-full py-12 md:py-16 lg:py-0 md:min-h-[500px] lg:h-[550px] flex items-center">
+      {/* Background Image Container (Desktop Only - spans full height and correct aspect ratio) */}
+      <div className="absolute right-0 top-0 bottom-0 h-full aspect-[1584/993] z-0 select-none pointer-events-none hidden md:block">
+        <img 
+          src="/images/scarlet-homebanner.png" 
+          alt="Scarlet Thread Home Banner" 
+          className="w-full h-full object-cover object-right"
+        />
+        {/* Gradient overlay to blend the image left edge seamlessly with the background color */}
+        <div className="absolute inset-y-0 left-0 w-32 md:w-60 bg-gradient-to-r from-[#faeef9] via-[#faeef9]/90 to-transparent" />
       </div>
 
-      <div className="container mx-auto px-4 py-16 md:py-24 lg:py-32">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6 z-10">
-            <div className="inline-block px-3 py-1 bg-white/50 rounded-full text-xs font-semibold tracking-widest text-primary uppercase mb-4">
-              Because
+      <div className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 relative z-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full">
+          <div className="space-y-5 z-20 relative">
+            {/* Decorative background elements positioned relative to the content */}
+            <div className="absolute -top-3 left-[32%] w-5 h-5 text-pink-400 opacity-70 transform rotate-12 animate-pulse hidden md:block">
+              <HeartIcon />
             </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold text-foreground leading-tight">
+            <div className="absolute top-[42%] -right-8 w-6 h-6 text-pink-400 opacity-70 transform -rotate-12 animate-pulse hidden md:block">
+              <HeartIcon />
+            </div>
+
+            <div className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
+              BECAUSE
+            </div>
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground leading-tight">
               Every Gift<br />
               Tells a <span className="text-primary italic font-serif">Story</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-md">
+            
+            <p className="text-base md:text-lg text-muted-foreground max-w-md">
               Personalized, embroidered & made with love for your special moments.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button size="lg" className="text-base h-12 px-8 rounded-full shadow-lg hover:shadow-primary/25 transition-all">
+            
+            <div className="flex items-center gap-6 pt-2">
+              <Button size="lg" className="text-base h-12 px-8 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl shadow-md transition-all">
                 Shop Now
               </Button>
-              <Button variant="outline" size="lg" className="text-base h-12 px-8 rounded-full border-primary/20 hover:bg-primary/5">
-                Explore Gifts <span className="ml-2">→</span>
-              </Button>
+              <Link href="/gifts" className="text-primary hover:text-primary/80 font-semibold flex items-center gap-2 transition-colors text-base py-2">
+                Explore Gifts <span className="text-lg">→</span>
+              </Link>
             </div>
-            
-            <div className="flex items-center gap-6 pt-8 mt-8 border-t border-primary/10">
-              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <GiftIcon className="h-4 w-4 text-primary" />
-                Personalized Just for You
+
+            <div className="flex flex-wrap items-center gap-2.5 pt-6 mt-6 border-t border-primary/10">
+              <div className="flex items-center gap-2 text-xs md:text-sm font-medium text-muted-foreground bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full border border-primary/10 shadow-sm whitespace-nowrap">
+                <GiftIcon className="h-4 w-4 text-primary shrink-0" />
+                <span>Personalized Just for You</span>
               </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <StarIcon className="h-4 w-4 text-primary" />
-                Premium Quality
+              <div className="flex items-center gap-2 text-xs md:text-sm font-medium text-muted-foreground bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full border border-primary/10 shadow-sm whitespace-nowrap">
+                <StarIcon className="h-4 w-4 text-primary shrink-0" />
+                <span>Premium Quality</span>
               </div>
-              <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
-                <HeartIcon className="h-4 w-4 text-primary" />
-                Made with Love
+              <div className="flex items-center gap-2 text-xs md:text-sm font-medium text-muted-foreground bg-white/70 backdrop-blur-sm px-4 py-2 rounded-full border border-primary/10 shadow-sm whitespace-nowrap">
+                <HeartIcon className="h-4 w-4 text-primary shrink-0" />
+                <span>Made with Love</span>
               </div>
             </div>
           </div>
-          
-          <div className="relative z-10">
-            <div className="relative aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
-              {/* Fallback color box simulating the image */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#E6D7FF] to-[#D4BEE4] flex items-center justify-center">
-                <div className="text-center p-8 bg-white/40 backdrop-blur-sm rounded-xl border border-white/50 shadow-xl">
-                   <p className="font-heading italic text-2xl text-primary mb-2">You are So Loved</p>
-                   <p className="text-sm font-medium text-foreground">Embroidered Baby Set</p>
-                </div>
-              </div>
-              
-              {/* Optional: if actual image is added later */}
-              {/* <img src="/images/hero-gift-box.jpg" alt="Personalized Gift Box" className="object-cover w-full h-full" /> */}
-            </div>
+
+          {/* Right Column: Mobile Image / Desktop Empty spacer */}
+          <div className="w-full flex justify-center md:block relative z-10">
+            <img 
+              src="/images/scarlet-homebanner.png" 
+              alt="Scarlet Thread Gift Set" 
+              className="w-full max-w-[450px] h-auto object-contain md:hidden"
+            />
           </div>
         </div>
       </div>
