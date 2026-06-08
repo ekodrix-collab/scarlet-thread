@@ -1,78 +1,100 @@
+"use client"
+
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, CheckCircle2, Heart, Award } from "lucide-react"
 import Link from "next/link"
+import { ArrowRight, Sparkles, Star, Heart } from "lucide-react"
 
 export function HeroHer() {
   return (
-    <section className="relative bg-[#FFF5F5] pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          
-          {/* Left Content */}
-          <div className="flex-1 text-center md:text-left">
-            <div className="inline-flex items-center px-3 py-1 bg-white rounded-full text-xs font-semibold tracking-widest text-primary uppercase mb-6 shadow-sm">
-              Gifts For Her <Heart className="w-3 h-3 ml-2 text-primary" />
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-foreground mb-6 leading-tight">
-              Made for Her, <br className="hidden md:block" />
-              <span className="text-primary">Personalized</span> <br className="hidden md:block" />
-              with Love
-            </h1>
-            
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg mx-auto md:mx-0">
-              Thoughtfully personalized & embroidered gifts that celebrate the most special women in your life.
-            </p>
+    <section className="relative overflow-hidden bg-[#fce8ec]">
+      {/* ── Full-bleed background image ── */}
+      <Image
+        src="/images/forher/scarlet-forherbanner-image.png"
+        alt="Personalized gifts for her — premium embroidered set"
+        fill
+        priority
+        className="object-cover object-center"
+      />
 
-            <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 mb-12">
-              <Button size="lg" className="rounded-full px-8 h-12 text-base shadow-lg shadow-primary/20 w-full sm:w-auto">
-                Shop Best Sellers
-              </Button>
-              <Button variant="ghost" size="lg" className="rounded-full px-8 h-12 text-base hover:bg-white/50 w-full sm:w-auto text-primary">
-                Explore Collection <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
+      {/* Gradient overlay so left text stays readable */} 
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, #fce8ec 0%, #fce8eccc 38%, #fce8ec88 58%, transparent 80%)",
+        }}
+      />
 
-            {/* Trust Badges */}
-            <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm font-medium text-muted-foreground bg-white/50 backdrop-blur-sm p-4 rounded-2xl w-max mx-auto md:mx-0 border border-white">
-              <div className="flex items-center gap-2">
-                <div className="text-primary">
-                  <Award className="w-4 h-4" />
-                </div>
-                Premium Quality
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="text-primary">
-                  <CheckCircle2 className="w-4 h-4" />
-                </div>
-                Personalized Just For Her
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="text-primary">
-                  <Heart className="w-4 h-4" />
-                </div>
-                Made with Love
-              </div>
-            </div>
+      {/* ── Content row ── */}
+      <div className="relative flex min-h-[240px] flex-col md:flex-row md:min-h-[280px] lg:min-h-[300px]">
+
+        {/* ── Left Content ── */}
+        <div className="relative z-10 flex flex-[1.3] flex-col justify-center px-8 py-23 md:pl-14 md:pr-6 lg:pl-20 md:max-w-[60%]">
+          {/* Badge */}
+          <div className="mb-3 flex items-center gap-1.5">
+            <Heart className="h-3 w-3 fill-[#c0004e] text-[#c0004e]" />
+            <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#c0004e]">
+              Gifts For Her
+            </span>
           </div>
 
-          {/* Right Image Box */}
-          <div className="flex-1 relative w-full aspect-[4/3] md:aspect-square lg:aspect-[4/3] max-w-2xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-            <Image 
-              src="/images/gifts_for_her.png" 
-              alt="Personalized gifts for her in a premium box"
-              fill
-              className="object-cover hover:scale-105 transition-transform duration-700"
-              priority
-            />
+          {/* Headline */}
+          <h1 className="mb-3 font-sans text-[1.75rem] font-extrabold leading-[1.18] text-[#111] md:text-[2.2rem] lg:text-[2.6rem]">
+            Made for Her,{" "}
+            <span className="text-[#c0004e]">Personalized</span>
+            <br />
+            with Love
+          </h1>
+
+          {/* Sub-text */}
+          <p className="mb-6 max-w-[360px] text-[0.78rem] leading-relaxed text-[#666] md:text-[0.82rem]">
+            Thoughtful, personalized &amp; embroidered gifts that celebrate the
+            most special women in your life.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="mb-6 flex flex-wrap items-center gap-2.5">
+            <Link
+              href="/gifts-for-her"
+              className="inline-flex h-9 items-center rounded-full bg-[#c0004e] px-5 text-[0.78rem] font-bold text-white shadow transition-all duration-200 hover:bg-[#a0003f] hover:-translate-y-px active:translate-y-0"
+            >
+              Shop Best Sellers
+            </Link>
+            <Link
+              href="/gifts-for-her"
+              className="inline-flex h-9 items-center rounded-full border border-[#c0004e]/60 bg-white/60 px-5 text-[0.78rem] font-semibold text-[#c0004e] backdrop-blur-sm transition-all duration-200 hover:bg-white hover:-translate-y-px active:translate-y-0"
+            >
+              Explore Collection
+              <ArrowRight className="ml-1 h-3 w-3" />
+            </Link>
           </div>
 
+          {/* Trust Badges */}
+          <div className="flex flex-wrap items-center gap-3">
+            <TrustBadge icon={<Sparkles className="h-3 w-3" />} label="Personalized &amp; Unique" />
+            <TrustBadge icon={<Star className="h-3 w-3" />} label="Premium Quality" />
+            <TrustBadge icon={<Heart className="h-3 w-3" />} label="Embroidered Items" />
+          </div>
         </div>
+
+
       </div>
-      
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
     </section>
+  )
+}
+
+/* ── Helper ── */
+function TrustBadge({
+  icon,
+  label,
+}: {
+  icon: React.ReactNode
+  label: string
+}) {
+  return (
+    <div className="flex items-center gap-1.5 rounded-full bg-white/55 px-3 py-1 text-[0.7rem] font-medium text-[#444] shadow-sm backdrop-blur-sm">
+      <span className="text-[#c0004e]">{icon}</span>
+      <span dangerouslySetInnerHTML={{ __html: label }} />
+    </div>
   )
 }
