@@ -2,29 +2,30 @@ import Link from "next/link"
 import Image from "next/image"
 
 const categories = [
-  { id: 1, name: "Gifts for Him", icon: "/icons/gift-blue.png", href: "/gifts-for-him" },
-  { id: 2, name: "Gifts for Her", icon: "/icons/gift-pink.png", href: "/gifts-for-her" },
-  { id: 3, name: "Kids & Babies", icon: "/icons/teddy.png", href: "/kids-babies" },
-  { id: 4, name: "Special Occasions", icon: "/icons/balloons.png", href: "/special-occasions" },
-  { id: 5, name: "Corporate Gifts", icon: "/icons/bag.png", href: "/corporate" },
-  { id: 6, name: "Custom Orders", icon: "/icons/custom.png", href: "/custom" },
+  { id: 1, name: "Gifts for Him", icon: "/images/scarlet-gift1.png", href: "/gifts-for-him", bgColor: "#E0F2FE"},
+  { id: 2, name: "Gifts for Her", icon: "/images/scarlet-gift2.png", href: "/gifts-for-her",bgColor: "#FCE7F3" },
+  { id: 3, name: "Kids & Babies", icon: "/images/scarlet-gift3.png", href: "/kids-babies",bgColor: "#FEF3C7" },
+  { id: 4, name: "Special Occasions", icon: "/images/scarlet-gift4.png", href: "/special-occasions",bgColor: "#FEE2E2" },
+  { id: 5, name: "Couple Gifts", icon: "/images/scarlet-couple.png", href: "/corporate",bgColor: "#FEE2E2" },
+  { id: 6, name: "Faith Based", icon: "/images/scarlet-faith.png", href: "/custom",bgColor: "#E8D5C4" },
 ]
 
 export function Categories() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-8 md:py-12">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4  md:gap-8">
           {categories.map((category) => (
-            <Link 
-              key={category.id} 
+            <Link
+              key={category.id}
               href={category.href}
-              className="flex flex-col items-center group text-center space-y-4"
+              className="flex flex-col items-center text-center py-3 space-y-3  bg-white border border-gray-200 shadow-lg rounded-2xl"
             >
-              <div className="w-24 h-24 md:w-32 md:h-32 rounded-3xl bg-secondary flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-300">
+              <div
+              style={{backgroundColor:category.bgColor}} className="w-24 h-24 md:w-40 md:h-40 rounded-3xl flex items-center justify-center shadow-sm group-hover:shadow-md group-hover:scale-105 transition-all duration-300">
                 {/* Fallback box for icon since we don't have actual images yet */}
-                <div className="w-12 h-12 md:w-16 md:h-16 bg-white/50 rounded-xl flex items-center justify-center text-primary">
-                  <GiftIcon />
+                <div className="w-full h-full  flex items-center justify-center text-primary">
+                  <Image src={category.icon} alt={category.name} width={500} height={550} />
                 </div>
               </div>
               <span className="font-sans font-medium text-sm md:text-base text-foreground group-hover:text-primary transition-colors">
