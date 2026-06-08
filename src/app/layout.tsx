@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fontSans.variable} ${fontHeading.variable} font-sans antialiased bg-background text-foreground min-h-screen flex flex-col`}
+        className={`${fontSans.variable} ${fontHeading.variable} font-sans antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden`}
       >
         <Header />
         <main className="flex-1">
