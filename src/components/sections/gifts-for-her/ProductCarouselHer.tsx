@@ -68,7 +68,7 @@ export function ProductCarouselHer() {
           <p className="text-muted-foreground mt-2">Handpicked with love, just for her</p>
         </div>
 
-        <div className="relative">
+        <div className="relative"> 
           {/* Navigation Arrows */}
           <button className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -ml-6 w-10 h-10 bg-white rounded-full shadow-md items-center justify-center z-10 hover:bg-[#FFF5F5] transition-colors border border-border">
             <ChevronLeft className="w-5 h-5 text-muted-foreground" />
