@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { Heart, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
@@ -120,9 +121,15 @@ export function RelatedProductsCarousel() {
                     <span className="ml-1">({product.reviews})</span>
                   </div>
                   
-                  <Button variant="outline" asChild className="w-full mt-auto rounded-lg text-primary border-primary hover:bg-primary/5 font-medium h-10">
-                    <Link href={`/product/${product.id}`}>Add to Cart</Link>
-                  </Button>
+                  <Link
+                    href={`/product/${product.id}`}
+                    className={cn(
+                      buttonVariants({ variant: "outline", size: "default" }),
+                      "w-full mt-auto rounded-lg text-primary border-primary hover:bg-primary/5 font-medium h-10"
+                    )}
+                  >
+                    Add to Cart
+                  </Link>
                 </CardContent>
               </Card>
             ))}
