@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { Heart, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
@@ -95,9 +96,15 @@ export function ProductCarouselKids() {
                   
                   <div className="font-bold text-lg mb-4 text-[#FF69B4]">₹{product.price}</div>
                   
-                  <Button asChild className="w-full mt-auto rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium h-10">
-                    <Link href={`/product/${product.id}`}>Personalize Now</Link>
-                  </Button>
+                  <Link
+                    href={`/product/${product.id}`}
+                    className={cn(
+                      buttonVariants({ variant: "default", size: "default" }),
+                      "w-full mt-auto rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium h-10"
+                    )}
+                  >
+                    Personalize Now
+                  </Link>
                 </CardContent>
               </Card>
             ))}

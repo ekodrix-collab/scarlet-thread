@@ -1,7 +1,8 @@
 "use client"
 
 import { useCartStore } from "@/store/useCartStore"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { Trash2, Plus, Minus, ShoppingBag } from "lucide-react"
 import Link from "next/link"
 
@@ -16,9 +17,15 @@ export default function CartPage() {
         </div>
         <h1 className="text-3xl font-heading font-bold mb-4">Your Cart is Empty</h1>
         <p className="text-muted-foreground mb-8">Looks like you haven't added any personalized gifts yet.</p>
-        <Button asChild size="lg" className="rounded-full px-8">
-          <Link href="/">Start Shopping</Link>
-        </Button>
+        <Link
+          href="/"
+          className={cn(
+            buttonVariants({ variant: "default", size: "lg" }),
+            "rounded-full px-8"
+          )}
+        >
+          Start Shopping
+        </Link>
       </div>
     )
   }
@@ -103,9 +110,15 @@ export default function CartPage() {
               </div>
             </div>
             
-            <Button asChild size="lg" className="w-full rounded-full h-12 text-base shadow-md">
-              <Link href="/checkout">Proceed to Checkout</Link>
-            </Button>
+            <Link
+              href="/checkout"
+              className={cn(
+                buttonVariants({ variant: "default", size: "lg" }),
+                "w-full rounded-full h-12 text-base shadow-md"
+              )}
+            >
+              Proceed to Checkout
+            </Link>
           </div>
         </div>
       </div>
