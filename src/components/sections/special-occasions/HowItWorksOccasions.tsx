@@ -10,7 +10,7 @@ export function HowItWorksOccasions() {
   ]
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-5 bg-white">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="bg-[#FDF8FF] rounded-[32px] p-8 md:p-12 border border-primary/10 shadow-sm relative overflow-hidden">
           
