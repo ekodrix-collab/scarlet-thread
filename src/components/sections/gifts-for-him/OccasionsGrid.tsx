@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 
 const occasions = [
   {
@@ -7,7 +8,8 @@ const occasions = [
     title: "Birthday Gifts",
     description: "Make his birthday extra special",
     bgColor: "bg-[#FAFAFA]",
-    imagePlaceholder: "Gift Box 1"
+    imagePlaceholder: "Gift Box 1",
+    image: "/images/forhimpage/scarlet-blackbox.png",
   },
   {
     id: "anniversary",
@@ -15,14 +17,16 @@ const occasions = [
     description: "Celebrate your special bond",
     bgColor: "bg-[#FFF5F5]",
     titleColor: "text-red-500",
-    imagePlaceholder: "Gift Box 2"
+    imagePlaceholder: "Gift Box 2",
+    image: "/images/forhimpage/scarlet-redbox2.png",
   },
   {
     id: "fathers-day",
     title: "Father's Day Gifts",
     description: "Thank him for being your hero",
     bgColor: "bg-[#FDF8EB]",
-    imagePlaceholder: "Super Dad Pouch"
+    imagePlaceholder: "Super Dad Pouch",
+    image: "/images/forhimpage/scarlet-superdeal.png",
   },
   {
     id: "boyfriend",
@@ -30,7 +34,8 @@ const occasions = [
     description: "Because he deserves the best",
     bgColor: "bg-[#F5F3FF]",
     titleColor: "text-primary",
-    imagePlaceholder: "Hubby Hoodie"
+    imagePlaceholder: "Hubby Hoodie",
+    image: "/images/forhimpage/scarlet-hubbyhoodie.png",
   }
 ]
 
@@ -52,12 +57,25 @@ export function OccasionsGrid() {
                   Shop Now <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
-              
+
               {/* Image Placeholder */}
+              {/* Image */}
               <div className="absolute right-0 bottom-0 w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 translate-x-4 translate-y-4">
-                <div className="w-full h-full bg-white/50 backdrop-blur rounded-full flex items-center justify-center border border-white shadow-sm p-4 text-center">
-                  <span className="text-xs font-medium text-muted-foreground">{occ.imagePlaceholder}</span>
-                </div>
+                {occ.image ? (
+                  <Image
+                    src={occ.image}
+                    alt={occ.title}
+                    fill
+                    sizes="(max-width: 768px) 128px, (max-width: 1024px) 144px, 160px"
+                    className="object-contain object-right-bottom"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-white/50 backdrop-blur rounded-full flex items-center justify-center border border-white shadow-sm p-4 text-center">
+                    <span className="text-xs font-medium text-muted-foreground">
+                      {occ.imagePlaceholder}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           ))}

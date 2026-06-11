@@ -1,13 +1,15 @@
 import { Heart, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 export function CraftedGallery() {
-  const mockImages = [
-    { text: "PAPA", bg: "bg-black" },
-    { text: "Mr. Perfect", bg: "bg-gray-400" },
-    { text: "KUNAL", bg: "bg-gray-800" },
-    { text: "Armaan", bg: "bg-blue-900" },
-    { text: "Dad You're My Hero", bg: "bg-indigo-900" }
+  const mockImages: { image?: string; text?: string; bg?: string }[] = [
+    { image:"/images/forhimpage/scarlet-papahoodie.png"},
+    { image:"/images/forhimpage/scarlet-mrperfect.png"},
+    { image:"/images/forhimpage/scarlet-papapouch.png"},
+    { image:"/images/forhimpage/scarlet-amazinghoodie.png"},
+    { image:"/images/forhimpage/scarlet-kinghoodie.png"},
+     
   ]
 
   return (
@@ -22,9 +24,19 @@ export function CraftedGallery() {
         <div className="flex overflow-x-auto gap-4 pb-8 hide-scrollbar justify-start md:justify-center">
           {mockImages.map((img, index) => (
             <div key={index} className="relative w-40 h-40 md:w-56 md:h-56 shrink-0 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
-              <div className={`w-full h-full ${img.bg} flex items-center justify-center`}>
-                <span className="text-xl md:text-2xl text-white font-heading font-medium italic">{img.text}</span>
-              </div>
+              {img.image ? (
+                <Image
+                  src={img.image}
+                  alt={"Gallery image"}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 160px, 224px"
+                />
+              ) : (
+                <div className={`w-full h-full ${img.bg} flex items-center justify-center`}>
+                  <span className="text-xl md:text-2xl text-white font-heading font-medium italic">{img.text}</span>
+                </div>
+              )}
               <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                 <Heart className="text-white w-8 h-8 fill-transparent" />
               </div>

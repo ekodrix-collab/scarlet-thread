@@ -14,15 +14,16 @@ export function LivePreviewFeature() {
 
   return (
     <section className="py-10 bg-[#FAFAFA]">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="flex flex-col lg:flex-row items-center gap-8 bg-[#FFF8FF] rounded-3xl p-3 md:p-4 shadow-sm">
+      <div className="container mx-auto px-4 max-w-8xl">
+        <div className="flex flex-col lg:flex-row items-center gap-7 bg-[#FFF8FF] rounded-3xl p-3 md:p-8 shadow-sm">
           {/* Left: Mockup UI */}
           <div className="flex-1 w-full relative">
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden">
+            <div className="relative aspect-[24/13] rounded-2xl overflow-hidden">
               <Image
-                src="/images/forhimpage/scarlet-customizebanner.png"
+                src="/images/forhimpage/scarlet-customisedbanner.png"
                 alt="Live preview hoodie customization"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />
             </div>

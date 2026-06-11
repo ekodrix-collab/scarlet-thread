@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
 export function EmbroideryStyles() {
-  const styles = [
-    { name: "Alexander", style: "Script Style", fontClass: "font-heading italic" },
-    { name: "Michael", style: "Luxury Serif", fontClass: "font-heading" },
-    { name: "Daniel", style: "Modern Sans", fontClass: "font-sans font-medium" },
-    { name: "John", style: "Handwritten", fontClass: "font-mono" }, // Using mono as placeholder for handwritten if we don't have a specific handwritten font
-  ]
+const styles = [
+  { name: "Alexander", style: "Script Style", fontClass: "font-[var(--font-alex)]" },
+  { name: "Michael", style: "Luxury Serif", fontClass: "font-[var(--font-playfair)] italic" },
+  { name: "Daniel", style: "Modern Sans", fontClass: "font-[var(--font-inter)] font-semibold" },
+  { name: "John", style: "Handwritten", fontClass: "font-[var(--font-dancing)]" },
+]
 
   return (
     <section className="py-16 bg-[#FAFAFA]">
