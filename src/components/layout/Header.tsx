@@ -38,22 +38,26 @@ export function Header() {
 
         {/* Logo */}
         <div className="flex items-center">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-heading text-xl italic font-bold">
-              S
-            </div>
-            <span className="hidden md:inline-block font-heading text-xl font-bold tracking-tight text-primary uppercase">
-              The Scarlet Thread
-            </span>
+          <Link href="/" className="flex items-center">
+            <img
+              src="/images/logo/logo.png"
+              alt="The Scarlet Thread Logo"
+              className="h-10 w-10 md:h-12 md:w-12 object-contain"
+            />
+            <img
+              src="/images/logo/name.png"
+              alt="The Scarlet Thread"
+              className="hidden md:block h-8 md:h-12 w-auto object-contain"
+            />
           </Link>
         </div>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {navLinks.map((link) => (
-            <Link 
-              key={link.path} 
-              href={link.path} 
+            <Link
+              key={link.path}
+              href={link.path}
               className={`transition-colors hover:text-primary ${isActive(link.path) ? 'text-primary font-bold border-b-2 border-primary pb-1' : 'text-muted-foreground'}`}
             >
               {link.name}
