@@ -1,34 +1,36 @@
-import { Gift, Type, Truck, ArrowRight } from "lucide-react"
+ import { Gift, Type, Truck, ArrowRight } from "lucide-react"
 
 export function LivePreviewFeatureKids() {
   return (
-    <section className="py-12 md:py-16 bg-white">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="bg-[#FAFAFA] rounded-[32px] p-6 md:p-10 flex flex-col lg:flex-row items-center gap-10 lg:gap-16 relative overflow-hidden shadow-sm border border-border/50">
-          
-          {/* Left: Product Showcase */}
-          <div className="flex-1 relative w-full aspect-[4/3] max-w-md mx-auto">
-             <div className="absolute inset-0 bg-[#FFF0F5] rounded-2xl flex items-center justify-center shadow-inner border border-white overflow-hidden">
-                 {/* Placeholder for Bunny & Towels Image */}
-                 <div className="flex flex-col items-center justify-center w-full h-full p-4 relative">
-                    <span className="text-4xl font-heading font-medium text-primary/30">Mockup Area</span>
-                    <span className="absolute top-1/4 right-1/4 text-2xl font-heading font-medium text-blue-500/80 italic">Aarav</span>
-                    <span className="absolute bottom-1/4 right-1/3 text-2xl font-heading font-medium text-pink-500/80 italic">Myra</span>
-                 </div>
-             </div>
+    <section className="py-8 md:py-12 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24">
+
+        {/* Single unified pink background — no split panels */}
+        <div className="rounded-[20px] sm:rounded-[32px] overflow-hidden bg-[#FFF0F5] flex flex-col lg:flex-row items-stretch shadow-sm border border-pink-100 min-h-[200px] sm:min-h-[260px]">
+
+          {/* Left: Image — no background, blends into parent pink */}
+          <div className="lg:w-[44%] w-full flex-shrink-0 relative overflow-hidden h-[200px] sm:h-[240px] lg:h-auto">
+            <img
+              src="/images/scarlet-secondbanner.png"
+              alt="Personalized baby gifts"
+              className="w-full h-full object-cover object-center"
+            />
+            {/* Right-side fade so image bleeds smoothly into content */}
+            <div className="hidden lg:block absolute inset-y-0 right-0 w-20 bg-gradient-to-r from-transparent to-[#FFF0F5]" />
+            <div className="lg:hidden absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-[#FFF0F5] to-transparent" />
           </div>
 
-          {/* Right: 3 Steps */}
-          <div className="flex-[1.5] w-full text-center lg:text-left">
-            <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground inline-flex items-center gap-2 mb-10 justify-center lg:justify-start w-full">
+          {/* Right: 3 Steps — same bg as parent, no border */}
+          <div className="flex-1 flex flex-col justify-center px-5 sm:px-8 md:px-12 py-6 sm:py-10 text-center lg:text-left">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground inline-flex items-center gap-2 mb-6 sm:mb-10 justify-center lg:justify-start w-full">
               Personalize in 3 Simple Steps
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary mt-1">
-                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
               </svg>
             </h2>
 
-            <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 relative">
-              
+            <div className="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-6 relative">
+
               {/* Step 1 */}
               <div className="flex flex-col items-center text-center flex-1 relative z-10">
                 <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-primary shadow-sm border border-primary/20 mb-4">
@@ -39,9 +41,9 @@ export function LivePreviewFeatureKids() {
               </div>
 
               {/* Arrow 1 */}
-              <div className="hidden md:flex absolute top-8 left-1/4 w-1/4 items-center justify-center -mt-3 pointer-events-none">
-                 <ArrowRight className="text-primary/30 w-6 h-6" />
-                 <div className="w-full border-t border-dashed border-primary/30"></div>
+              <div className="hidden sm:flex absolute top-8 left-1/4 w-1/4 items-center justify-center -mt-3 pointer-events-none">
+                <div className="w-full border-t border-dashed border-primary/30"></div>
+                <ArrowRight className="text-primary/30 w-6 h-6 flex-shrink-0" />
               </div>
 
               {/* Step 2 */}
@@ -54,9 +56,9 @@ export function LivePreviewFeatureKids() {
               </div>
 
               {/* Arrow 2 */}
-              <div className="hidden md:flex absolute top-8 right-1/4 w-1/4 items-center justify-center -mt-3 pointer-events-none">
-                 <div className="w-full border-t border-dashed border-primary/30"></div>
-                 <ArrowRight className="text-primary/30 w-6 h-6" />
+              <div className="hidden sm:flex absolute top-8 right-1/4 w-1/4 items-center justify-center -mt-3 pointer-events-none">
+                <div className="w-full border-t border-dashed border-primary/30"></div>
+                <ArrowRight className="text-primary/30 w-6 h-6 flex-shrink-0" />
               </div>
 
               {/* Step 3 */}
@@ -70,6 +72,7 @@ export function LivePreviewFeatureKids() {
 
             </div>
           </div>
+
         </div>
       </div>
     </section>

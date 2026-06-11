@@ -25,17 +25,26 @@ export function BottomValuePropsKids() {
   ]
 
   return (
-    <section className="py-12 bg-white border-y border-border/40">
-      <div className="container mx-auto px-4">
-        <div className="flex flex-wrap justify-center md:justify-between gap-6 max-w-7xl mx-auto">
+    <section className="py-8 sm:py-12 bg-white border-y border-border/40">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 sm:gap-6 max-w-7xl mx-auto">
           {props.map((prop, index) => (
-            <div key={index} className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 flex-1 min-w-[200px] group">
-              <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-sm border border-primary/10">
+            <div
+              key={index}
+              className={`flex flex-col items-center text-center md:flex-row md:items-center md:text-left gap-2 sm:gap-3 md:gap-4 group
+                ${
+                  index < props.length - 1
+                    ? "md:border-r md:border-border/40 md:pr-6"
+                    : ""
+                }
+              `}
+            >
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-[#FFF0F5] flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform border border-primary/10">
                 {prop.icon}
               </div>
               <div>
-                <h4 className="font-bold text-sm text-foreground mb-1">{prop.title}</h4>
-                <p className="text-[11px] leading-tight text-muted-foreground">{prop.desc}</p>
+                <h4 className="font-bold text-xs sm:text-sm text-[#6E3B9B] mb-0.5 sm:mb-1">{prop.title}</h4>
+                <p className="text-[10px] sm:text-[11px] leading-tight text-muted-foreground">{prop.desc}</p>
               </div>
             </div>
           ))}
