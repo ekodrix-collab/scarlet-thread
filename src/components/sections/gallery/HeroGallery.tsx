@@ -1,54 +1,80 @@
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Heart } from "lucide-react"
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Sparkles, Star, Heart } from "lucide-react";
 
 export function HeroGallery() {
   return (
-    <section className="relative bg-[#FFF0F5] pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden">
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          
-          {/* Left Content */}
-          <div className="flex-1 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 text-primary font-medium mb-6">
-              <span className="italic font-heading text-xl">A Gallery of Love</span>
-              <Heart className="w-5 h-5 text-primary fill-transparent" strokeWidth={1.5} />
-            </div>
-            
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-foreground mb-6 leading-tight">
-              Real Gifts.<br className="hidden md:block" />
-              Real Smiles.<br className="hidden md:block" />
-              <span className="text-primary">Real Memories.</span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-lg mx-auto md:mx-0">
-              Every gift has a story and every stitch holds a memory. Here's a glimpse of the love we've helped create.
-            </p>
+    <section className="relative overflow-hidden bg-[#fce8ec]">
+      {/* ── Full-bleed background image ── */}
+      <Image
+        src="/images/gallery-hero.png"
+        alt="Personalized gifts for her — premium embroidered set"
+        fill
+        priority
+        className="object-cover object-center"
+      />
 
-            <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 mb-8">
-              <Button size="lg" className="rounded-full px-8 h-12 text-base shadow-lg shadow-primary/20 bg-primary hover:bg-primary/90 w-full sm:w-auto">
-                Explore Our Collection <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
-            </div>
+      {/* Gradient overlay so left text stays readable */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to right, #fce8ec 0%, #fce8eccc 38%, #fce8ec88 40%, transparent 50%)",
+        }}
+      />
+
+      {/* ── Content row ── */}
+      <div className="relative flex min-h-[240px] flex-col md:flex-row md:min-h-[280px] lg:min-h-[300px]">
+        {/* ── Left Content ── */}
+        <div className="relative z-10 flex flex-[1.3] flex-col justify-center px-8 py-23 md:pl-14 md:pr-6 lg:pl-20 md:max-w-[60%]">
+          {/* Badge */}
+          <div className="mb-3 flex items-center gap-1.5">
+            <span
+              className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#8059BB]"
+              style={{ fontFamily: "Pacifico, cursive" }}
+            >
+              {" "}
+              A Gallery of Love
+            </span>
+            <Heart className="h-3 w-3 fill-[##8059BB] text-[#8059BB]" />
           </div>
 
-          {/* Right Image Box */}
-          <div className="flex-1 relative w-full aspect-[4/3] md:aspect-[4/3] lg:aspect-[16/10] max-w-3xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white transform hover:scale-[1.02] transition-transform duration-700">
-            <Image 
-              src="/images/gallery.png" 
-              alt="Gallery of Personalized Gifts"
-              fill
-              className="object-cover"
-              priority
-            />
-          </div>
+          {/* Headline */}
+          <h1 className="mb-3 font-sans text-[1.75rem] font-extrabold leading-[1.18] text-[#111] md:text-[2.2rem] lg:text-[2.6rem]">
+            Real Gifts.<br />
+            Real Smiles.<br />
+            Real <span className="text-[#8059BB]">Memories.</span>
+          </h1>
 
+          {/* Sub-text */}
+          <p className="mb-6 max-w-[360px] text-[0.78rem] leading-relaxed text-[#666] md:text-[0.82rem]">
+            Every gift has a story. and every stitch holds a memory. Here's a glimpse of the love we've helped create.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="mb-6 flex flex-wrap items-center gap-2.5">
+            <Link
+              href="/gifts-for-her"
+              className="inline-flex h-9 items-center rounded-[5px] border border-[#8059BB]/60  px-5 text-[0.78rem] bg-[#8059BB] text-white backdrop-blur-sm transition-all duration-200 hover:bg-[#996cdc] hover:-translate-y-px active:translate-y-0"
+            >
+              Explore Our Collection
+              <ArrowRight className="ml-1 h-3 w-3" />
+            </Link>
+          </div>
         </div>
       </div>
-      
-      {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#FF69B4]/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none"></div>
     </section>
-  )
+  );
+}
+
+/* ── Helper ── */
+function TrustBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
+  return (
+    <div className="flex items-center gap-1.5 rounded-full bg-white/55 px-3 py-1 text-[0.7rem] font-medium text-[#444] shadow-sm backdrop-blur-sm">
+      <span className="text-[#8059BB]">{icon}</span>
+      <span dangerouslySetInnerHTML={{ __html: label }} />
+    </div>
+  );
 }

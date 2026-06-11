@@ -2,7 +2,8 @@
 
 import { useState } from "react"
 import { useCartStore } from "@/store/useCartStore"
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { CheckCircle2 } from "lucide-react"
@@ -23,9 +24,15 @@ export default function CheckoutPage() {
         <p className="text-muted-foreground mb-8">
           Thank you for choosing The Scarlet Thread. We've received your order and will start crafting your personalized gifts soon.
         </p>
-        <Button asChild size="lg" className="rounded-full px-8">
-          <a href="/">Continue Shopping</a>
-        </Button>
+        <a
+          href="/"
+          className={cn(
+            buttonVariants({ variant: "default", size: "lg" }),
+            "rounded-full px-8"
+          )}
+        >
+          Continue Shopping
+        </a>
       </div>
     )
   }
