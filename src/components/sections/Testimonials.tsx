@@ -63,7 +63,7 @@ export function Testimonials() {
   }, [maxIndex])
 
   return (
-    <section className="py-16 bg-secondary/30 overflow-hidden">
+    <section className="hidden md:block py-16 bg-secondary/30 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-heading font-bold flex items-center justify-center gap-2">
@@ -94,7 +94,7 @@ export function Testimonials() {
                     </div>
 
                     <p className="text-foreground/80 italic text-sm leading-relaxed flex-1">
-                      "{testimonial.content}"
+                      &quot;{testimonial.content}&quot;
                     </p>
 
                     <div className="flex items-center gap-3 mt-5">

@@ -1,10 +1,12 @@
+"use client"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import { Gift, Type, Truck } from "lucide-react"
 
 export function LivePreviewFeatureHer() {
   return (
     <section className="py-5">
-      <div className="container mx-auto px-4 max-w-8xl">
+      <motion.div initial={{ opacity: 0, y: 60, scale: 0.9 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, type: "spring", bounce: 0.3 }} className="container mx-auto px-4 max-w-8xl">
         <div className="bg-gradient-to-r from-[#fff7fb] via-[#fdf0f8] to-[#fff7fb] rounded-2xl flex flex-col lg:flex-row items-stretch overflow-hidden shadow-sm border border-[#ead6ec]/60">
 
           {/* Left: Product Showcase */}
@@ -73,7 +75,7 @@ export function LivePreviewFeatureHer() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

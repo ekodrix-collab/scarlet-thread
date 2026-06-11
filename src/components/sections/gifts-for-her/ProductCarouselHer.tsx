@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -60,7 +62,7 @@ const products = [
 export function ProductCarouselHer() {
   return (
     <section className="py-8 md:py-12">
-      <div className="container mx-auto px-4">
+      <motion.div initial={{ opacity: 0, y: 40, scale: 0.95 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, ease: "circOut" }} className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-heading font-bold flex items-center justify-center gap-2">
             Most Loved Gifts For Her{" "}
@@ -135,7 +137,7 @@ export function ProductCarouselHer() {
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
 
       <style
         dangerouslySetInnerHTML={{
