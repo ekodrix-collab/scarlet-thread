@@ -1,10 +1,10 @@
 "use client"
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from "framer-motion"
 import { Search, Heart, User, ShoppingBag, Home, Gift, Baby, Star, Image, Menu, X, ChevronRight } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 const marqueeItems = [
   "• Free Shipping Above ₹1499",
@@ -14,11 +14,49 @@ const marqueeItems = [
 
 export function Header() {
   const pathname = usePathname()
+  const router = useRouter()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const searchInputRef = useRef<HTMLInputElement>(null)
 
   const isActive = (path: string) => {
     if (path === '/') return pathname === '/'
     return pathname?.startsWith(path)
+  }
+
+  // Auto-focus input when search opens
+  useEffect(() => {
+    if (searchOpen) {
+      setTimeout(() => searchInputRef.current?.focus(), 100)
+    }
+  }, [searchOpen])
+
+  // Close search on route change
+  useEffect(() => {
+    setSearchOpen(false)
+    setSearchQuery("")
+  }, [pathname])
+
+  // Close on Escape key
+  useEffect(() => {
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setSearchOpen(false)
+        setSearchQuery("")
+      }
+    }
+    window.addEventListener("keydown", handleKey)
+    return () => window.removeEventListener("keydown", handleKey)
+  }, [])
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault()
+    const q = searchQuery.trim()
+    if (!q) return
+    router.push(`/search?q=${encodeURIComponent(q)}`)
+    setSearchOpen(false)
+    setSearchQuery("")
   }
 
   const navLinks = [
@@ -44,12 +82,9 @@ export function Header() {
 
         {/* Announcement Bar */}
         <div className="bg-primary text-primary-foreground py-1 text-center text-[12px] font-medium tracking-wider overflow-hidden">
-          {/* Desktop: static centered — only above lg */}
           <div className="hidden lg:block px-4">
             • Free Shipping Above ₹1499 &nbsp;&nbsp;• Made With Love In India &nbsp;&nbsp;• Track Your Order
           </div>
-
-          {/* Mobile + Tablet: marquee — below lg */}
           <div className="lg:hidden overflow-hidden">
             <motion.div
               className="flex gap-12 whitespace-nowrap"
@@ -81,7 +116,7 @@ export function Header() {
             </Link>
           </div>
 
-          {/* Desktop Navigation — only above lg (1024px) */}
+          {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
@@ -98,8 +133,15 @@ export function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-1">
-            <button className="p-2 text-foreground hover:text-primary transition-colors">
-              <Search className="h-5 w-5" />
+            <button
+              className="p-2 text-foreground hover:text-primary transition-colors"
+              onClick={() => {
+                setSearchOpen((prev) => !prev)
+                setMenuOpen(false)
+              }}
+              aria-label="Toggle search"
+            >
+              {searchOpen ? <X className="h-5 w-5" /> : <Search className="h-5 w-5" />}
             </button>
             <Link href="/account" className="p-2 text-foreground hover:text-primary transition-colors hidden lg:block">
               <User className="h-5 w-5" />
@@ -113,11 +155,12 @@ export function Header() {
                 0
               </span>
             </Link>
-
-            {/* Hamburger — visible below lg (0px – 1023px) */}
             <button
               className="lg:hidden p-2 text-foreground hover:text-primary transition-colors ml-1"
-              onClick={() => setMenuOpen((prev) => !prev)}
+              onClick={() => {
+                setMenuOpen((prev) => !prev)
+                setSearchOpen(false)
+              }}
               aria-label="Toggle menu"
             >
               {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -125,7 +168,48 @@ export function Header() {
           </div>
         </div>
 
-        {/* Toggle Dropdown Menu — below lg */}
+        {/* Search Bar Dropdown */}
+        <AnimatePresence>
+          {searchOpen && (
+            <motion.div
+              key="search-bar"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeInOut" }}
+              className="overflow-hidden border-t bg-white shadow-md"
+            >
+              <form onSubmit={handleSearch} className="flex items-center gap-3 px-4 py-3">
+                <Search className="h-4 w-4 text-muted-foreground shrink-0" />
+                <input
+                  ref={searchInputRef}
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search for gifts, occasions, products..."
+                  className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                )}
+                <button
+                  type="submit"
+                  className="bg-primary text-primary-foreground text-[12px] font-semibold uppercase tracking-wide px-4 py-1.5 rounded-sm hover:opacity-90 transition-opacity"
+                >
+                  Search
+                </button>
+              </form>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Toggle Dropdown Nav Menu */}
         <AnimatePresence>
           {menuOpen && (
             <motion.div
@@ -157,8 +241,6 @@ export function Header() {
                     </Link>
                   )
                 })}
-
-                {/* Account & Wishlist at bottom of dropdown */}
                 <div className="flex items-center gap-4 px-5 py-4 border-t border-border/40 mt-1">
                   <Link
                     href="/account"
@@ -181,7 +263,7 @@ export function Header() {
         </AnimatePresence>
       </header>
 
-      {/* Mobile Bottom Navigation — below lg */}
+      {/* Mobile Bottom Navigation */}
       <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border shadow-[0_-2px_10px_rgba(0,0,0,0.08)]">
         <div className="flex items-center justify-around h-16 px-2">
           {bottomNavLinks.map((link) => {
@@ -207,7 +289,7 @@ export function Header() {
         </div>
       </nav>
 
-      {/* Bottom spacer for mobile/tablet */}
+      {/* Bottom spacer */}
       <div className="lg:hidden h-16" />
     </>
   )
