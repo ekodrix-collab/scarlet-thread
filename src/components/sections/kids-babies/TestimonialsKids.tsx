@@ -48,7 +48,7 @@ export function TestimonialsKids() {
                   ))}
                 </div>
                 <p className="text-foreground/80 text-sm mb-8 leading-relaxed italic">
-                  "{testimonial.content}"
+                  &quot;{testimonial.content}&quot;
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full bg-[#FFF0F5] flex items-center justify-center text-[#FF69B4] font-bold text-sm">
