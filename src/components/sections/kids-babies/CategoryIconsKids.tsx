@@ -13,7 +13,7 @@ export function CategoryIconsKids() {
   ]
 
   return (
-    <section className="py-8 md:py-12 bg-white border-b border-border/40">
+    <section className="py-6 md:py-10 bg-white border-b border-border/40">
       <div className="container mx-auto px-4">
         <div className="flex overflow-x-auto pb-4 md:pb-0 hide-scrollbar gap-4 md:gap-6 justify-start lg:justify-center">
           {categories.map((cat, index) => (

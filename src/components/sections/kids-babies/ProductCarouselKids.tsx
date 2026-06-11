@@ -1,8 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button"
 import { Heart, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
+import { cn } from "@/lib/utils"
 
 const products = [
   {
@@ -11,7 +12,8 @@ const products = [
     price: 899,
     rating: 4.9,
     reviews: 128,
-    imagePlaceholder: "Myra Towel"
+    imagePlaceholder: "Myra Towel",
+    image: "/images/scarlet-babie1.png"
   },
   {
     id: 22,
@@ -19,7 +21,8 @@ const products = [
     price: 699,
     rating: 4.8,
     reviews: 95,
-    imagePlaceholder: "Little Prince"
+    imagePlaceholder: "Little Prince",
+    image: "/images/scarlet-babie2.png"
   },
   {
     id: 23,
@@ -27,7 +30,8 @@ const products = [
     price: 999,
     rating: 4.9,
     reviews: 112,
-    imagePlaceholder: "Teddy Bear"
+    imagePlaceholder: "Teddy Bear",
+    image: "/images/scarlet-babie3.png"
   },
   {
     id: 24,
@@ -35,7 +39,8 @@ const products = [
     price: 1299,
     rating: 4.8,
     reviews: 74,
-    imagePlaceholder: "Ananya Backpack"
+    imagePlaceholder: "Ananya Backpack",
+    image: "/images/scarlet-babie4.png"
   },
   {
     id: 25,
@@ -43,16 +48,17 @@ const products = [
     price: 1099,
     rating: 4.9,
     reviews: 86,
-    imagePlaceholder: "Vihaan Blanket"
+    imagePlaceholder: "Vihaan Blanket",
+    image: "/images/scarlet-babie5.png"
   }
 ]
 
 export function ProductCarouselKids() {
   return (
-    <section className="py-16 md:py-20 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-4 md:py-8 bg-white">
+      <div className="container px-4 sm:px-6 md:px-12 lg:px-24">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-heading font-bold flex items-center justify-center gap-2">
+          <h2 className="text-2xl sm:text-3xl font-heading font-bold flex items-center justify-center gap-2">
             Most Loved Kids & Baby Gifts <Heart className="w-5 h-5 text-primary fill-transparent" />
           </h2>
           <p className="text-muted-foreground mt-2">Handpicked favorites for your little stars</p>
@@ -68,12 +74,22 @@ export function ProductCarouselKids() {
             <ChevronRight className="w-5 h-5 text-muted-foreground" />
           </button>
 
-          <div className="flex overflow-x-auto gap-6 pb-8 pt-4 px-2 snap-x hide-scrollbar">
+          <div className="flex gap-4 sm:gap-6 pb-8 pt-4 px-1 sm:px-2 snap-x hide-scrollbar overflow-x-auto justify-start md:justify-center">
             {products.map((product) => (
-              <Card key={product.id} className="min-w-[260px] max-w-[280px] shrink-0 snap-start overflow-hidden border-border/50 shadow-sm hover:shadow-md transition-all group flex flex-col h-full rounded-2xl">
-                <div className="relative aspect-square bg-[#FAFAFA] p-0">
-                  <div className="w-full h-full bg-[#FAFAFA] flex items-center justify-center overflow-hidden relative">
-                    <span className="font-heading italic text-xl text-primary font-medium">{product.imagePlaceholder}</span>
+              <Card key={product.id} className="min-w-[200px] sm:min-w-[220px] md:min-w-[200px] lg:min-w-[220px] max-w-[280px] w-[calc((100%-96px)/5)] shrink-0 snap-start overflow-hidden border-border/50 shadow-sm hover:shadow-md transition-all group flex flex-col h-full rounded-2xl">
+                <div className="relative aspect-square overflow-hidden bg-[#FAFAFA]">
+                  <Image 
+                    src={product.image} 
+                    alt={product.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 768px) 100vw, 280px"
+                  />
+                  {/* Personalized text badge */}
+                  <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full border border-pink-100 shadow-sm z-10">
+                    <span className="text-[10px] font-heading italic font-semibold text-primary">
+                      {product.imagePlaceholder}
+                    </span>
                   </div>
                 </div>
                 
@@ -96,11 +112,11 @@ export function ProductCarouselKids() {
                   
                   <div className="font-bold text-lg mb-4 text-[#FF69B4]">₹{product.price}</div>
                   
-                  <Link
-                    href={`/product/${product.id}`}
+                  <Link 
+                    href={`/product/${product.id}`} 
                     className={cn(
-                      buttonVariants({ variant: "default", size: "default" }),
-                      "w-full mt-auto rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium h-10"
+                      buttonVariants({ variant: "default" }),
+                      "w-full mt-auto rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium h-10 flex items-center justify-center text-sm"
                     )}
                   >
                     Personalize Now

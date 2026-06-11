@@ -25,17 +25,17 @@ export function MidValuePropsKids() {
   ]
 
   return (
-    <section className="py-12 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 max-w-6xl mx-auto bg-[#FAFAFA] rounded-3xl p-8 border border-border/50 shadow-sm">
+    <section className="py-1 bg-white">
+      <div className="container max-w-[1360px] mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-10 bg-[#FFF5F8] rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 border border-border/50 shadow-sm">
           {props.map((prop, index) => (
-            <div key={index} className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 flex-1 group">
-              <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-sm border border-primary/10 text-primary">
+            <div key={index} className="flex flex-col items-center text-center md:flex-row md:text-left gap-2 sm:gap-3 md:gap-4 flex-1 group">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full bg-white flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform shadow-sm border border-primary/10 text-primary">
                 {prop.icon}
               </div>
               <div>
-                <h4 className="font-bold text-sm text-foreground mb-1">{prop.title}</h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">{prop.desc}</p>
+                <h4 className="font-bold text-xs sm:text-sm text-[#6E3B9B] mb-0.5 sm:mb-1">{prop.title}</h4>
+                <p className="text-[10px] sm:text-xs text-muted-foreground leading-relaxed">{prop.desc}</p>
               </div>
             </div>
           ))}
