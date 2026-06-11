@@ -30,8 +30,8 @@ const testimonials = [
 
 export function TestimonialsKids() {
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-8 md:py-12 bg-white">
+      <div className=" m-0">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-heading font-bold flex items-center justify-center gap-2">
             What Parents Say <Heart className="w-5 h-5 text-primary fill-transparent" />

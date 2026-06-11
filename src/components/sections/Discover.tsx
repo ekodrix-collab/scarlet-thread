@@ -23,8 +23,8 @@ export function Discover() {
             </p>
             
             <div className="pt-4">
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 h-12 shadow-sm transition-transform hover:-translate-y-0.5">
-                <Link href="/about">Read Our Story</Link>
+              <Button render={<Link href="/about" />} size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 h-12 shadow-sm transition-transform hover:-translate-y-0.5">
+                Read Our Story
               </Button>
             </div>
           </div>
