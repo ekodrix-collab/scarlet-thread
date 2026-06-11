@@ -26,13 +26,9 @@ export function Hero() {
               <HeartIcon />
             </div>
 
-            <div className="text-xs font-bold tracking-widest text-muted-foreground uppercase">
-              BECAUSE
-            </div>
-            
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground leading-tight">
-              Every Gift<br />
-              Tells a <span className="text-primary italic font-serif">Story</span>
+              Because Just A Gift<br />
+              Was Never <span className="text-primary italic font-serif">Enough</span>
             </h1>
             
             <p className="text-base md:text-lg text-muted-foreground max-w-md">

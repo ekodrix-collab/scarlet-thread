@@ -70,7 +70,7 @@ export function Footer() {
             © {new Date().getFullYear()} The Scarlet Thread. All rights reserved.
           </p>
           <p className="text-sm text-muted-foreground flex items-center gap-1">
-            Designed with <Heart className="h-4 w-4 text-red-500 fill-red-500" /> in India
+            Crafted by <a href="https://www.ekodrix.com" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:underline transition-colors">Ekodrix</a>
           </p>
         </div>
       </div>
