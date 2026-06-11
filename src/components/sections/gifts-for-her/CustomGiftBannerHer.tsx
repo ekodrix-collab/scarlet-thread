@@ -1,10 +1,12 @@
+"use client"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 
 export function CustomGiftBannerHer() {
   return (
     <section className="py-16 md:py-24 bg-white">
-      <div className="container mx-auto px-4">
+      <motion.div initial={{ opacity: 0, rotateX: 15, y: 40 }} whileInView={{ opacity: 1, rotateX: 0, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.9, ease: "backOut" }} className="container mx-auto px-4">
         <div
           className="rounded-3xl p-8 md:p-16 relative overflow-hidden flex items-center text-white shadow-xl border-2 border-primary/20 bg-cover bg-center bg-no-repeat min-h-[320px] md:min-h-[380px]"
           style={{
@@ -17,12 +19,12 @@ export function CustomGiftBannerHer() {
           {/* Left Content */}
           <div className="relative z-10 text-center md:text-left max-w-xl">
             <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
-              Can't Find The Perfect Gift? <br />
+              Can&apos;t Find The Perfect Gift? <br />
               Create A Custom Gift For Her
             </h2>
 
             <p className="text-white/90 text-sm md:text-base mb-8">
-              Share your idea, photo or message and we'll craft something truly unique.
+              Share your idea, photo or message and we&apos;ll craft something truly unique.
             </p>
 
             <Button
@@ -38,7 +40,7 @@ export function CustomGiftBannerHer() {
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/3 -translate-x-1/3 pointer-events-none" />
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

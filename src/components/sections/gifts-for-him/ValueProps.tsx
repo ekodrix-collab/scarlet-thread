@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import { Gift, Heart, Truck, Package } from "lucide-react"
 
 export function ValueProps() {
@@ -26,7 +28,7 @@ export function ValueProps() {
 
   return (
     <section className="py-8 bg-white border-y border-border/40">
-      <div className="container mx-auto px-4">
+      <motion.div initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, ease: "backOut" }} className="container mx-auto px-4">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
           {props.map((prop, index) => (
             <div key={index} className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-4 group">
@@ -40,7 +42,7 @@ export function ValueProps() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }
