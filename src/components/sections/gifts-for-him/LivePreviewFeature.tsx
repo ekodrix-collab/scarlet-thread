@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import { CheckCircle2, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -13,24 +15,25 @@ export function LivePreviewFeature() {
   ]
 
   return (
-    <section className="py-10 bg-[#FAFAFA]">
-      <div className="container mx-auto px-4 max-w-8xl">
-        <div className="flex flex-col lg:flex-row items-center gap-7 bg-[#FFF8FF] rounded-3xl p-3 md:p-8 shadow-sm">
+    <section className="py-4 bg-white">
+      <motion.div initial={{ opacity: 0, y: 60, scale: 0.9 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, type: "spring", bounce: 0.3 }} className="container mx-auto px-4 max-w-6xl">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           {/* Left: Mockup UI */}
           <div className="flex-1 w-full relative">
-            <div className="relative aspect-[24/13] rounded-2xl overflow-hidden">
+            <div className="relative aspect-[3/2] rounded-2xl overflow-hidden shadow-sm border border-border/40">
               <Image
                 src="/images/forhimpage/scarlet-customisedbanner.png"
                 alt="Live preview hoodie customization"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
+                priority
               />
             </div>
           </div>
 
           {/* Right: Checklist */}
-          <div className="flex-1 px-6 md:px-10 py-8">
+          <div className="flex-1 py-4 lg:py-8">
             <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground inline-flex items-center gap-2 mb-6">
               See Your Gift Come To Life
               <svg
@@ -39,22 +42,20 @@ export function LivePreviewFeature() {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="1.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                className="text-primary mt-1"
+                className="text-primary mt-1 rotate-12"
               >
-                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+                <path d="M12 20S5 13.5 3.5 10c-1.5-3.5 1.5-7 5-6.5 2.5.3 3.5 2.5 3.5 2.5s1-2.2 3.5-2.5c3.5-.5 6.5 3 5 6.5C19 13.5 12 20 12 20z" />
               </svg>
             </h2>
 
-            <ul className="space-y-3">
+            <ul className="space-y-4 mb-8">
               {steps.map((step, index) => (
-                <li key={index} className="flex items-center gap-3 group">
-                  <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                    <CheckCircle2 className="w-4 h-4" />
-                  </div>
-                  <span className="text-sm font-medium text-foreground/80">
+                <li key={index} className="flex items-start gap-3 group cursor-pointer">
+                  <CheckCircle2 className="w-5 h-5 text-primary shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 mt-0.5" strokeWidth={2} />
+                  <span className="text-sm font-medium text-foreground/80 group-hover:text-foreground transition-colors duration-300">
                     {step}
                   </span>
                 </li>
@@ -63,13 +64,13 @@ export function LivePreviewFeature() {
 
             <Button
               size="lg"
-              className="mt-6 rounded-md px-8 h-10 text-sm shadow-lg shadow-primary/20 bg-primary hover:bg-primary/90 text-white w-full sm:w-auto"
+              className="rounded-md px-8 h-11 text-sm shadow-md shadow-primary/20 bg-primary hover:bg-primary/90 text-white w-full sm:w-auto transition-transform hover:scale-102"
             >
               Start Personalizing <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

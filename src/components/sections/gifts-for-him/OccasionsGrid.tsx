@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
@@ -42,8 +44,8 @@ const occasions = [
 export function OccasionsGrid() {
   return (
     <section className="py-12 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <motion.div initial={{ opacity: 0, y: 30, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.9, ease: "easeOut" }} className="container mx-auto px-4">
+        <div className="grid grid-cols-4 gap-3 md:gap-6">
           {occasions.map((occ) => (
             <div key={occ.id} className={`${occ.bgColor} rounded-3xl p-6 relative overflow-hidden group hover:shadow-md transition-shadow flex flex-col h-full min-h-[220px]`}>
               <div className="relative z-10 w-2/3">
@@ -60,7 +62,7 @@ export function OccasionsGrid() {
 
               {/* Image Placeholder */}
               {/* Image */}
-              <div className="absolute right-0 bottom-0 w-32 h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 translate-x-4 translate-y-4">
+              <div className="absolute right-0 bottom-0 w-39 h-39 md:w-46 md:h-46 lg:w-55 lg:h-55 translate-x-4 translate-y-4">
                 {occ.image ? (
                   <Image
                     src={occ.image}
@@ -80,7 +82,7 @@ export function OccasionsGrid() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

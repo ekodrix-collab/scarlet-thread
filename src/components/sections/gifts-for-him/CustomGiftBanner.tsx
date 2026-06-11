@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Gift } from "lucide-react"
 import Image from "next/image"
@@ -5,7 +7,7 @@ import Image from "next/image"
 export function CustomGiftBanner() {
   return (
     <section className="py-12 md:py-16 bg-white">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <motion.div initial={{ opacity: 0, rotateX: 15, y: 40 }} whileInView={{ opacity: 1, rotateX: 0, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.9, ease: "backOut" }} className="container mx-auto px-4 max-w-6xl">
         <div className="bg-[#5c2a86] rounded-2xl relative overflow-hidden flex flex-col md:flex-row items-center text-white shadow-lg min-h-[260px] p-8 md:p-0">
           
           {/* Background pattern */}
@@ -32,14 +34,14 @@ export function CustomGiftBanner() {
           {/* Text Container (Right side) */}
           <div className="w-full md:w-[55%] relative z-10 text-center md:text-left flex flex-col justify-center md:pl-12 lg:pl-16 py-12 md:py-8 px-8 md:px-0">
             <h3 className="text-lg md:text-xl font-medium text-white/95 mb-2">
-              Can't Find The Perfect Gift?
+              Can&apos;t Find The Perfect Gift?
             </h3>
             <h2 className="text-2xl md:text-3xl font-heading font-bold mb-4">
               Create A Fully Custom Gift
             </h2>
             <p className="text-white/85 text-sm md:text-base mb-6 max-w-md mx-auto md:mx-0 leading-relaxed">
               Upload your design, photo or idea, <br className="hidden md:block"/>
-              and we'll craft something unique just for him.
+              and we&apos;ll craft something unique just for him.
             </p>
             <div className="flex justify-center md:justify-start">
               <Button size="lg" className="rounded-md bg-white text-[#5c2a86] hover:bg-white/90 font-bold px-6 h-11 text-sm shadow-sm transition-transform hover:scale-105">
@@ -49,7 +51,7 @@ export function CustomGiftBanner() {
           </div>
           
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

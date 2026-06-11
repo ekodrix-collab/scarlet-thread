@@ -51,7 +51,7 @@ export function TestimonialsOccasions() {
                   ))}
                 </div>
                 <p className="text-foreground/80 text-sm mb-8 leading-relaxed italic">
-                  "{testimonial.content}"
+                  &quot;{testimonial.content}&quot;
                 </p>
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-full bg-[#FDF8FF] flex items-center justify-center text-primary font-bold text-sm border border-primary/20">

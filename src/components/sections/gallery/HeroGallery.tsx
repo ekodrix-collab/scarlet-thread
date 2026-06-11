@@ -50,7 +50,7 @@ export function HeroGallery() {
 
           {/* Sub-text */}
           <p className="mb-6 max-w-[360px] text-[0.78rem] leading-relaxed text-[#666] md:text-[0.82rem]">
-            Every gift has a story. and every stitch holds a memory. Here's a glimpse of the love we've helped create.
+            Every gift has a story. and every stitch holds a memory. Here&apos;s a glimpse of the love we&apos;ve helped create.
           </p>
 
           {/* CTA Buttons */}
