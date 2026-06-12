@@ -10,7 +10,7 @@ export function HeroHer() {
   const typingSpeed = 0.09
 
   return (
-    <section className="relative bg-[#fce8ec] py-4 md:py-4 overflow-hidden">
+    <section className="relative bg-[#fce8ec] py-6 md:py-6 overflow-hidden">
       {/* Background Image — Desktop */}
       <div className="absolute inset-0 hidden md:block">
         <Image
@@ -49,11 +49,11 @@ export function HeroHer() {
         initial={{ opacity: 0, y: 20, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="container mx-auto px-3 relative z-10"
+        className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10"
       >
         <div className="flex flex-col md:flex-row items-center gap-12 min-h-[360px] md:min-h-[500px]">
           {/* Left Content */}
-          <div className="flex-1 text-left py-8 md:py-12">
+          <div className="flex-1 text-left py-10 sm:py-14 md:py-0">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}

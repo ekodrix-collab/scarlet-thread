@@ -61,8 +61,8 @@ const products = [
 
 export function ProductCarousel() {
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <motion.div initial={{ opacity: 0, y: 40, scale: 0.95 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, ease: "circOut" }} className="container mx-auto px-4">
+    <section className="py-4 md:py-8 bg-white">
+      <motion.div initial={{ opacity: 0, y: 40, scale: 0.95 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, ease: "circOut" }} className="container px-4 sm:px-6 md:px-12 lg:px-24">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-heading font-bold flex items-center justify-center gap-2">
             Most Loved Gifts For Him{" "}
@@ -83,34 +83,42 @@ export function ProductCarousel() {
             <ChevronRight className="w-5 h-5 text-muted-foreground" />
           </button>
 
-          <div className="flex overflow-x-auto gap-6 pb-8 pt-4 px-2 snap-x hide-scrollbar">
+          <div className="flex overflow-x-auto gap-4 sm:gap-6 pb-8 pt-4 px-1 sm:px-2 snap-x hide-scrollbar justify-start md:justify-center">
             {products.map((product) => (
               <Card
                 key={product.id}
-                className="min-w-[260px] max-w-[280px] shrink-0 snap-start overflow-hidden border-border/50 shadow-sm hover:shadow-md transition-all group flex flex-col h-full rounded-2xl"
+                className="min-w-[200px] sm:min-w-[220px] md:min-w-[200px] lg:min-w-[220px] max-w-[280px] w-[calc((100%-96px)/5)] shrink-0 snap-start overflow-hidden border-border/50 shadow-sm hover:shadow-md transition-all group flex flex-col h-full rounded-2xl"
               >
-                <div className="relative aspect-square bg-secondary/30 p-4">
-                  {product.bestSeller && (
-                    <div className="absolute top-4 left-4 z-10 bg-white px-2 py-1 rounded text-[10px] font-bold tracking-wider uppercase shadow-sm">
-                      Best Seller
-                    </div>
-                  )}
-
-                  <div className="w-full h-full bg-white rounded-xl shadow-sm flex items-center justify-center border border-border/30 overflow-hidden relative">
-                    {product.image ? (
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        sizes="280px"
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
+                <div className="relative aspect-square overflow-hidden bg-[#FAFAFA]">
+                  {product.image ? (
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, 280px"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
                       <span className="font-heading italic text-2xl text-primary font-medium">
                         {product.imagePlaceholder}
                       </span>
-                    )}
-                  </div>
+                    </div>
+                  )}
+
+                  {product.bestSeller ? (
+                    <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full border border-slate-100 shadow-sm z-10">
+                      <span className="text-[10px] font-heading italic font-semibold text-primary">
+                        Best Seller
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full border border-pink-100 shadow-sm z-10">
+                      <span className="text-[10px] font-heading italic font-semibold text-primary">
+                        {product.imagePlaceholder}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 <CardContent className="p-4 pt-5 flex-1 flex flex-col">
@@ -134,8 +142,8 @@ export function ProductCarousel() {
                     ₹{product.price}
                   </div>
 
-                  <Link href={`/product/${product.id}`} className="mt-auto">
-                    <Button className="w-full rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium h-10">
+                  <Link href={`/product/${product.id}`} className="w-full mt-auto">
+                    <Button className="w-full rounded-lg bg-primary hover:bg-primary/90 text-primary-foreground font-medium h-10 flex items-center justify-center text-sm">
                       Personalize Now
                     </Button>
                   </Link>
