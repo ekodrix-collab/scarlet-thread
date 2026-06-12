@@ -31,14 +31,14 @@ const testimonials = [
 export function TestimonialsKids() {
   return (
     <section className="py-8 md:py-12 bg-white">
-      <div className=" m-0">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-heading font-bold flex items-center justify-center gap-2">
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-8 sm:mb-10">
+          <h2 className="text-2xl sm:text-3xl font-heading font-bold flex items-center justify-center gap-2">
             What Parents Say <Heart className="w-5 h-5 text-primary fill-transparent" />
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
           {testimonials.map((testimonial) => (
             <Card key={testimonial.id} className="bg-white border-border/50 shadow-sm hover:shadow-md transition-shadow rounded-2xl relative overflow-hidden group">
               <CardContent className="p-8">
