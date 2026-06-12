@@ -3,7 +3,7 @@
 import { ArrowRight, Heart } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion"
 
 const festivals = [
   {
@@ -56,7 +56,7 @@ const festivals = [
   }
 ]
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: {},
   show: {
     transition: {
@@ -66,7 +66,7 @@ const containerVariants = {
   },
 }
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { 
     opacity: 0, 
     y: 60,
@@ -83,7 +83,7 @@ const itemVariants = {
   },
 }
 
-const contentReveal = {
+const contentReveal: Variants = {
   hidden: { opacity: 0, x: -20 },
   show: { opacity: 1, x: 0, transition: { duration: 0.8, delay: 0.4, ease: "easeOut" } }
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion"
 
 export function MidValuePropsOccasions() {
   const props = [
@@ -51,7 +51,7 @@ export function MidValuePropsOccasions() {
     },
   ]
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     show: {
       transition: {
@@ -61,7 +61,7 @@ export function MidValuePropsOccasions() {
     },
   }
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 50, rotateX: -45, scale: 0.9 },
     show: { 
       opacity: 1, 

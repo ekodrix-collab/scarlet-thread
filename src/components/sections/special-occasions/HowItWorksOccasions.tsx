@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion"
 
 export function HowItWorksOccasions() {
   const steps = [
@@ -32,7 +32,7 @@ export function HowItWorksOccasions() {
     },
   ]
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: {},
     show: {
       transition: {
@@ -41,7 +41,7 @@ export function HowItWorksOccasions() {
     },
   }
 
-  const stepVariants = {
+  const stepVariants: Variants = {
     hidden: { opacity: 0, y: 40, scale: 0.5 },
     show: { 
       opacity: 1, 
@@ -56,7 +56,7 @@ export function HowItWorksOccasions() {
     },
   }
 
-  const lineVariants = {
+  const lineVariants: Variants = {
     hidden: { pathLength: 0, opacity: 0 },
     show: { 
       pathLength: 1, 
