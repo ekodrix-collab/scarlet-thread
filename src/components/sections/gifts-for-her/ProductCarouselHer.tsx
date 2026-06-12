@@ -1,11 +1,12 @@
 "use client"
 
-import { motion, Variants } from "framer-motion"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Heart, Star, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
+import { staggerContainer, fadeUp } from "@/lib/animations"
 
 const products = [
   {
@@ -61,29 +62,6 @@ const products = [
 ]
 
 export function ProductCarouselHer() {
-  const container: Variants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.12,
-      },
-    },
-  }
-
-  const item: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 40,
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
-    },
-  }
 
   return (
     <section className="py-4 md:py-8 bg-white">
@@ -126,7 +104,7 @@ export function ProductCarouselHer() {
           </button>
 
           <motion.div
-            variants={container}
+            variants={staggerContainer(0.12)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.15 }}
@@ -135,7 +113,7 @@ export function ProductCarouselHer() {
             {products.map((product, index) => (
               <motion.div
                 key={product.id}
-                variants={item}
+                variants={fadeUp(0.6, 40)}
                 whileHover={{
                   y: -10,
                 }}

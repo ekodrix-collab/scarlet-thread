@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import { staggerContainer, cardPerspective } from "@/lib/animations"
 
 const occasions = [
   {
@@ -43,11 +44,22 @@ const occasions = [
 
 export function OccasionsGrid() {
   return (
-    <section className="py-12 bg-white">
-      <motion.div initial={{ opacity: 0, y: 30, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.9, ease: "easeOut" }} className="container px-4 sm:px-6 md:px-12 lg:px-24">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6">
+    <section className="py-12 bg-white overflow-hidden perspective-1000">
+      <div className="container px-4 sm:px-6 md:px-12 lg:px-24">
+        <motion.div 
+          variants={staggerContainer(0.12, 0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6"
+          style={{ transformStyle: "preserve-3d" }}
+        >
           {occasions.map((occ) => (
-            <div key={occ.id} className={`${occ.bgColor} rounded-3xl p-6 relative overflow-hidden group hover:shadow-md transition-shadow flex flex-col h-full min-h-[220px]`}>
+            <motion.div 
+              key={occ.id} 
+              variants={cardPerspective}
+              className={`${occ.bgColor} rounded-3xl p-6 relative overflow-hidden group hover:shadow-md transition-shadow flex flex-col h-full min-h-[220px]`}
+            >
               <div className="relative z-10 w-2/3">
                 <h3 className={`font-bold text-xl mb-2 ${occ.titleColor || 'text-foreground'}`}>
                   {occ.title}
@@ -79,10 +91,10 @@ export function OccasionsGrid() {
                   </div>
                 )}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   )
 }

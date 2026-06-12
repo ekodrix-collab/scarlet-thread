@@ -1,13 +1,20 @@
 "use client"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Gift } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Image from "next/image"
+import { rotateXPerspective } from "@/lib/animations"
 
 export function CustomGiftBanner() {
   return (
-    <section className="py-12 md:py-16 bg-white">
-      <motion.div initial={{ opacity: 0, rotateX: 15, y: 40 }} whileInView={{ opacity: 1, rotateX: 0, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.9, ease: "backOut" }} className="container px-4 sm:px-6 md:px-12 lg:px-24">
+    <section className="py-12 md:py-16 bg-white overflow-hidden" style={{ perspective: 1000 }}>
+      <motion.div 
+        variants={rotateXPerspective}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+        className="container px-4 sm:px-6 md:px-12 lg:px-24"
+      >
         <div className="bg-[#5c2a86] rounded-2xl relative overflow-hidden flex flex-col md:flex-row items-center text-white shadow-lg min-h-[260px] p-8 md:p-0">
 
           {/* Background pattern */}

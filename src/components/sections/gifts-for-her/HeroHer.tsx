@@ -1,37 +1,13 @@
 "use client"
 
-import { motion, Variants } from "framer-motion"
+import { motion } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowRight, Sparkles, Star, Heart } from "lucide-react"
+import { staggerContainer, fadeUp } from "@/lib/animations"
 
 export function HeroHer() {
-  const titleText = "Made for Her,\nPersonalized\nwith Love"
-  const typingSpeed = 0.09
-
-  const container: Variants = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  }
-
-  const fadeUp: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 40,
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  }
+  const line1 = "Made for Her,"
 
   return (
     <section className="relative bg-[#fce8ec] py-6 md:py-6 overflow-hidden">
@@ -50,7 +26,7 @@ export function HeroHer() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Gradient overlay so left text stays readable on desktop */} 
+        {/* Gradient overlay so left text stays readable on desktop */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -80,7 +56,7 @@ export function HeroHer() {
       </motion.div>
 
       <motion.div
-        variants={container}
+        variants={staggerContainer(0.2)}
         initial="hidden"
         animate="show"
         className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10"
@@ -89,7 +65,7 @@ export function HeroHer() {
           {/* Left Content */}
           <div className="flex-1 text-left py-10 sm:py-14 md:py-0">
             <motion.div
-              variants={fadeUp}
+              variants={fadeUp(0.8, 40)}
               className="inline-block text-[10px] font-semibold tracking-widest text-[#c0004e] uppercase mb-3"
             >
               <div className="flex items-center gap-1.5">
@@ -110,35 +86,18 @@ export function HeroHer() {
             </motion.div>
 
             <motion.h1
-              variants={fadeUp}
+              variants={fadeUp(0.8, 40)}
               className="text-3xl md:text-5xl lg:text-6xl font-sans font-extrabold text-[#111] mb-4 md:mb-5 leading-tight"
             >
-              {titleText.split("").map((char, index) => {
-                if (char === "\n") {
-                  return <br key={index} />
-                }
-
-                const isPersonalized = index >= titleText.indexOf("Personalized") && index < titleText.indexOf("Personalized") + 12
-
-                return (
-                  <motion.span
-                    key={index}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{
-                      delay: index * typingSpeed,
-                      duration: 0.010,
-                    }}
-                    className={isPersonalized ? "text-[#c0004e]" : ""}
-                  >
-                    {char === " " ? "\u00A0" : char}
-                  </motion.span>
-                )
-              })}
+              {line1}
+              <br />
+              <span className="text-[#c0004e]">Personalized</span>
+              <br />
+              with Love
             </motion.h1>
 
             <motion.p
-              variants={fadeUp}
+              variants={fadeUp(0.8, 40)}
               className="text-sm md:text-base text-[#666] mb-6 max-w-md"
             >
               Thoughtful, personalized &amp; embroidered gifts that celebrate the
@@ -146,7 +105,7 @@ export function HeroHer() {
             </motion.p>
 
             <motion.div
-              variants={fadeUp}
+              variants={fadeUp(0.8, 40)}
               className="mb-6 flex flex-wrap items-center gap-2.5"
             >
               <motion.div
@@ -185,7 +144,7 @@ export function HeroHer() {
 
             {/* Trust Badges */}
             <motion.div
-              variants={fadeUp}
+              variants={fadeUp(0.8, 40)}
               className="flex flex-wrap items-center justify-start gap-3 md:gap-4 text-xs font-medium text-[#444]"
             >
               <TrustBadge icon={<Sparkles className="h-3 w-3" />} label="Personalized &amp; Unique" />

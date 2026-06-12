@@ -3,6 +3,7 @@
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import { staggerContainer, fadeUp } from "@/lib/animations"
 import {
   Great_Vibes,
   Playfair_Display,
@@ -39,12 +40,12 @@ export function EmbroideryStyles() {
   ]
 
   return (
-    <section className="py-3 md:py-4 bg-[#FAFAFA]">
+    <section className="py-3 md:py-4 bg-[#FAFAFA] overflow-hidden">
       <motion.div
-        initial={{ opacity: 0, x: -40 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        variants={fadeUp(0.7, 30)}
+        initial="hidden"
+        whileInView="show"
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
         className="container px-4 sm:px-6 md:px-12 lg:px-24"
       >
         <div className="grid grid-cols-1 md:grid-cols-[1.15fr_4fr] gap-3 md:gap-4 items-stretch">
@@ -65,10 +66,14 @@ export function EmbroideryStyles() {
             </Button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <motion.div 
+            variants={staggerContainer(0.08, 0.1)}
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4"
+          >
             {styles.map((item, index) => (
-              <div
+              <motion.div
                 key={index}
+                variants={fadeUp(0.6, 20)}
                 className="bg-white rounded-xl md:rounded-2xl px-3 py-3 md:px-4 md:py-4 flex flex-col items-center justify-center text-center shadow-sm border border-[#F4E8F1] hover:border-primary/30 transition-colors group cursor-pointer min-h-[82px] md:min-h-[92px]"
               >
                 <span
@@ -80,9 +85,9 @@ export function EmbroideryStyles() {
                 <span className="text-[8px] md:text-[9px] uppercase tracking-wide text-muted-foreground font-semibold">
                   {item.style}
                 </span>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </motion.div>
     </section>
