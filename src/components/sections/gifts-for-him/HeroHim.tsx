@@ -1,7 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, Variants } from "framer-motion"
 import Image from "next/image"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, CheckCircle2, Heart, Award } from "lucide-react"
 
@@ -9,10 +10,39 @@ export function HeroHim() {
   const titleText = "Make Every\nGift Personal"
   const typingSpeed = 0.09
 
+  const container: Variants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  }
+
+  const fadeUp: Variants = {
+    hidden: {
+      opacity: 0,
+      y: 40,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  }
+
   return (
     <section className="relative bg-[#FFF7FD] py-6 md:py-6 overflow-hidden">
       {/* Background Image — Desktop */}
-      <div className="absolute inset-0 hidden md:block">
+      <motion.div
+        initial={{ scale: 1.15 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 2.5, ease: "easeOut" }}
+        className="absolute inset-0 hidden md:block"
+      >
         <Image
           src="/images/forhimpage/scarlet-forhimbanner.png"
           alt="Personalized gifts for him"
@@ -21,10 +51,15 @@ export function HeroHim() {
           sizes="100vw"
           className="object-cover object-center"
         />
-      </div>
+      </motion.div>
 
       {/* Background Image — Mobile */}
-      <div className="absolute inset-0 md:hidden">
+      <motion.div
+        initial={{ scale: 1.15 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 2.5, ease: "easeOut" }}
+        className="absolute inset-0 md:hidden"
+      >
         <Image
           src="/images/forhimpage/scarlet-mobilebanner.png"
           alt="Personalized gifts for him"
@@ -35,27 +70,42 @@ export function HeroHim() {
         />
         {/* Gradient overlay so text stays readable on mobile */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white/10 pointer-events-none" />
-      </div>
+      </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20, scale: 0.98 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
+        variants={container}
+        initial="hidden"
+        animate="show"
         className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10"
       >
         <div className="flex flex-col md:flex-row items-center gap-12 min-h-[360px] md:min-h-[500px]">
           {/* Left Content */}
           <div className="flex-1 text-left py-10 sm:py-14 md:py-0">
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.4 }}
+              variants={fadeUp}
               className="inline-block text-[10px] font-semibold tracking-widest text-primary uppercase mb-3"
             >
-              Gifts For Him
+              <div className="flex items-center gap-1.5">
+                <motion.div
+                  animate={{
+                    y: [0, -6, 0],
+                    rotate: [0, 8, -8, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                  }}
+                >
+                  <Heart className="h-3 w-3 fill-primary text-primary" />
+                </motion.div>
+                <span>Gifts For Him</span>
+              </div>
             </motion.div>
 
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-4 md:mb-5 leading-tight">
+            <motion.h1
+              variants={fadeUp}
+              className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-4 md:mb-5 leading-tight"
+            >
               {titleText.split("").map((char, index) => {
                 if (char === "\n") {
                   return <br key={index} className="hidden md:block" />
@@ -78,12 +128,10 @@ export function HeroHim() {
                   </motion.span>
                 )
               })}
-            </h1>
+            </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 3.2, duration: 0.5 }}
+              variants={fadeUp}
               className="text-sm md:text-base text-muted-foreground mb-4 max-w-md"
             >
               Thoughtfully embroidered gifts for husbands, boyfriends, fathers,
@@ -91,9 +139,7 @@ export function HeroHim() {
             </motion.p>
 
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 3.5, duration: 0.5 }}
+              variants={fadeUp}
               className="text-sm text-foreground/80 mb-6 max-w-md"
             >
               Personalized with names, dates, quotes, and memories that last
@@ -101,38 +147,60 @@ export function HeroHim() {
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 3.8, duration: 0.5 }}
+              variants={fadeUp}
+              className="mb-6 md:mb-10 flex flex-wrap items-center gap-2.5"
             >
-              <Button
-                size="lg"
-                className="rounded-md px-6 h-10 md:h-11 text-sm shadow-lg shadow-primary/20 mb-6 md:mb-10"
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
               >
-                Shop Best Sellers
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </Button>
+                <Link
+                  href="/gifts-for-him"
+                  className="inline-flex h-10 md:h-11 items-center rounded-full bg-primary px-6 text-[0.78rem] md:text-sm font-bold text-white shadow transition-all duration-200 hover:bg-primary/90 hover:-translate-y-px active:translate-y-0"
+                >
+                  Shop Best Sellers
+                </Link>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
+              >
+                <Link
+                  href="/gifts-for-him"
+                  className="inline-flex h-10 md:h-11 items-center rounded-full border border-primary/60 bg-white/60 px-6 text-[0.78rem] md:text-sm font-semibold text-primary backdrop-blur-sm transition-all duration-200 hover:bg-white hover:-translate-y-px active:translate-y-0"
+                >
+                  Explore Collection
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                    }}
+                    className="inline-block"
+                  >
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </motion.div>
+                </Link>
+              </motion.div>
             </motion.div>
 
             {/* Trust Badges */}
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 4.1, duration: 0.5 }}
-              className="flex flex-wrap justify-start gap-4 md:gap-6 text-xs font-medium text-muted-foreground"
+              variants={fadeUp}
+              className="flex flex-wrap items-center justify-start gap-3 md:gap-4 text-xs font-medium text-[#444]"
             >
-              <div className="flex items-center gap-2">
-                <Award className="w-3 h-3 text-primary" />
+              <div className="flex items-center gap-1.5 rounded-full bg-white/55 px-3 py-2 md:py-2.5 text-[0.7rem] md:text-xs font-medium text-[#444] shadow-sm backdrop-blur-sm">
+                <span className="text-primary"><Award className="h-3 w-3" /></span>
                 Premium Quality
               </div>
 
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="w-3 h-3 text-primary" />
+              <div className="flex items-center gap-1.5 rounded-full bg-white/55 px-3 py-2 md:py-2.5 text-[0.7rem] md:text-xs font-medium text-[#444] shadow-sm backdrop-blur-sm">
+                <span className="text-primary"><CheckCircle2 className="h-3 w-3" /></span>
                 Personalized For You
               </div>
 
-              <div className="flex items-center gap-2">
-                <Heart className="w-3 h-3 text-primary" />
+              <div className="flex items-center gap-1.5 rounded-full bg-white/55 px-3 py-2 md:py-2.5 text-[0.7rem] md:text-xs font-medium text-[#444] shadow-sm backdrop-blur-sm">
+                <span className="text-primary"><Heart className="h-3 w-3" /></span>
                 Made with Love
               </div>
             </motion.div>
