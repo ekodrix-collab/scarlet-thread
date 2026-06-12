@@ -26,8 +26,8 @@ export function BottomValuePropsKids() {
 
   return (
     <section className="py-8 sm:py-12 bg-white border-y border-border/40">
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 sm:gap-6 max-w-7xl mx-auto">
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-6 sm:gap-6">
           {props.map((prop, index) => (
             <div
               key={index}

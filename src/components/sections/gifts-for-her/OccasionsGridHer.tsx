@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { ArrowRight, Heart } from "lucide-react"
 import Link from "next/link"
+import { staggerContainer, cardPerspective } from "@/lib/animations"
 
 const occasions = [
   {
@@ -44,19 +45,39 @@ const occasions = [
 
 export function OccasionsGridHer() {
   return (
-    <section className="py-12 bg-white">
-      <motion.div initial={{ opacity: 0, y: 30, filter: "blur(8px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.9, ease: "easeOut" }} className="container mx-auto px-4">
-        <div className="text-center mb-10">
+    <section className="py-12 bg-white overflow-hidden perspective-1000">
+      <div className="container px-4 sm:px-6 md:px-12 lg:px-24">
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10"
+        >
           <h2 className="text-2xl md:text-3xl font-heading font-bold flex items-center justify-center gap-2">
             Gifts For Every Occasion{" "}
-            <Heart className="w-5 h-5 text-primary fill-transparent" />
+            <motion.div
+              animate={{ scale: [1, 1.2, 1], rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              className="inline-block"
+            >
+              <Heart className="w-5 h-5 text-primary fill-transparent" />
+            </motion.div>
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <motion.div 
+          variants={staggerContainer(0.12, 0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          style={{ transformStyle: "preserve-3d" }}
+        >
           {occasions.map((occ) => (
-            <div
+            <motion.div
               key={occ.id}
+              variants={cardPerspective}
               className={`${occ.bgColor} rounded-3xl p-6 relative overflow-hidden group hover:shadow-md transition-shadow flex flex-col h-full min-h-[220px]`}
             >
               {occ.image && (
@@ -99,10 +120,10 @@ export function OccasionsGridHer() {
                   </div>
                 </div>
               )}
-            </div>
+            </motion.div>
           ))}
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   )
 }

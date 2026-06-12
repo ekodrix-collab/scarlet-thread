@@ -1,6 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
 import { Gift, Heart, Truck, Package, ShieldCheck } from "lucide-react"
+import { staggerContainer, rotateXPerspective } from "@/lib/animations"
 
 export function ValuePropsHer() {
   const props = [
@@ -32,11 +33,22 @@ export function ValuePropsHer() {
   ]
 
   return (
-    <section className="py-10 bg-white border-y border-border/40">
-      <motion.div initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, ease: "backOut" }} className="container mx-auto px-4">
+    <section className="py-8 bg-white border-y border-border/40 overflow-hidden">
+      <motion.div 
+        variants={staggerContainer(0.15, 0.05)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        className="container px-4 sm:px-6 md:px-12 lg:px-24"
+        style={{ transformPerspective: 1000 }}
+      >
         <div className="flex flex-wrap justify-center gap-6 md:gap-10 max-w-7xl mx-auto">
           {props.map((prop, index) => (
-            <div key={index} className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 flex-1 min-w-[150px] group">
+            <motion.div 
+              key={index} 
+              variants={rotateXPerspective}
+              className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 flex-1 min-w-[150px] group"
+            >
               <div className="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                 {prop.icon}
               </div>
@@ -44,7 +56,7 @@ export function ValuePropsHer() {
                 <h4 className="font-bold text-sm text-primary mb-1">{prop.title}</h4>
                 <p className="text-[11px] leading-tight text-muted-foreground">{prop.desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>
