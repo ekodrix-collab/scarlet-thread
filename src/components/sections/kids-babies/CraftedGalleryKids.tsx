@@ -1,56 +1,102 @@
+"use client"
+
+import Image from "next/image"
 import { Heart, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
 
 export function CraftedGalleryKids() {
   const mockImages = [
-    { text: "Myra", bg: "bg-[#FFF0F5]" },
-    { text: "Aarav", bg: "bg-blue-100" },
-    { text: "Teddy", bg: "bg-[#FDF8EB]" },
-    { text: "Little Princess", bg: "bg-pink-100" },
-    { text: "Princess", bg: "bg-blue-200" },
-    { text: "Siya", bg: "bg-orange-50" }
+    { text: "Myra", image: "/images/scarlet-babie1.png" },
+    { text: "Aarav", image: "/images/scarlet-gift.png" },
+    { text: "Teddy", image: "/images/scarlet-babie3.png" },
+    { text: "Little Princess", image: "/images/scarlet-loved4.png" },
+    { text: "Princess", image: "/images/scarlet-loved5.png" },
+    { text: "Siya", image: "/images/scarlet-loved6.png" },
   ]
 
   return (
-    <section className="py-16 bg-[#FAFAFA] overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
+    <section className="py-12 sm:py-16 bg-[#FAFAFA] overflow-hidden">
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8 sm:mb-10"
+        >
           <h2 className="text-2xl md:text-3xl font-heading font-bold flex items-center justify-center gap-2">
-            Loved By Parents, Made For Their Little Ones <Heart className="w-5 h-5 text-primary fill-transparent" />
+            Loved By Parents, Made For Their Little Ones
+            <Heart className="w-5 h-5 text-primary fill-transparent" />
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="flex overflow-x-auto gap-4 pb-8 hide-scrollbar justify-start md:justify-center">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.08
+              }
+            }
+          }}
+          className="flex overflow-x-auto gap-4 pb-8 hide-scrollbar justify-start md:justify-center"
+        >
           {mockImages.map((img, index) => (
-            <div key={index} className="relative w-40 h-40 md:w-48 md:h-48 lg:w-52 lg:h-52 shrink-0 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow group">
-              <div className={`w-full h-full ${img.bg} flex items-center justify-center p-4 text-center border border-black/5`}>
-                <span className={`text-xl md:text-2xl font-heading font-medium italic text-foreground/70`}>
-                  {img.text}
-                </span>
+            <motion.div
+              key={index}
+              variants={{
+                hidden: { opacity: 0, scale: 0.9, y: 20 },
+                visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+              }}
+              className="relative w-40 h-40 md:w-48 md:h-48 lg:w-52 lg:h-52 shrink-0 rounded-2xl overflow-hidden shadow-sm hover:shadow-md group"
+            >
+              <div className="relative w-full h-full border border-black/5">
+                <Image
+                  src={img.image}
+                  alt={img.text}
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-[2px]">
-                <Heart className="text-[#FF69B4] w-8 h-8 fill-transparent" />
-              </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-        
-        <div className="text-center">
-          <Button size="sm" className="rounded-full bg-primary text-white hover:bg-primary/90">
-            View More Creations <ArrowRight className="w-3 h-3 ml-2" />
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-center"
+        >
+          <Button
+            size="sm"
+            className="rounded-full bg-primary text-white hover:bg-primary/90"
+          >
+            View More Creations
+            <ArrowRight className="w-3 h-3 ml-2" />
           </Button>
-        </div>
+        </motion.div>
       </div>
-      
-      <style dangerouslySetInnerHTML={{__html: `
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}} />
+
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+            .hide-scrollbar::-webkit-scrollbar {
+              display: none;
+            }
+            .hide-scrollbar {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+            }
+          `,
+        }}
+      />
     </section>
   )
 }
