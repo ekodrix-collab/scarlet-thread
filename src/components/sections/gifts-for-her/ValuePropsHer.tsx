@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import { Gift, Heart, Truck, Package, ShieldCheck } from "lucide-react"
 
 export function ValuePropsHer() {
@@ -31,7 +33,7 @@ export function ValuePropsHer() {
 
   return (
     <section className="py-10 bg-white border-y border-border/40">
-      <div className="container mx-auto px-4">
+      <motion.div initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, ease: "backOut" }} className="container mx-auto px-4">
         <div className="flex flex-wrap justify-center gap-6 md:gap-10 max-w-7xl mx-auto">
           {props.map((prop, index) => (
             <div key={index} className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 flex-1 min-w-[150px] group">
@@ -45,7 +47,7 @@ export function ValuePropsHer() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

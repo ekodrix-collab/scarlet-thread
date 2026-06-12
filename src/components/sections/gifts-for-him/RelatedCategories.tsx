@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 
@@ -27,14 +29,14 @@ export function RelatedCategories() {
 
   return (
     <section className="py-16 bg-[#FAFAFA] border-t border-border/40">
-      <div className="container mx-auto px-4">
+      <motion.div initial={{ opacity: 0, y: 30, filter: "blur(5px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, ease: "easeOut" }} className="container mx-auto px-4">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
             You May Also Like
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
           {categories.map((cat, index) => (
             <Link
               key={index}
@@ -61,7 +63,7 @@ export function RelatedCategories() {
             </Link>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

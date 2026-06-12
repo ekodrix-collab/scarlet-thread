@@ -1,3 +1,5 @@
+"use client"
+import { motion } from "framer-motion"
 import Image from "next/image"
 
 export function CategoryIconsHer() {
@@ -12,11 +14,11 @@ export function CategoryIconsHer() {
     },
     {
       name: "Hoodies",
-      icon: "/images/categoryicons/scarlet-hoodie.png",
+      icon: "/images/categoryicons/scarlet-sweatshirt.png",
     },
     {
       name: "Personalized Jewelry",
-      icon: "/images/categoryicons/scarlet-jewelery.png",
+      icon: "/images/categoryicons/scarlet-necklace.png",
     },
     {
       name: "Mugs & Bottles",
@@ -42,7 +44,7 @@ export function CategoryIconsHer() {
 
   return (
     <section className="py-6 bg-white border-b border-border/40">
-      <div className="container mx-auto px-4">
+      <motion.div initial={{ opacity: 0, x: 50, filter: "blur(4px)" }} whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, ease: "easeOut" }} className="container mx-auto px-4">
         <div className="flex overflow-x-auto hide-scrollbar gap-3 md:gap-4 justify-start lg:justify-center pb-2">
           {categories.map((cat, index) => (
             <div
@@ -50,7 +52,7 @@ export function CategoryIconsHer() {
               className="flex flex-col items-center gap-2 min-w-[90px] md:min-w-[110px] cursor-pointer group"
             >
               <div className="w-[90px] h-[70px] md:w-[110px] md:h-[80px] rounded-xl bg-[#FFF8FB] border border-[#F5E8EE] flex items-center justify-center transition-all duration-300 hover:shadow-md hover:border-primary/30">
-                <div className="relative w-24 h-28 md:w-24 md:h-28">
+                <div className="relative w-24 h-28 md:w-30 md:h-36">
                   <Image
                     src={cat.icon}
                     alt={cat.name}
@@ -66,7 +68,7 @@ export function CategoryIconsHer() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       <style
         dangerouslySetInnerHTML={{

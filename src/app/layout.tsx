@@ -20,7 +20,7 @@ export default function RootLayout({
         className={`${fontSans.variable} ${fontHeading.variable} font-sans antialiased bg-background text-foreground min-h-screen flex flex-col overflow-x-hidden`}
       >
         <Header />
-        <main className="flex-1">
+        <main className="flex-1 pb-16 lg:pb-0">
           {children}
         </main>
         <Footer />

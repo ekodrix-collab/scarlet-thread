@@ -11,6 +11,7 @@ import { Testimonials } from "@/components/sections/Testimonials"
 import { CustomGiftBanner } from "@/components/sections/gifts-for-him/CustomGiftBanner"
 import { RelatedCategories } from "@/components/sections/gifts-for-him/RelatedCategories"
 
+// Force Next.js route re-compilation to resolve hydration mismatch cache desync
 export default function GiftsForHimPage() {
   return (
     <div className="flex flex-col min-h-screen">
