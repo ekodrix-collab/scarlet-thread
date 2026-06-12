@@ -1,3 +1,4 @@
+"use client"
 import { Heart } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -22,7 +23,7 @@ export function SmileCTA() {
           </p>
           
           <div className="pt-1">
-            <Button size="lg" className="text-xs md:text-sm h-10 px-5 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-xl shadow-lg hover:shadow-primary/20 transition-all">
+            <Button size="lg" className="text-xs md:text-sm h-10 px-5 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-[5px] shadow-lg hover:shadow-primary/20 transition-all">
               Start Personalizing Now
             </Button>
           </div>

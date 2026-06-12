@@ -18,12 +18,22 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
+  const [showBottomNav, setShowBottomNav] = useState(false)  // ← ADD THIS
   const searchInputRef = useRef<HTMLInputElement>(null)
 
   const isActive = (path: string) => {
     if (path === '/') return pathname === '/'
     return pathname?.startsWith(path)
   }
+
+  // ← ADD THIS: Show bottom nav only when scrolled down
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBottomNav(window.scrollY > 60)
+    }
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // Auto-focus input when search opens
   useEffect(() => {
@@ -263,31 +273,42 @@ export function Header() {
         </AnimatePresence>
       </header>
 
-      {/* Mobile Bottom Navigation */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border shadow-[0_-2px_10px_rgba(0,0,0,0.08)]">
-        <div className="flex items-center justify-around h-16 px-2">
-          {bottomNavLinks.map((link) => {
-            const Icon = link.icon
-            const active = isActive(link.path)
-            return (
-              <Link
-                key={link.path}
-                href={link.path}
-                onClick={() => setMenuOpen(false)}
-                className={`flex flex-col items-center justify-center gap-1 flex-1 py-2 transition-colors relative ${
-                  active ? 'text-primary' : 'text-muted-foreground'
-                }`}
-              >
-                <Icon className="h-5 w-5" />
-                <span className="text-[10px] font-medium leading-none">{link.name}</span>
-                {active && (
-                  <span className="absolute bottom-0 w-6 h-0.5 rounded-full bg-primary" />
-                )}
-              </Link>
-            )
-          })}
-        </div>
-      </nav>
+      {/* Mobile Bottom Navigation — appears on scroll */}
+      <AnimatePresence>
+        {showBottomNav && (
+          <motion.nav
+            key="bottom-nav"
+            initial={{ y: 80, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 80, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border shadow-[0_-2px_10px_rgba(0,0,0,0.08)]"
+          >
+            <div className="flex items-center justify-around h-16 px-2">
+              {bottomNavLinks.map((link) => {
+                const Icon = link.icon
+                const active = isActive(link.path)
+                return (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    onClick={() => setMenuOpen(false)}
+                    className={`flex flex-col items-center justify-center gap-1 flex-1 py-2 transition-colors relative ${
+                      active ? 'text-primary' : 'text-muted-foreground'
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span className="text-[10px] font-medium leading-none">{link.name}</span>
+                    {active && (
+                      <span className="absolute bottom-0 w-6 h-0.5 rounded-full bg-primary" />
+                    )}
+                  </Link>
+                )
+              })}
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
     </>
   )
 }

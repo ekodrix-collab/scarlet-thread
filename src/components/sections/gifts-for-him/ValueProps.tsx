@@ -1,6 +1,7 @@
 "use client"
 import { motion } from "framer-motion"
 import { Gift, Heart, Truck, Package } from "lucide-react"
+import { staggerContainer, rotateXPerspective } from "@/lib/animations"
 
 export function ValueProps() {
   const props = [
@@ -27,11 +28,22 @@ export function ValueProps() {
   ]
 
   return (
-    <section className="py-8 bg-white border-y border-border/40">
-      <motion.div initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, ease: "backOut" }} className="container mx-auto px-4">
+    <section className="py-8 bg-white border-y border-border/40 overflow-hidden">
+      <motion.div 
+        variants={staggerContainer(0.15, 0.05)}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+        className="container px-4 sm:px-6 md:px-12 lg:px-24"
+        style={{ transformPerspective: 1000 }}
+      >
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
           {props.map((prop, index) => (
-            <div key={index} className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-4 group">
+            <motion.div 
+              key={index} 
+              variants={rotateXPerspective}
+              className="flex flex-col md:flex-row items-center md:items-start text-center md:text-left gap-4 group"
+            >
               <div className="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                 {prop.icon}
               </div>
@@ -39,7 +51,7 @@ export function ValueProps() {
                 <h4 className="font-bold text-sm text-foreground mb-1">{prop.title}</h4>
                 <p className="text-xs text-muted-foreground leading-relaxed">{prop.desc}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </motion.div>

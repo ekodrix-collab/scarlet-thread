@@ -3,6 +3,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { CheckCircle2, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { springScaleUp } from "@/lib/animations"
 
 export function LivePreviewFeature() {
   const steps = [
@@ -16,7 +17,13 @@ export function LivePreviewFeature() {
 
   return (
     <section className="py-4 bg-white">
-      <motion.div initial={{ opacity: 0, y: 60, scale: 0.9 }} whileInView={{ opacity: 1, y: 0, scale: 1 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, type: "spring", bounce: 0.3 }} className="container mx-auto px-4 max-w-6xl">
+      <motion.div 
+        variants={springScaleUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+        className="container px-4 sm:px-6 md:px-12 lg:px-24"
+      >
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
           {/* Left: Mockup UI */}
           <div className="flex-1 w-full relative">
