@@ -118,7 +118,7 @@ export function FestivalCollectionsGrid() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
         >
           {festivals.map((fest) => (
-            <motion.div key={fest.id} variants={itemVariants} className="group relative h-[190px] rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-shadow duration-500">
+            <motion.div key={fest.id} variants={itemVariants} className="group relative h-[150px] md:h-[190px] rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-shadow duration-500">
               <Link
                 href={`/special-occasions/${fest.id}`}
                 className="block w-full h-full"
@@ -150,7 +150,7 @@ export function FestivalCollectionsGrid() {
                     </h3>
 
                     <p
-                      className={`text-sm leading-relaxed mb-1 opacity-90 ${fest.textColor}`}
+                      className={`hidden md:block text-sm leading-relaxed mb-1 opacity-90 ${fest.textColor}`}
                     >
                       {fest.description}
                     </p>

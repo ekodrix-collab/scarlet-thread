@@ -59,13 +59,13 @@ export function CustomGiftBannerOccasions() {
               className="max-w-[520px] px-8 md:px-16 py-10 transition-transform duration-500 group-hover:translate-x-2"
             >
 
-              <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#2C1844] leading-tight mb-5 drop-shadow-sm">
+              <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#2C1844] leading-tight mb-8 md:mb-5 drop-shadow-sm">
                 Can't Find The Perfect Gift For
                 <br />
                 Your Special Occasion?
               </h2>
 
-              <p className="text-[#4A3266] text-base md:text-lg leading-relaxed mb-8 max-w-[450px]">
+              <p className="hidden md:block text-[#4A3266] text-base md:text-lg leading-relaxed mb-8 max-w-[450px]">
                 We create custom gifts for any festival or celebration.
                 <br />
                 Share your idea and we'll bring it to life!

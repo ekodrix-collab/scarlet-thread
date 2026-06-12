@@ -92,7 +92,7 @@ export function MidValuePropsOccasions() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-50px" }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10"
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-10"
           >
             {props.map((prop, index) => (
               <motion.div
@@ -127,7 +127,7 @@ export function MidValuePropsOccasions() {
                     {prop.title}
                   </h4>
 
-                  <div className="text-[13px] text-[#6B7280] leading-relaxed">
+                  <div className="hidden sm:block text-[13px] text-[#6B7280] leading-relaxed">
                     {prop.desc}
                   </div>
                 </div>
