@@ -100,7 +100,7 @@ export function TestimonialsOccasions() {
           initial={{ opacity: 0, y: 30, filter: "blur(5px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
           className="text-center mb-10"
         >
           <h2 className="text-3xl md:text-4xl font-heading font-bold flex items-center justify-center gap-2">

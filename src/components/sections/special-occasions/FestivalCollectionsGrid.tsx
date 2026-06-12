@@ -78,7 +78,7 @@ const itemVariants = {
     clipPath: "inset(0% 0 0 0)",
     transition: { 
       duration: 1.2, 
-      ease: [0.16, 1, 0.3, 1] // Custom ease curve for a very smooth landing
+      ease: "easeOut" // Fixed TS type error here
     } 
   },
 }

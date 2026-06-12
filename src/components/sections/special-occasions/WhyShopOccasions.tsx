@@ -102,7 +102,7 @@ export function WhyShopOccasions() {
           initial={{ opacity: 0, scale: 0.95, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
           className="bg-[#FCF9FF] border border-[#f0e6f7] rounded-3xl overflow-hidden shadow-sm"
           style={{ transformStyle: "preserve-3d" }}
         >
