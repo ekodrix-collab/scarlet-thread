@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image"
+import { motion } from "framer-motion"
 
 export function WhyShopOccasions() {
   const reasons = [
@@ -34,37 +37,88 @@ export function WhyShopOccasions() {
     },
   ]
 
+  const containerVariants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.3,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.9, rotateY: 15 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      rotateY: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 90, 
+        damping: 15 
+      } 
+    },
+  }
+
   return (
-    <section className="py-12 bg-white relative overflow-hidden">
+    <section className="py-12 bg-white relative overflow-hidden perspective-1000">
       <div className="container mx-auto px-4 max-w-[1400px]">
 
         {/* Heading */}
-        <div className="text-center mb-10">
+        <motion.div 
+          initial={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="text-center mb-10"
+        >
           <h2 className="text-3xl md:text-4xl font-heading font-bold flex items-center justify-center gap-3 text-[#2f1f3a]">
             Why Shop Occasions With Us?
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#C86DD7"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+            <motion.div
+              animate={{ rotate: [0, -15, 15, -5, 5, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-            </svg>
+              <svg
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#C86DD7"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="drop-shadow-sm"
+              >
+                <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+              </svg>
+            </motion.div>
           </h2>
-        </div>
+        </motion.div>
 
         {/* Main Box */}
-        <div className="bg-[#FCF9FF] border border-[#f0e6f7] rounded-3xl overflow-hidden shadow-sm">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95, y: 30 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="bg-[#FCF9FF] border border-[#f0e6f7] rounded-3xl overflow-hidden shadow-sm"
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+          >
 
             {reasons.map((reason, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="group relative flex flex-col items-center text-center px-4 py-8 md:py-10 hover:bg-white transition-colors duration-300"
+                variants={itemVariants}
+                className="group relative flex flex-col items-center text-center px-4 py-8 md:py-10 hover:bg-white transition-colors duration-500"
               >
                 {/* Divider Line */}
                 {index !== reasons.length - 1 && (
@@ -72,31 +126,33 @@ export function WhyShopOccasions() {
                 )}
 
                 {/* Icon Circle */}
-                <div className="w-16 h-16 mb-4 rounded-full border border-[#ecdaf4] bg-white shadow-sm flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:rotate-[-5deg] transition-all duration-300 group-hover:border-[#c86dd7] group-hover:shadow-[0_8px_20px_-5px_rgba(200,109,215,0.2)]">
-                  <Image
-                    src={reason.image}
-                    alt={reason.title}
-                    width={32}
-                    height={32}
-                    className="object-contain"
-                  />
+                <div className="w-16 h-16 mb-5 rounded-full border border-[#ecdaf4] bg-white shadow-sm flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:border-[#c86dd7] group-hover:shadow-[0_10px_25px_-5px_rgba(200,109,215,0.3)]">
+                  <motion.div whileHover={{ scale: 1.15, rotate: 8 }} transition={{ type: "spring", stiffness: 300 }}>
+                    <Image
+                      src={reason.image}
+                      alt={reason.title}
+                      width={32}
+                      height={32}
+                      className="object-contain"
+                    />
+                  </motion.div>
                 </div>
                 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-sm font-bold text-[#3a2944] mb-1.5 leading-tight">
+                  <h4 className="text-[15px] font-bold text-[#3a2944] mb-2 leading-tight group-hover:text-[#b05dc0] transition-colors duration-300">
                     {reason.title}
                   </h4>
 
-                  <p className="text-xs text-[#7f7388] leading-relaxed max-w-[140px] mx-auto">
+                  <p className="text-[13px] text-[#7f7388] leading-relaxed max-w-[140px] mx-auto">
                     {reason.desc}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
 
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
       </div>
     </section>
