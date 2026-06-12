@@ -109,12 +109,12 @@ export function Discover() {
               At Scarlet, we believe the most meaningful gifts are the ones created with love, thought and personal touch. Whether it's a heartfelt gift for him, a thoughtful gift for her, a precious keepsake for a new born, a surprise gift for a toddler or unforgettable baby shower gifts, we turn emotions into meaningful gifts that hold memories forever.
             </p>
 
-            <div className="pt-2 lg:pt-4 flex justify-center">
+            <div className="pt-2 lg:pt-4 flex justify-center md:justify-start">
               <Button
                 nativeButton={false}
                 render={<Link href="/about" />}
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-8 h-12 shadow-sm transition-transform hover:-translate-y-0.5"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-[5px] px-8 h-12 shadow-sm transition-transform hover:-translate-y-0.5"
               >
                 Read Our Story
               </Button>
