@@ -5,8 +5,8 @@ import { ArrowRight } from "lucide-react"
 
 export function CustomGiftBannerHer() {
   return (
-    <section className="py-16 md:py-24 bg-white">
-      <motion.div initial={{ opacity: 0, rotateX: 15, y: 40 }} whileInView={{ opacity: 1, rotateX: 0, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.9, ease: "backOut" }} className="container mx-auto px-4">
+    <section className="py-12 md:py-16 bg-white">
+      <motion.div initial={{ opacity: 0, rotateX: 15, y: 40 }} whileInView={{ opacity: 1, rotateX: 0, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.9, ease: "backOut" }} className="container px-4 sm:px-6 md:px-12 lg:px-24">
         <div
           className="rounded-3xl p-8 md:p-16 relative overflow-hidden flex items-center text-white shadow-xl border-2 border-primary/20 bg-cover bg-center bg-no-repeat min-h-[320px] md:min-h-[380px]"
           style={{

@@ -10,7 +10,7 @@ export function HeroHer() {
   const typingSpeed = 0.09
 
   return (
-    <section className="relative bg-[#fce8ec] py-4 md:py-4 overflow-hidden">
+    <section className="relative bg-[#fce8ec] py-6 md:py-6 overflow-hidden">
       {/* Background Image — Desktop */}
       <div className="absolute inset-0 hidden md:block">
         <Image

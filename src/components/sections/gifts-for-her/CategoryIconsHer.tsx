@@ -44,7 +44,7 @@ export function CategoryIconsHer() {
 
   return (
     <section className="py-6 md:py-10 bg-white border-b border-border/40">
-      <motion.div initial={{ opacity: 0, x: 50, filter: "blur(4px)" }} whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, ease: "easeOut" }} className="container mx-auto px-4">
+      <motion.div initial={{ opacity: 0, x: 50, filter: "blur(4px)" }} whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.8, ease: "easeOut" }} className="container px-4 sm:px-6 md:px-12 lg:px-24">
         <div className="flex overflow-x-auto pb-4 md:pb-0 hide-scrollbar gap-4 md:gap-6 justify-start lg:justify-center">
           {categories.map((cat, index) => (
             <div
