@@ -115,7 +115,7 @@ export function HeroOccasions() {
             {/* Description */}
             <motion.p
               variants={fadeUp}
-              className="mt-4 text-gray-700 text-base md:text-lg max-w-md"
+              className="hidden sm:block mt-4 text-gray-700 text-base md:text-lg max-w-md"
             >
               Thoughtful, personalized gifts for every festival,
               celebration and special moment. Because every occasion
@@ -130,8 +130,9 @@ export function HeroOccasions() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.96 }}
+                className="w-full sm:w-auto"
               >
-                <Button className="rounded-full px-8 h-12 bg-primary hover:bg-primary/90">
+                <Button className="w-full sm:w-auto rounded-full px-8 h-12 bg-primary hover:bg-primary/90">
                   Shop All Occasions
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
@@ -148,10 +149,11 @@ export function HeroOccasions() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.96 }}
+                className="w-full sm:w-auto"
               >
                 <Button
                   variant="outline"
-                  className="rounded-full px-8 h-12 border-primary/20 bg-white/80 backdrop-blur-sm"
+                  className="w-full sm:w-auto rounded-full px-8 h-12 border-primary/20 bg-white/80 backdrop-blur-sm"
                 >
                   Explore Collection
                 </Button>
@@ -163,7 +165,7 @@ export function HeroOccasions() {
 
         {/* Floating Decorative Blur */}
         <motion.div
-          className="absolute top-20 right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl"
+          className="hidden md:block absolute top-20 right-20 w-40 h-40 bg-primary/20 rounded-full blur-3xl"
           animate={{
             y: [0, -30, 0],
             x: [0, 15, 0],
@@ -175,7 +177,7 @@ export function HeroOccasions() {
         />
 
         <motion.div
-          className="absolute bottom-10 right-40 w-24 h-24 bg-primary/10 rounded-full blur-2xl"
+          className="hidden md:block absolute bottom-10 right-40 w-24 h-24 bg-primary/10 rounded-full blur-2xl"
           animate={{
             y: [0, 20, 0],
           }}

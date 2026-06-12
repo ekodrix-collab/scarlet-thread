@@ -32,8 +32,8 @@ export function ValuePropsHer() {
   ]
 
   return (
-    <section className="py-10 bg-white border-y border-border/40">
-      <motion.div initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, ease: "backOut" }} className="container mx-auto px-4">
+    <section className="py-8 bg-white border-y border-border/40">
+      <motion.div initial={{ opacity: 0, y: -30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.6, ease: "backOut" }} className="container px-4 sm:px-6 md:px-12 lg:px-24">
         <div className="flex flex-wrap justify-center gap-6 md:gap-10 max-w-7xl mx-auto">
           {props.map((prop, index) => (
             <div key={index} className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-4 flex-1 min-w-[150px] group">

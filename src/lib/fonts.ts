@@ -1,6 +1,6 @@
-import { Playfair_Display, Outfit } from 'next/font/google';
+import { Outfit } from 'next/font/google';
 
-export const fontHeading = Playfair_Display({
+export const fontHeading = Outfit({
   subsets: ['latin'],
   variable: '--font-heading',
   display: 'swap',

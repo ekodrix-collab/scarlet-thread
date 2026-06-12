@@ -1,5 +1,7 @@
+"use client"
+
 import Image from "next/image"
-import { Heart, Award, Truck } from "lucide-react"
+import { motion, Variants } from "framer-motion"
 
 export function MidValuePropsOccasions() {
   const props = [
@@ -49,41 +51,90 @@ export function MidValuePropsOccasions() {
     },
   ]
 
+  const containerVariants: Variants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 50, rotateX: -45, scale: 0.9 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      rotateX: 0, 
+      scale: 1, 
+      transition: { 
+        type: "spring", 
+        stiffness: 120, 
+        damping: 14 
+      } 
+    },
+  }
+
   return (
-    <section className="py-6 bg-white">
+    <section className="py-6 bg-white overflow-hidden perspective-1000">
       <div className="container mx-auto px-4">
-        <div className="rounded-[24px] bg-[#FAF5FF] border border-[#E9D5FF] px-8 py-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10">
+        <motion.div 
+          initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="rounded-[24px] bg-[#FAF5FF] border border-[#E9D5FF] px-8 py-6"
+          style={{ transformPerspective: 1000 }}
+        >
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-10"
+          >
             {props.map((prop, index) => (
-              <div
+              <motion.div
                 key={index}
-                className="flex items-center gap-4"
+                variants={itemVariants}
+                className="flex items-center gap-4 group"
               >
                 {/* Icon Circle */}
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white border border-[#E9D5FF]">
-                  <Image
-                    src={prop.icon}
-                    alt={prop.title}
-                    width={28}
-                    height={28}
-                    className="object-contain"
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white border border-[#E9D5FF] shadow-sm group-hover:border-[#c86dd7] transition-colors duration-500 overflow-hidden relative">
+                  <motion.div
+                    className="absolute inset-0 bg-[#f6edff] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    initial={false}
                   />
+                  <motion.div
+                    whileHover={{ scale: 1.15, rotate: [0, -10, 10, -5, 5, 0] }}
+                    transition={{ duration: 0.6 }}
+                    className="relative z-10"
+                  >
+                    <Image
+                      src={prop.icon}
+                      alt={prop.title}
+                      width={28}
+                      height={28}
+                      className="object-contain"
+                    />
+                  </motion.div>
                 </div>
 
                 {/* Content */}
                 <div>
-                  <h4 className="text-[15px] font-semibold text-primary mb-1">
+                  <h4 className="text-[15px] font-semibold text-primary mb-1 transition-colors duration-300 group-hover:text-[#b05dc0]">
                     {prop.title}
                   </h4>
 
-                  <div className="text-[13px] text-[#6B7280] leading-relaxed">
+                  <div className="hidden sm:block text-[13px] text-[#6B7280] leading-relaxed">
                     {prop.desc}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   )
