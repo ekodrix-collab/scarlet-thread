@@ -47,14 +47,14 @@ export function CategoryIconsOccasions() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
-          className="flex overflow-x-auto pb-4 md:pb-0 hide-scrollbar gap-4 md:gap-15 justify-start lg:justify-center"
+          className="flex overflow-x-auto pb-4 md:pb-0 hide-scrollbar gap-2 md:gap-15 justify-start lg:justify-center"
         >
           {categories.map((cat, index) => (
             <motion.div
               key={index}
               variants={item}
               whileHover={{ y: -6 }}
-              className="flex flex-col items-center gap-3 min-w-[90px] md:min-w-[110px] cursor-pointer group"
+              className="flex flex-col items-center gap-2 md:gap-3 min-w-[76px] md:min-w-[110px] cursor-pointer group"
             >
               <motion.div
                 whileHover={{
@@ -65,11 +65,11 @@ export function CategoryIconsOccasions() {
                   type: "spring",
                   stiffness: 300,
                 }}
-                className="relative w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white flex items-center justify-center shadow-sm border border-primary/10 overflow-hidden"
+                className="relative w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-white flex items-center justify-center shadow-sm border border-primary/10 overflow-hidden"
               >
                 {/* Glow Effect */}
                 <motion.div
-                  className="absolute inset-0 rounded-2xl border border-primary/20"
+                  className="hidden md:block absolute inset-0 rounded-2xl border border-primary/20"
                   animate={{
                     scale: [1, 1.08, 1],
                     opacity: [0.2, 0.7, 0.2],
@@ -98,7 +98,7 @@ export function CategoryIconsOccasions() {
                     alt={cat.name}
                     width={80}
                     height={80}
-                    className="w-full h-full object-contain p-2"
+                    className="w-full h-full object-contain p-1.5 md:p-2"
                   />
                 </motion.div>
               </motion.div>
