@@ -54,8 +54,8 @@ export function EmbroideryStylesHer() {
   ]
 
   return (
-    <section className="py-16 bg-white">
-      <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, ease: "easeOut" }} className="container mx-auto px-4">
+    <section className="py-3 md:py-4 bg-white">
+      <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, ease: "easeOut" }} className="container px-4 sm:px-6 md:px-12 lg:px-24">
         <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
           <div className="md:w-1/4 text-center md:text-left bg-[#FFF5F5] rounded-3xl p-8 flex flex-col justify-center h-full min-h-[200px]">
             <h2 className="text-xl md:text-2xl font-heading font-bold text-foreground mb-3">

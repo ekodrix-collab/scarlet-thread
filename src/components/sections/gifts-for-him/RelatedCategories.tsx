@@ -29,7 +29,7 @@ export function RelatedCategories() {
 
   return (
     <section className="py-16 bg-[#FAFAFA] border-t border-border/40">
-      <motion.div initial={{ opacity: 0, y: 30, filter: "blur(5px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, ease: "easeOut" }} className="container mx-auto px-4">
+      <motion.div initial={{ opacity: 0, y: 30, filter: "blur(5px)" }} whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.7, ease: "easeOut" }} className="container px-4 sm:px-6 md:px-12 lg:px-24">
         <div className="text-center mb-10">
           <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">
             You May Also Like
