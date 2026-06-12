@@ -7,7 +7,7 @@ import Image from "next/image"
 export function CustomGiftBanner() {
   return (
     <section className="py-12 md:py-16 bg-white">
-      <motion.div initial={{ opacity: 0, rotateX: 15, y: 40 }} whileInView={{ opacity: 1, rotateX: 0, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.9, ease: "backOut" }} className="container mx-auto px-4 max-w-6xl">
+      <motion.div initial={{ opacity: 0, rotateX: 15, y: 40 }} whileInView={{ opacity: 1, rotateX: 0, y: 0 }} viewport={{ once: true, margin: "-50px" }} transition={{ duration: 0.9, ease: "backOut" }} className="container px-4 sm:px-6 md:px-12 lg:px-24">
         <div className="bg-[#5c2a86] rounded-2xl relative overflow-hidden flex flex-col md:flex-row items-center text-white shadow-lg min-h-[260px] p-8 md:p-0">
           
           {/* Background pattern */}
