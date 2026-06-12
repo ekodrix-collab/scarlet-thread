@@ -10,6 +10,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { scaleUp, staggerContainer, fadeUp } from "@/lib/animations"
 
 export function CraftedGalleryHer() {
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -40,10 +41,10 @@ export function CraftedGalleryHer() {
   return (
     <section className="py-16 bg-[#FAFAFA] overflow-hidden">
       <motion.div
-        initial={{ opacity: 0, scale: 1.05 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        variants={scaleUp(1.2, 0)}
+        initial="hidden"
+        whileInView="show"
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 1.2, ease: "circOut" }}
         className="container px-4 sm:px-6 md:px-12 lg:px-24"
       >
         <div className="text-center mb-10">
@@ -70,13 +71,15 @@ export function CraftedGalleryHer() {
             <ChevronRight className="w-5 h-5" />
           </button>
 
-          <div
+          <motion.div
             ref={scrollRef}
+            variants={staggerContainer(0.08, 0.1)}
             className="flex overflow-x-auto gap-4 pb-8 hide-scrollbar scroll-smooth snap-x snap-mandatory"
           >
             {mockImages.map((img, index) => (
-              <div
+              <motion.div
                 key={index}
+                variants={fadeUp(0.6, 20)}
                 className="relative w-40 md:w-48 lg:w-56 shrink-0 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group snap-start bg-white"
               >
                 <div className="relative aspect-square">
@@ -92,9 +95,9 @@ export function CraftedGalleryHer() {
                 <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <Heart className="text-white w-8 h-8 fill-transparent" />
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         <div className="text-center">

@@ -1,5 +1,6 @@
 "use client"
 import { motion } from "framer-motion"
+import { staggerContainer, fadeUp } from "@/lib/animations"
 import Image from "next/image"
 
 export function CategoryIconsHer() {
@@ -42,34 +43,11 @@ export function CategoryIconsHer() {
     },
   ]
 
-  const container = {
-    hidden: {},
-    show: {
-      transition: {
-        staggerChildren: 0.08,
-      },
-    },
-  }
-
-  const item = {
-    hidden: {
-      opacity: 0,
-      y: 30,
-    },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-      },
-    },
-  }
-
   return (
     <section className="py-6 md:py-10 bg-white border-b border-border/40">
       <div className="container px-4 sm:px-6 md:px-12 lg:px-24">
         <motion.div
-          variants={container}
+          variants={staggerContainer(0.08)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.2 }}
@@ -78,7 +56,7 @@ export function CategoryIconsHer() {
           {categories.map((cat, index) => (
             <motion.div
               key={index}
-              variants={item}
+              variants={fadeUp(0.6, 30)}
               whileHover={{ y: -6 }}
               className="flex flex-col items-center gap-3 min-w-[90px] md:min-w-[110px] cursor-pointer group"
             >
@@ -91,8 +69,22 @@ export function CategoryIconsHer() {
                   type: "spring",
                   stiffness: 300,
                 }}
-                className="w-[90px] h-[70px] md:w-[110px] md:h-[80px] rounded-xl bg-[#FFF8FB] border border-[#F5E8EE] flex items-center justify-center transition-all duration-300 hover:shadow-md hover:border-primary/30"
+                className="w-[90px] h-[70px] md:w-[110px] md:h-[80px] rounded-xl bg-[#FFF8FB] border border-[#F5E8EE] flex items-center justify-center transition-all duration-300 hover:shadow-md hover:border-primary/30 overflow-hidden relative"
               >
+                {/* Glow Effect */}
+                <motion.div
+                  className="hidden md:block absolute inset-0 rounded-xl border border-primary/20"
+                  animate={{
+                    scale: [1, 1.08, 1],
+                    opacity: [0.2, 0.7, 0.2],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: index * 0.2,
+                  }}
+                />
+
                 <motion.div
                   animate={{
                     y: [0, -4, 0],

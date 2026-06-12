@@ -10,6 +10,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { scaleUp, staggerContainer, fadeUp } from "@/lib/animations"
 
 export function CraftedGallery() {
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -41,10 +42,10 @@ export function CraftedGallery() {
   return (
     <section className="py-16 bg-white overflow-hidden">
       <motion.div
-        initial={{ opacity: 0, scale: 1.05 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        variants={scaleUp(1.2, 0)}
+        initial="hidden"
+        whileInView="show"
         viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 1.2, ease: "circOut" }}
         className="container px-4 sm:px-6 md:px-12 lg:px-24"
       >
         <div className="text-center mb-10">
@@ -71,13 +72,15 @@ export function CraftedGallery() {
             <ChevronRight className="w-5 h-5" />
           </button>
 
-          <div
+          <motion.div
             ref={scrollRef}
+            variants={staggerContainer(0.08, 0.1)}
             className="flex overflow-x-auto gap-3 pb-6 hide-scrollbar scroll-smooth snap-x snap-mandatory"
           >
             {mockImages.map((img, index) => (
-              <div
+              <motion.div
                 key={index}
+                variants={fadeUp(0.6, 20)}
                 className="relative w-[180px] md:w-[240px] shrink-0 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group bg-[#f8f4f1] snap-start"
               >
                 <div className="relative aspect-[4/3]">
@@ -103,9 +106,9 @@ export function CraftedGallery() {
                 <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <Heart className="text-white w-7 h-7 fill-transparent" />
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
         <div className="text-center">
