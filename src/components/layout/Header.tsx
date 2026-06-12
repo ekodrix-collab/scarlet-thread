@@ -288,9 +288,6 @@ export function Header() {
           })}
         </div>
       </nav>
-
-      {/* Bottom spacer */}
-      <div className="lg:hidden h-16" />
     </>
   )
 }

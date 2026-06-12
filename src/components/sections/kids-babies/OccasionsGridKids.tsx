@@ -1,6 +1,9 @@
+"use client"
+
 import { ArrowRight, Heart } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { motion } from "framer-motion"
 
 const occasions = [
   {
@@ -40,16 +43,42 @@ const occasions = [
 export function OccasionsGridKids() {
   return (
     <section className="py-8 sm:py-12 bg-white">
-      <div className="container mx-auto px-4 sm:px-6 md:px-12 lg:px-24">
-        <div className="text-center mb-10">
+      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8 sm:mb-10"
+        >
           <h2 className="text-2xl md:text-3xl font-heading font-bold flex items-center justify-center gap-2">
             Gifts For Every Occasion <Heart className="w-5 h-5 text-primary fill-transparent" />
           </h2>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
+        >
           {occasions.map((occ) => (
-            <div key={occ.id} className={`${occ.bgColor} rounded-2xl sm:rounded-3xl p-3 sm:p-4 md:p-6 relative overflow-hidden group hover:shadow-md transition-shadow flex flex-col h-full min-h-[180px] sm:min-h-[200px] md:min-h-[220px]`}>
+            <motion.div 
+              key={occ.id} 
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+              }}
+              className={`${occ.bgColor} rounded-2xl sm:rounded-3xl p-3 sm:p-4 md:p-6 relative overflow-hidden group hover:shadow-md transition-shadow flex flex-col h-full min-h-[180px] sm:min-h-[200px] md:min-h-[220px]`}
+            >
               <div className="relative z-10 w-full sm:w-2/3">
                 <h3 className={`font-bold text-sm sm:text-base md:text-xl mb-1 sm:mb-2 ${occ.titleColor}`}>
                   {occ.title}
@@ -65,12 +94,12 @@ export function OccasionsGridKids() {
               {/* Image Placeholder */}
               <div className="absolute right-0 bottom-0 w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 translate-x-2 translate-y-2 sm:translate-x-4 sm:translate-y-4">
                 <div className="w-full h-full flex items-center justify-center p-4">
-        <Image src={occ.image} alt={occ.title} width={200} height={100} className="object-cover rounded-full" />
+                  <Image src={occ.image} alt={occ.title} width={200} height={100} className="object-cover rounded-full" />
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )
