@@ -58,16 +58,16 @@ export function HowItWorksOccasions() {
             {steps.map((step, index) => (
               <div
                 key={index}
-                className="relative flex flex-col items-center text-center flex-1"
+                className="relative flex flex-col items-center text-center flex-1 group"
               >
                 {/* Icon Circle */}
-                <div className="relative z-10 w-20 h-20 rounded-full bg-white border border-[#ecdaf4] shadow-sm flex items-center justify-center mb-4">
+                <div className="relative z-10 w-20 h-20 rounded-full bg-white border border-[#ecdaf4] shadow-sm flex items-center justify-center mb-4 transition-all duration-300 group-hover:border-[#c86dd7] group-hover:shadow-[0_8px_25px_-5px_rgba(200,109,215,0.3)] group-hover:-translate-y-1">
                   <Image
                     src={step.image}
                     alt={step.title}
                     width={36}
                     height={36}
-                    className="object-contain"
+                    className="object-contain transition-transform duration-300 group-hover:scale-110 group-hover:rotate-[-3deg]"
                   />
                 </div>
 
