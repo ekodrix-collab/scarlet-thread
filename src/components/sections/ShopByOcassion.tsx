@@ -9,49 +9,49 @@ const occasions = [
     label: "Birthday\nGifts",
     image: "/images/gift-occasion/birthday-gift.png",
     alt: "Birthday gifts",
-    href: "/occasions/birthday",
+    href: "/products/birthday",
   },
   {
     label: "Anniversary\nGifts",
     image: "/images/gift-occasion/anniversary-gift.png",
     alt: "Anniversary gifts",
-    href: "/occasions/anniversary",
+    href: "/products/anniversary",
   },
   {
     label: "New Baby\nGifts",
     image: "/images/gift-occasion/baby-gift.png",
     alt: "New baby gifts",
-    href: "/occasions/new-baby",
+    href: "/products/new-baby",
   },
   {
     label: "Eid\nGifts",
     image: "/images/gift-occasion/eid-gift.png",
     alt: "Eid gifts",
-    href: "/occasions/eid",
+    href: "/products/eid",
   },
   {
     label: "Wedding\nGifts",
     image: "/images/gift-occasion/wedding-gift.png",
     alt: "Wedding gifts",
-    href: "/occasions/wedding",
+    href: "/products/wedding",
   },
   {
     label: "Ramadan\nGifts",
     image: "/images/gift-occasion/ramdan-gift.png",
     alt: "Ramadan gifts",
-    href: "/occasions/ramadan",
+    href: "/products/ramadan",
   },
   {
     label: "Corporate\nGifts",
     image: "/images/gift-occasion/corporate-gift.png",
     alt: "Corporate gifts",
-    href: "/occasions/corporate",
+    href: "/products/corporate",
   },
   {
     label: "Gifts Under\nAED 200",
     image: "/images/gift-occasion/gift-under-aed-200.png",
     alt: "Gifts under AED 200",
-    href: "/occasions/under-200",
+    href: "/products/under-200",
   },
 ];
 
@@ -96,7 +96,7 @@ export default function ShopByOccasion() {
           Shop by <span className="text-violet-500">Occasion</span>
         </h2>
         <Link
-          href="/occasions"
+          href="/special-occasions"
           className="absolute right-4 sm:right-6 md:right-12 lg:right-16 text-sm text-violet-500 hover:text-violet-700 font-medium transition-colors whitespace-nowrap"
         >
           View All
