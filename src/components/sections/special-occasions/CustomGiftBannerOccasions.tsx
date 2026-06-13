@@ -4,22 +4,23 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import { rotateXPerspective } from "@/lib/animations"
 
 export function CustomGiftBannerOccasions() {
   return (
-    <section className="py-12 bg-white">
+    <section className="py-12 bg-white overflow-hidden" style={{ perspective: 1000 }}>
       <div className="container mx-auto px-4 max-w-7xl">
 
         <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
+          variants={rotateXPerspective}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
           className="group relative overflow-hidden rounded-[2rem] min-h-[280px] md:min-h-[340px] shadow-sm hover:shadow-[0_20px_40px_-15px_rgba(200,109,215,0.3)] transition-all duration-500 hover:-translate-y-2 border border-[#f0e6f7] hover:border-[#d7b8e6]"
         >
 
           {/* Background Image */}
-          <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
+          <div className="absolute inset-0 overflow-hidden rounded-[2rem] hidden md:block">
             <Image
               src="/images/banners/custom-gift-banner.png"
               alt="Custom Gift Banner"
@@ -51,13 +52,7 @@ export function CustomGiftBannerOccasions() {
 
           {/* Content */}
           <div className="relative z-20 h-full flex items-center min-h-[280px] md:min-h-[340px]">
-            <motion.div 
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-              className="max-w-[520px] px-8 md:px-16 py-10 transition-transform duration-500 group-hover:translate-x-2"
-            >
+            <div className="max-w-[520px] px-8 md:px-16 py-10 transition-transform duration-500 group-hover:translate-x-2">
 
               <h2 className="text-3xl md:text-5xl font-heading font-bold text-[#2C1844] leading-tight mb-8 md:mb-5 drop-shadow-sm">
                 Can't Find The Perfect Gift For
@@ -79,7 +74,7 @@ export function CustomGiftBannerOccasions() {
                 <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover/btn:translate-x-2" />
               </Button>
 
-            </motion.div>
+            </div>
           </div>
 
         </motion.div>
