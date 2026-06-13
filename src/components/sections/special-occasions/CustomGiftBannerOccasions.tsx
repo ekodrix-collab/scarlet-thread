@@ -20,7 +20,7 @@ export function CustomGiftBannerOccasions() {
         >
 
           {/* Background Image */}
-          <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
+          <div className="absolute inset-0 overflow-hidden rounded-[2rem] hidden md:block">
             <Image
               src="/images/banners/custom-gift-banner.png"
               alt="Custom Gift Banner"

@@ -63,7 +63,7 @@ export function WhyShopOccasions() {
   }
 
   return (
-    <section className="py-12 bg-white relative overflow-hidden perspective-1000">
+    <section className="hidden md:block py-12 bg-white relative overflow-hidden perspective-1000">
       <div className="container mx-auto px-4 max-w-[1400px]">
 
         {/* Heading */}
@@ -103,7 +103,7 @@ export function WhyShopOccasions() {
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="bg-[#FCF9FF] border border-[#f0e6f7] rounded-3xl overflow-hidden shadow-sm"
+          className="bg-transparent md:bg-[#FCF9FF] border-transparent md:border md:border-[#f0e6f7] rounded-none md:rounded-3xl overflow-hidden shadow-none md:shadow-sm"
           style={{ transformStyle: "preserve-3d" }}
         >
           <motion.div 
@@ -111,14 +111,14 @@ export function WhyShopOccasions() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6"
+            className="grid grid-cols-3 lg:grid-cols-6 gap-y-6 md:gap-y-0"
           >
 
             {reasons.map((reason, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
-                className="group relative flex flex-col items-center text-center px-4 py-8 md:py-10 hover:bg-white transition-colors duration-500"
+                className="group relative flex flex-col items-center text-center px-2 md:px-4 py-4 md:py-10 hover:bg-transparent md:hover:bg-white transition-colors duration-500"
               >
                 {/* Divider Line */}
                 {index !== reasons.length - 1 && (
@@ -126,25 +126,25 @@ export function WhyShopOccasions() {
                 )}
 
                 {/* Icon Circle */}
-                <div className="w-16 h-16 mb-5 rounded-full border border-[#ecdaf4] bg-white shadow-sm flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:border-[#c86dd7] group-hover:shadow-[0_10px_25px_-5px_rgba(200,109,215,0.3)]">
+                <div className="w-12 h-12 md:w-16 md:h-16 mb-2 md:mb-5 rounded-full border border-[#ecdaf4] bg-white shadow-sm flex items-center justify-center shrink-0 transition-all duration-500 group-hover:scale-110 group-hover:border-[#c86dd7] group-hover:shadow-[0_10px_25px_-5px_rgba(200,109,215,0.3)]">
                   <motion.div whileHover={{ scale: 1.15, rotate: 8 }} transition={{ type: "spring", stiffness: 300 }}>
                     <Image
                       src={reason.image}
                       alt={reason.title}
                       width={32}
                       height={32}
-                      className="object-contain"
+                      className="object-contain w-6 h-6 md:w-8 md:h-8"
                     />
                   </motion.div>
                 </div>
                 
                 {/* Content */}
                 <div className="flex-1 min-w-0">
-                  <h4 className="text-[15px] font-bold text-[#3a2944] mb-2 leading-tight group-hover:text-[#b05dc0] transition-colors duration-300">
+                  <h4 className="text-[11px] md:text-[15px] font-bold text-[#3a2944] mb-0 md:mb-2 leading-tight group-hover:text-[#b05dc0] transition-colors duration-300">
                     {reason.title}
                   </h4>
 
-                  <p className="text-[13px] text-[#7f7388] leading-relaxed max-w-[140px] mx-auto">
+                  <p className="hidden md:block text-[13px] text-[#7f7388] leading-relaxed max-w-[140px] mx-auto">
                     {reason.desc}
                   </p>
                 </div>
