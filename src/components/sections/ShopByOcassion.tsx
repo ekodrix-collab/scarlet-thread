@@ -59,74 +59,92 @@ const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.07,
+      staggerChildren: 0.08,
     },
   },
 };
 
 const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 24 },
+  hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: "easeOut" as const },
+    transition: { duration: 0.5, ease: [0.215, 0.61, 0.355, 1] }, // premium cubic-bezier easeOut
   },
 };
 
 const headingVariants: Variants = {
-  hidden: { opacity: 0, y: -16 },
+  hidden: { opacity: 0, y: -20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
 export default function ShopByOccasion() {
   return (
-    <section className="w-full py-5 md:py-24 bg-white">
-      {/* Header */}
+    <section className="w-full py-10 md:py-20 bg-white border-b border-gray-50 overflow-hidden">
+      {/* Header Layout with Viewport Animation */}
       <motion.div
-        className="relative max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 mb-5 flex items-center justify-center"
+        className="relative max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 mb-8 md:mb-12 text-center"
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-60px" }}
         variants={headingVariants}
       >
-        <h2 className="text-lg md:text-[28px] font-bold text-gray-800 text-center">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-800 tracking-tight">
           Shop by <span className="text-violet-500">Occasion</span>
         </h2>
+        <p className="text-gray-400 text-sm mt-2 max-w-xl mx-auto">
+          Celebrate every milestone with handpicked, beautifully personalised gifts crafted to tell your unique story.
+        </p>
+
+        {/* Mobile View All */}
         <Link
           href="/special-occasions"
-          className="absolute right-4 sm:right-6 md:right-12 lg:right-16 text-sm text-violet-500 hover:text-violet-700 font-medium transition-colors whitespace-nowrap"
+          className="text-xs text-violet-500 hover:text-violet-700 font-bold transition-colors whitespace-nowrap flex items-center justify-center gap-1 mt-3 sm:hidden group"
         >
-          View All
+          View All Occasions 
+          <span className="group-hover:translate-x-1 transition-transform">→</span>
+        </Link>
+
+        {/* Desktop View All absolute at the top right */}
+        <Link
+          href="/special-occasions"
+          className="absolute right-4 sm:right-6 md:right-12 lg:right-16 top-0 text-sm text-violet-500 hover:text-violet-700 font-bold transition-colors whitespace-nowrap hidden sm:flex items-center gap-1 group"
+        >
+          View All Occasions 
+          <span className="group-hover:translate-x-1 transition-transform">→</span>
         </Link>
       </motion.div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
-        {/* Mobile: horizontal scroll */}
+        {/* Mobile: horizontal scroll with Viewport Animation */}
         <motion.div
-          className="flex gap-3 overflow-x-auto pb-2 sm:hidden scrollbar-hide"
+          className="flex gap-4 overflow-x-auto pb-4 sm:hidden scrollbar-hide -mx-4 px-4"
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-40px" }}
           variants={containerVariants}
         >
           {occasions.map((occasion) => (
-            <motion.div key={occasion.href} variants={cardVariants}>
+            <motion.div key={occasion.href} variants={cardVariants} className="shrink-0">
               <OccasionCard occasion={occasion} />
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Tablet+: centered wrapping flex */}
+        {/* Tablet+: grid layout with Viewport Animation */}
         <motion.div
-          className="hidden sm:flex sm:flex-wrap justify-center gap-3"
+          className="hidden sm:grid grid-cols-4 lg:grid-cols-8 gap-4 md:gap-5 justify-items-center"
           initial="hidden"
-          animate="visible"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
           variants={containerVariants}
         >
           {occasions.map((occasion) => (
-            <motion.div key={occasion.href} variants={cardVariants}>
+            <motion.div key={occasion.href} variants={cardVariants} className="w-full max-w-[160px]">
               <OccasionCard occasion={occasion} />
             </motion.div>
           ))}
@@ -145,25 +163,40 @@ type Occasion = {
 
 function OccasionCard({ occasion }: { occasion: Occasion }) {
   return (
-    <Link
-      href={occasion.href}
-      className="flex-shrink-0 flex flex-col items-center gap-2 p-3 rounded-2xl border border-gray-100 bg-white hover:shadow-md hover:border-violet-100 transition-all duration-200 group w-[86px] sm:w-[100px] md:w-[110px]"
+    <motion.div
+      whileHover={{ y: -6, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="w-full h-full"
     >
-      {/* Image container */}
-      <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-gray-50 group-hover:bg-violet-50 transition-colors duration-200">
-        <Image
-          src={occasion.image}
-          alt={occasion.alt}
-          fill
-          sizes="56px"
-          className="object-contain p-1"
-        />
-      </div>
+      <Link
+        href={occasion.href}
+        className="flex flex-col items-center gap-3.5 p-4 sm:p-5 rounded-2xl border border-gray-100 bg-white hover:shadow-lg hover:border-violet-200 transition-all duration-300 group w-full h-full min-w-[110px]"
+      >
+        {/* Image container */}
+        <div className="relative w-18 h-18 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-2xl overflow-hidden bg-gray-50/50 group-hover:bg-violet-50/60 transition-all duration-300 flex items-center justify-center p-2">
+          <motion.div
+            className="relative w-full h-full"
+            whileHover={{ 
+              rotate: [0, -6, 6, -3, 3, 0], 
+              scale: 1.1 
+            }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+          >
+            <Image
+              src={occasion.image}
+              alt={occasion.alt}
+              fill
+              sizes="(max-width: 640px) 72px, (max-width: 768px) 80px, 96px"
+              className="object-contain p-2"
+            />
+          </motion.div>
+        </div>
 
-      {/* Label */}
-      <span className="text-center text-[12px] leading-tight text-gray-600 font-medium whitespace-pre-line">
-        {occasion.label}
-      </span>
-    </Link>
+        {/* Label */}
+        <span className="text-center text-xs sm:text-sm leading-tight text-gray-700 font-semibold group-hover:text-violet-600 transition-colors whitespace-pre-line">
+          {occasion.label}
+        </span>
+      </Link>
+    </motion.div>
   );
 }
