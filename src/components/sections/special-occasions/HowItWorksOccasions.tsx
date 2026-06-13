@@ -81,7 +81,7 @@ export function HowItWorksOccasions() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="bg-[#faf6fd] border border-[#f0e6f7] rounded-[28px] lg:rounded-[40px] px-4 lg:px-10 py-8 lg:py-10 shadow-[inset_0_0_40px_rgba(200,109,215,0.05)]"
+          className="bg-transparent lg:bg-[#faf6fd] border border-transparent lg:border-[#f0e6f7] rounded-[28px] lg:rounded-[40px] px-4 lg:px-10 py-8 lg:py-10 shadow-none lg:shadow-[inset_0_0_40px_rgba(200,109,215,0.05)]"
         >
 
           {/* Heading */}

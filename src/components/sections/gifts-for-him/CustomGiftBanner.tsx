@@ -15,7 +15,7 @@ export function CustomGiftBanner() {
         viewport={{ once: true, margin: "-50px" }}
         className="container px-4 sm:px-6 md:px-12 lg:px-24"
       >
-        <div className="bg-[#5c2a86] rounded-2xl relative overflow-hidden flex flex-col md:flex-row items-center text-white shadow-lg min-h-[260px] p-8 md:p-0">
+        <div className="group bg-[#5c2a86] rounded-2xl relative overflow-hidden flex flex-col md:flex-row items-center text-white shadow-lg min-h-[260px] p-8 md:p-0 hover:shadow-xl transition-all duration-500 hover:-translate-y-2">
 
           {/* Background pattern */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
@@ -28,7 +28,7 @@ export function CustomGiftBanner() {
               src="/images/forhimpage/scarlet-custombanner.png"
               alt="Custom Gift Banner"
               fill
-              className="object-cover object-center"
+              className="object-cover object-center transition-transform duration-700 group-hover:scale-105 group-hover:rotate-1"
               sizes="(max-width: 1200px) 100vw, 1152px"
               priority
             />
@@ -51,8 +51,8 @@ export function CustomGiftBanner() {
               and we&apos;ll craft something unique just for him.
             </p>
             <div className="flex justify-center md:justify-start">
-              <Button size="lg" className="rounded-md bg-white text-[#5c2a86] hover:bg-white/90 font-bold px-6 h-11 text-sm shadow-sm transition-transform hover:scale-105">
-                Start Custom Order <ArrowRight className="w-4 h-4 ml-2" />
+              <Button size="lg" className="group/btn rounded-md bg-white text-[#5c2a86] hover:bg-white/90 font-bold px-6 h-11 text-sm shadow-sm transition-all duration-300">
+                Start Custom Order <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover/btn:translate-x-2" />
               </Button>
             </div>
           </div>

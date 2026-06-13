@@ -1,8 +1,17 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import * as React from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Star, Heart } from "lucide-react"
+import { motion } from "framer-motion"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel"
 
 const testimonials = [
   {
@@ -21,7 +30,6 @@ const testimonials = [
       "She loved the personalized jewelry box. Thank you for making our anniversary so special!",
     avatar: "N",
   },
- 
   {
     id: 4,
     name: "Ananya Sharma",
@@ -49,89 +57,156 @@ const testimonials = [
 ]
 
 export function Testimonials() {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [api, setApi] = React.useState<CarouselApi>()
+  const [current, setCurrent] = React.useState(0)
+  const [count, setCount] = React.useState(0)
 
-  const visibleCards = 3
-  const maxIndex = testimonials.length - visibleCards
+  React.useEffect(() => {
+    if (!api) {
+      return
+    }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1))
-    }, 4000)
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap() + 1)
 
-    return () => clearInterval(interval)
-  }, [maxIndex])
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap() + 1)
+    })
+  }, [api])
+
+  // Auto sliding effect
+  React.useEffect(() => {
+    if (!api) return
+
+    const autoplay = setInterval(() => {
+      api.scrollNext()
+    }, 4000) // Slide every 4 seconds
+
+    return () => clearInterval(autoplay)
+  }, [api])
 
   return (
-    <section className="hidden md:block py-16 bg-secondary/30 overflow-hidden">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-10">
+    <section className="hidden md:block py-16 bg-secondary/30 overflow-hidden perspective-1000">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <motion.div 
+          initial={{ opacity: 0, y: 30, filter: "blur(5px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.9, ease: "easeOut" }}
+          className="text-center mb-10"
+        >
           <h2 className="text-3xl font-heading font-bold flex items-center justify-center gap-2">
             What Our Customers Say
-            <Heart className="w-5 h-5 text-primary fill-transparent" />
+            <motion.div
+              animate={{ rotate: [0, -10, 10, -5, 5, 0], scale: [1, 1.1, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <Heart className="w-5 h-5 text-primary fill-transparent ml-2 drop-shadow-sm" />
+            </motion.div>
           </h2>
-
           <p className="text-muted-foreground mt-2">
             Real stories from real customers
           </p>
-        </div>
+        </motion.div>
 
-        <div className="max-w-7xl mx-auto overflow-hidden">
-          <div
-            className="flex transition-transform duration-700 ease-in-out"
-            style={{
-              transform: `translateX(-${currentIndex * 33.3333}%)`,
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9, y: 40, rotateX: 10 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0, rotateX: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, delay: 0.1, type: "spring", stiffness: 60, damping: 15 }}
+          className="relative px-4 md:px-12"
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          <Carousel
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: true,
             }}
+            className="w-full"
           >
-            {testimonials.map((testimonial) => (
-              <div key={testimonial.id} className="w-1/3 shrink-0 px-3">
-                <Card className="h-[260px] border-none shadow-sm hover:shadow-md transition-shadow rounded-xl flex flex-col">
-                  <CardContent className="p-6 flex flex-col h-full">
-                    <div className="flex gap-1 mb-4 text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-current" />
-                      ))}
-                    </div>
+            <CarouselContent className="-ml-6 py-6">
+              {testimonials.map((testimonial) => (
+                <CarouselItem key={testimonial.id} className="pl-6 md:basis-1/2 lg:basis-1/3">
+                  <motion.div 
+                    whileHover={{ y: -12, scale: 1.02 }} 
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }} 
+                    className="h-full"
+                  >
+                    <Card className="rounded-[2rem] border border-primary/10 shadow-sm bg-background/40 h-full hover:shadow-[0_20px_40px_-15px_rgba(var(--primary),0.2)] transition-shadow duration-500 backdrop-blur-sm">
+                      <CardContent className="p-8 h-full flex flex-col relative overflow-hidden group">
+                        
+                        {/* Decorative Background Element */}
+                        <div className="absolute -right-8 -top-8 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors duration-500" />
 
-                    <p className="text-foreground/80 italic text-sm leading-relaxed flex-1">
-                      &quot;{testimonial.content}&quot;
-                    </p>
+                        {/* Stars */}
+                        <div className="flex gap-1.5 mb-6 relative z-10">
+                          {[...Array(5)].map((_, i) => (
+                            <motion.div
+                              key={i}
+                              initial={{ opacity: 0, scale: 0 }}
+                              whileInView={{ opacity: 1, scale: 1 }}
+                              transition={{ delay: 0.3 + (i * 0.1), type: "spring", stiffness: 300 }}
+                            >
+                              <Star
+                                className="w-4 h-4 fill-yellow-400 text-yellow-400 drop-shadow-sm"
+                              />
+                            </motion.div>
+                          ))}
+                        </div>
 
-                    <div className="flex items-center gap-3 mt-5">
-                      <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">
-                        {testimonial.avatar}
-                      </div>
-
-                      <div>
-                        <h4 className="font-bold text-sm">
-                          {testimonial.name}
-                        </h4>
-
-                        <p className="text-xs text-muted-foreground">
-                          {testimonial.role}
+                        {/* Review */}
+                        <p className="text-[15px] leading-relaxed text-foreground/80 flex-grow relative z-10 font-medium">
+                          &quot;{testimonial.content}&quot;
                         </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
+
+                        {/* User */}
+                        <div className="flex items-center gap-4 mt-8 relative z-10">
+                          <div className="relative w-14 h-14 rounded-full overflow-hidden border-[3px] border-background shadow-md group-hover:border-primary/20 transition-colors duration-300 flex items-center justify-center bg-primary/20 text-primary font-bold text-xl">
+                            {testimonial.avatar}
+                          </div>
+
+                          <div>
+                            <h4 className="font-bold text-[15px] text-foreground group-hover:text-primary transition-colors duration-300">
+                              {testimonial.name}
+                            </h4>
+                            <p className="text-[13px] text-muted-foreground font-medium mt-0.5">
+                              {testimonial.role}
+                            </p>
+                          </div>
+                        </div>
+
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="hidden md:block">
+              <CarouselPrevious className="border-primary/20 hover:bg-primary/5 hover:text-primary hover:scale-110 transition-transform duration-300 -left-12 w-10 h-10 shadow-sm" />
+              <CarouselNext className="border-primary/20 hover:bg-primary/5 hover:text-primary hover:scale-110 transition-transform duration-300 -right-12 w-10 h-10 shadow-sm" />
+            </div>
+          </Carousel>
+        </motion.div>
+
+        {/* Dynamic Dots */}
+        {count > 0 && (
+          <div className="flex justify-center items-center gap-3 mt-10">
+            {Array.from({ length: count }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => api?.scrollTo(index)}
+                className={`transition-all duration-500 rounded-full ${
+                  current === index + 1 
+                    ? "w-10 h-2.5 bg-gradient-to-r from-primary to-primary/80 shadow-md" 
+                    : "w-2.5 h-2.5 bg-primary/20 hover:bg-primary/40"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
             ))}
           </div>
-        </div>
+        )}
 
-        <div className="flex justify-center gap-2 mt-8">
-          {Array.from({ length: testimonials.length - 2 }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`transition-all duration-300 rounded-full ${
-                currentIndex === index
-                  ? "w-6 h-2 bg-primary"
-                  : "w-2 h-2 bg-primary/30"
-              }`}
-            />
-          ))}
-        </div>
       </div>
     </section>
   )
