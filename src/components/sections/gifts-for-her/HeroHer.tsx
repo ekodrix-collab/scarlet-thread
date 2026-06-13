@@ -26,14 +26,6 @@ export function HeroHer() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Gradient overlay so left text stays readable on desktop */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "linear-gradient(to right, #fce8ec 0%, #fce8eccc 38%, #fce8ec88 58%, transparent 80%)",
-          }}
-        />
       </motion.div>
 
       {/* Background Image — Mobile */}
@@ -51,9 +43,10 @@ export function HeroHer() {
           sizes="100vw"
           className="object-cover object-top"
         />
-        {/* Gradient overlay so text stays readable on mobile */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white/10 pointer-events-none" />
       </motion.div>
+
+      {/* Sophisticated Overlay for better visibility (matches Occasions) */}
+      <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-white/95 via-white/80 md:from-white/70 md:via-white/30 to-white/20 md:to-transparent backdrop-blur-[1px] md:backdrop-blur-none pointer-events-none" />
 
       <motion.div
         variants={staggerContainer(0.2)}
@@ -157,6 +150,19 @@ export function HeroHer() {
           <div className="flex-1 hidden md:block" />
         </div>
       </motion.div>
+
+      {/* Floating Decorative Elements (matches Occasions) */}
+      <motion.div
+        className="hidden md:block absolute top-10 right-20 w-40 h-40 bg-[#c0004e]/10 rounded-full blur-[80px] pointer-events-none"
+        animate={{ y: [0, -20, 0], x: [0, 15, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
+      <motion.div
+        className="absolute -bottom-10 -right-10 w-32 h-32 md:w-48 md:h-48 bg-[#c0004e]/10 rounded-full blur-[60px] pointer-events-none"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      />
     </section>
   )
 }

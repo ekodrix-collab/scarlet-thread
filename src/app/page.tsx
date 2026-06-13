@@ -8,18 +8,22 @@ import { StoreFeatures } from "@/components/sections/StoreFeatures"
 import { Testimonials } from "@/components/sections/Testimonials"
 import { SmileCTA } from "@/components/sections/SmileCTA"
 import ShopByOccasion from "@/components/sections/ShopByOcassion"
+import { CraftedGalleryHer } from "@/components/sections/gifts-for-her/CraftedGalleryHer"
+import { NewHowItWorks } from "@/components/sections/NewHowItWorks"
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <Hero />
       <ShopByOccasion/>
-      {/* <Discover /> */}
-      <Categories />
-      <HowItWorks />
+      {/* <Discover /> */} 
+      {/* <Categories /> */}
+      <NewHowItWorks />
+      {/* <HowItWorks /> */}
       <FeaturedBanner />
       <ProductGrid />
       <StoreFeatures />
+      <CraftedGalleryHer />
       <Testimonials />
       <SmileCTA />
     </div>

@@ -42,12 +42,51 @@ export function CategoryIconsKids() {
               }}
               className="flex flex-col items-center gap-3 min-w-[80px] md:min-w-[100px] cursor-pointer group"
             >
-              <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white flex items-center justify-center text-[#FF69B4] group-hover:bg-[#FF69B4] group-hover:text-white group-hover:scale-105 transition-all duration-300 shadow-sm border border-[#FF69B4]/20 group-hover:border-transparent">
-                {cat.icon}
-              </div>
-              <span className="text-xs md:text-sm font-medium text-center text-foreground group-hover:text-[#FF69B4] transition-colors line-clamp-2">
+              <motion.div 
+                whileHover={{
+                  scale: 1.08,
+                  rotate: 3,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 300,
+                }}
+                className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white flex items-center justify-center text-[#FF69B4] group-hover:bg-[#FF69B4] group-hover:text-white transition-all duration-300 shadow-sm border border-[#FF69B4]/20 group-hover:border-transparent relative overflow-hidden"
+              >
+                {/* Glow Effect */}
+                <motion.div
+                  className="hidden md:block absolute inset-0 rounded-2xl border border-[#FF69B4]/20"
+                  animate={{
+                    scale: [1, 1.08, 1],
+                    opacity: [0.2, 0.7, 0.2],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    delay: index * 0.2,
+                  }}
+                />
+                
+                <motion.div
+                  animate={{
+                    y: [0, -4, 0],
+                  }}
+                  transition={{
+                    duration: 3 + index * 0.2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="relative flex items-center justify-center z-10"
+                >
+                  {cat.icon}
+                </motion.div>
+              </motion.div>
+              <motion.span 
+                whileHover={{ y: -2 }}
+                className="text-xs md:text-sm font-medium text-center text-foreground group-hover:text-[#FF69B4] transition-colors duration-300 line-clamp-2"
+              >
                 {cat.name}
-              </span>
+              </motion.span>
             </motion.div>
           ))}
         </motion.div>

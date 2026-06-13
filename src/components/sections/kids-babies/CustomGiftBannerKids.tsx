@@ -15,7 +15,7 @@ export function CustomGiftBannerKids() {
         viewport={{ once: true, margin: "-50px" }}
         className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8"
       >
-        <div className="bg-primary rounded-[20px] sm:rounded-[32px] relative overflow-hidden flex flex-col md:flex-row items-stretch justify-between text-white shadow-xl min-h-[200px] sm:min-h-[220px] px-4 sm:px-8 md:px-12 lg:px-20">
+        <div className="group bg-primary rounded-[20px] sm:rounded-[32px] relative overflow-hidden flex flex-col md:flex-row items-stretch justify-between text-white shadow-xl min-h-[200px] sm:min-h-[220px] px-4 sm:px-8 md:px-12 lg:px-20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
 
           {/* Left Teddy Bear Image — hidden on mobile, shown md+ */}
           <motion.div 
@@ -48,9 +48,9 @@ export function CustomGiftBannerKids() {
             </p>
             <Button
               size="lg"
-              className="rounded-full bg-[#9B59B6] hover:bg-[#8E44AD] text-white h-10 sm:h-11 px-6 sm:px-7 font-semibold shadow-lg text-sm sm:text-base"
+              className="group/btn rounded-full bg-[#9B59B6] hover:bg-[#8E44AD] text-white h-10 sm:h-11 px-6 sm:px-7 font-semibold shadow-lg text-sm sm:text-base transition-all duration-300"
             >
-              Start Custom Order <ArrowRight className="w-4 h-4 ml-2" />
+              Start Custom Order <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover/btn:translate-x-2" />
             </Button>
           </motion.div>
 
