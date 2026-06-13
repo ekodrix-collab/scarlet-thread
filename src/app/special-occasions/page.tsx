@@ -16,8 +16,8 @@ export default function SpecialOccasionsPage() {
       <ProductCarouselOccasions />
       <MidValuePropsOccasions />
       <FestivalCollectionsGrid />
-      <HowItWorksOccasions />
-      <WhyShopOccasions />
+      {/*<HowItWorksOccasions />*/}
+      {/*<WhyShopOccasions />*/}
       <TestimonialsOccasions />
       <CustomGiftBannerOccasions />
     </div>

@@ -16,9 +16,9 @@ export default function GiftsForHerPage() {
       <HeroHer />
       <CategoryIconsHer />
       <ProductCarouselHer />
-      <LivePreviewFeatureHer />
+     {/*<LivePreviewFeatureHer />*/}
       <OccasionsGridHer />
-      <EmbroideryStylesHer />
+      {/* <EmbroideryStylesHer /> */}
       <CraftedGalleryHer />
       <ValuePropsHer />
       <Testimonials />

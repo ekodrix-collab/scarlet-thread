@@ -18,10 +18,10 @@ export default function GiftsForHimPage() {
       <HeroHim />
       <CategoryIcons />
       <ProductCarousel />
-      <LivePreviewFeature />
+      {/* <LivePreviewFeature /> */}
       <OccasionsGrid />
-      <HowItWorks />
-      <EmbroideryStyles />
+      {/*<HowItWorks />*/}
+      {/* <EmbroideryStyles /> */}
       <CraftedGallery />
       <ValueProps />
       <Testimonials />
