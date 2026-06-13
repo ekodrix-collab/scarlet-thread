@@ -1,256 +1,270 @@
 "use client"
 
-import { motion } from "framer-motion"
 import Image from "next/image"
-
-const headingVariants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
-}
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-}
-
-const stepVariants = {
-  hidden: { opacity: 0, y: 30, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" as const },
-  },
-}
-
-const arrowVariants = {
-  hidden: { opacity: 0, x: -12 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.4, ease: "easeOut" as const },
-  },
-}
+import { motion, Variants } from "framer-motion"
+import { Smile, Eye } from "lucide-react"
 
 export function HowItWorks() {
+  const steps = [
+    {
+      image: "/images/icons/gift2.png", // Reusing gift icon for product selection
+      title: "Choose Product",
+      desc: "Pick your favorite product",
+    },
+    {
+      image: "/images/icons/personalize.png",
+      title: "Personalize It",
+      desc: "Add name, message or design",
+    },
+    {
+      icon: <Eye className="w-8 h-8 lg:w-10 lg:h-10 text-primary" />,
+      title: "Preview Design",
+      desc: "See exactly how it looks",
+    },
+    {
+      image: "/images/icons/craft.png", // Reuse craft for preview or just use craft
+      title: "We Craft It",
+      desc: "Our artisans handcraft with love",
+    },
+    {
+      image: "/images/icons/delivery.png",
+      title: "Delivered With Love",
+      desc: "Delivered to your doorstep on time",
+    },
+    {
+      icon: <Smile className="w-8 h-8 lg:w-10 lg:h-10 text-primary" />,
+      title: "Happy Customer",
+      desc: "A smile on their face",
+    },
+  ]
+
+  const containerVariants: Variants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  }
+
+  const stepVariants: Variants = {
+    hidden: { opacity: 0, y: 30, scale: 0.8 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { 
+        type: "spring",
+        stiffness: 80,
+        damping: 12,
+      } 
+    },
+  }
+
+  const lineVariants: Variants = {
+    hidden: { pathLength: 0, opacity: 0 },
+    show: { 
+      pathLength: 1, 
+      opacity: 1,
+      transition: { 
+        duration: 0.8, 
+        ease: "easeInOut" 
+      } 
+    },
+  }
+
   return (
-    <section className="py-10 md:py-20 bg-white">
-      <div className="max-w-[1450px] mx-auto px-4 sm:px-8 md:px-16 text-center">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={headingVariants}
+    <section className="py-8 lg:py-24 px-4 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="bg-transparent lg:bg-secondary/20 border border-transparent lg:border-primary/10 rounded-[28px] lg:rounded-[40px] px-4 lg:px-10 py-8 lg:py-16 shadow-none"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#262033] mb-2">
-            How Personalization Works
-          </h2>
-          <p className="text-[#7E7488] text-sm md:text-base mb-10">
-            Create a meaningful gift in 3 simple steps
-          </p>
-        </motion.div>
 
-        <motion.div
-          className="relative flex flex-col md:flex-row justify-between items-center gap-4 md:gap-2 bg-[#FCFAFF] rounded-[32px] px-5 sm:px-8 md:px-14 py-8 md:py-12 shadow-[0_10px_45px_rgba(107,70,193,0.08)] border border-[#F1EAF8]"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-        >
-          <StepCard
-            number="1"
-            title="Choose Your Product"
-            desc="Pick a product from our collection"
-            image="/images/personalise/scarlet-bride.png"
-          />
+          {/* Heading */}
+          <div className="text-center mb-8 lg:mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground flex items-center justify-center gap-2">
+              How It Works
+            </h2>
+            <p className="text-muted-foreground mt-2 max-w-xl mx-auto">
+              Create meaningful memories with our easy personalization process
+            </p>
+          </div>
 
-          {/* Desktop: right arrow | Mobile: down arrow */}
-          <motion.div className="hidden md:block text-[#9B6BD3]" variants={arrowVariants}>
-            <ArrowRightIcon />
+          {/* MOBILE SNAKE GRID */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="lg:hidden grid grid-cols-2 gap-y-10 gap-x-4 relative"
+          >
+            {steps.map((step, index) => {
+              let orderClass = '';
+              if (index === 0) orderClass = 'col-start-1 row-start-1';
+              else if (index === 1) orderClass = 'col-start-2 row-start-1';
+              else if (index === 2) orderClass = 'col-start-2 row-start-2';
+              else if (index === 3) orderClass = 'col-start-1 row-start-2';
+              else if (index === 4) orderClass = 'col-start-1 row-start-3';
+              else if (index === 5) orderClass = 'col-start-2 row-start-3';
+
+              return (
+                <motion.div
+                  key={index}
+                  variants={stepVariants}
+                  className={`relative flex flex-col items-center text-center group ${orderClass}`}
+                >
+                  {/* Icon Circle - transparent background */}
+                  <div className="relative z-10 w-16 h-16 rounded-full bg-transparent border-2 border-primary/20 flex items-center justify-center mb-2 transition-all duration-500 group-hover:border-primary group-hover:-translate-y-1">
+                    <motion.div whileHover={{ scale: 1.1, rotate: [-5, 5, -5, 0] }} transition={{ duration: 0.4 }}>
+                      {step.icon ? (
+                        step.icon
+                      ) : (
+                        <Image
+                          src={step.image!}
+                          alt={step.title}
+                          width={30}
+                          height={30}
+                          className="object-contain"
+                        />
+                      )}
+                    </motion.div>
+                  </div>
+
+                  <h3 className="font-bold text-foreground text-[13px] leading-tight group-hover:text-primary transition-colors duration-300">
+                    {step.title}
+                  </h3>
+
+                  {/* Horizontal Line 1 -> 2 */}
+                  {index === 0 && (
+                    <div className="absolute top-8 left-[75%] w-[50%] z-0 pointer-events-none">
+                      <svg className="w-full h-[24px] overflow-visible" preserveAspectRatio="none">
+                        <motion.path d="M 0 12 L 100 12" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="4 4" fill="none" variants={lineVariants}/>
+                        <motion.path d="M 90 7 L 100 12 L 90 17" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={lineVariants}/>
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Vertical Line 2 -> 3 */}
+                  {index === 1 && (
+                    <div className="absolute top-[100%] left-1/2 w-[24px] h-[32px] z-0 pointer-events-none -translate-x-1/2 mt-1">
+                      <svg className="w-full h-full overflow-visible" preserveAspectRatio="none">
+                        <motion.path d="M 12 0 L 12 32" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="4 4" fill="none" variants={lineVariants}/>
+                        <motion.path d="M 6 26 L 12 32 L 18 26" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={lineVariants}/>
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Horizontal Line 3 -> 4 */}
+                  {index === 2 && (
+                    <div className="absolute top-8 right-[75%] w-[50%] z-0 pointer-events-none">
+                      <svg className="w-full h-[24px] overflow-visible" preserveAspectRatio="none">
+                        <motion.path d="M 100 12 L 0 12" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="4 4" fill="none" variants={lineVariants}/>
+                        <motion.path d="M 10 7 L 0 12 L 10 17" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={lineVariants}/>
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Vertical Line 4 -> 5 */}
+                  {index === 3 && (
+                    <div className="absolute top-[100%] left-1/2 w-[24px] h-[32px] z-0 pointer-events-none -translate-x-1/2 mt-1">
+                      <svg className="w-full h-full overflow-visible" preserveAspectRatio="none">
+                        <motion.path d="M 12 0 L 12 32" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="4 4" fill="none" variants={lineVariants}/>
+                        <motion.path d="M 6 26 L 12 32 L 18 26" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={lineVariants}/>
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Horizontal Line 5 -> 6 (Badge) */}
+                  {index === 4 && (
+                    <div className="absolute top-8 left-[75%] w-[50%] z-0 pointer-events-none">
+                      <svg className="w-full h-[24px] overflow-visible" preserveAspectRatio="none">
+                        <motion.path d="M 0 12 L 100 12" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="4 4" fill="none" variants={lineVariants}/>
+                        <motion.path d="M 90 7 L 100 12 L 90 17" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={lineVariants}/>
+                      </svg>
+                    </div>
+                  )}
+
+                </motion.div>
+              )
+            })}
           </motion.div>
-          <motion.div className="block md:hidden text-[#9B6BD3]" variants={arrowVariants}>
-            <ArrowDownIcon />
+
+          {/* DESKTOP FLEX ROW */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="hidden lg:flex flex-row items-center justify-between gap-4 relative"
+          >
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                variants={stepVariants}
+                className="relative flex flex-col items-center text-center group flex-1"
+              >
+                {/* Icon Circle */}
+                <div className="relative z-10 w-24 h-24 rounded-full bg-transparent border-2 border-primary/20 flex items-center justify-center mb-5 transition-all duration-500 group-hover:border-primary group-hover:shadow-[0_10px_30px_-5px_rgba(var(--primary),0.3)] group-hover:-translate-y-2">
+                  <motion.div whileHover={{ scale: 1.1, rotate: [-5, 5, -5, 0] }} transition={{ duration: 0.4 }}>
+                    {step.icon ? (
+                      step.icon
+                    ) : (
+                      <Image
+                        src={step.image!}
+                        alt={step.title}
+                        width={40}
+                        height={40}
+                        className="object-contain"
+                      />
+                    )}
+                  </motion.div>
+                </div>
+
+                <h3 className="font-bold text-foreground text-lg mb-2 group-hover:text-primary transition-colors duration-300">
+                  {step.title}
+                </h3>
+
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-[150px]">
+                  {step.desc}
+                </p>
+
+                {/* Desktop Horizontal Connecting Arrow */}
+                {index < steps.length - 1 && (
+                  <div className="absolute top-12 left-[65%] w-[70%] z-0">
+                    <svg className="w-full h-[24px] overflow-visible" preserveAspectRatio="none">
+                      <motion.path 
+                        d="M 20 12 L 100 12" 
+                        vectorEffect="non-scaling-stroke"
+                        stroke="var(--primary)"
+                        strokeOpacity="0.3"
+                        strokeWidth="2" 
+                        strokeDasharray="6 6"
+                        fill="none" 
+                        variants={lineVariants}
+                      />
+                      <motion.path 
+                        d="M 95 7 L 102 12 L 95 17" 
+                        vectorEffect="non-scaling-stroke"
+                        stroke="var(--primary)" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        fill="none" 
+                        variants={lineVariants}
+                      />
+                    </svg>
+                  </div>
+                )}
+              </motion.div>
+            ))}
           </motion.div>
 
-          <StepCard
-            number="2"
-            title="Personalize It"
-            desc="Add name, choose font, color & message"
-            customContent
-          />
-
-          {/* Desktop: right arrow | Mobile: down arrow */}
-          <motion.div className="hidden md:block text-[#9B6BD3]" variants={arrowVariants}>
-            <ArrowRightIcon />
-          </motion.div>
-          <motion.div className="block md:hidden text-[#9B6BD3]" variants={arrowVariants}>
-            <ArrowDownIcon />
-          </motion.div>
-
-          <StepCard
-            number="3"
-            title="We Make & Deliver"
-            desc="We craft with love & deliver to your doorstep"
-            image="/images/personalise/scarlet-giftbox.png"
-          />
         </motion.div>
       </div>
     </section>
-  )
-}
-
-function StepCard({
-  number,
-  title,
-  desc,
-  image,
-  customContent,
-}: {
-  number: string
-  title: string
-  desc: string
-  image?: string
-  customContent?: boolean
-}) {
-  return (
-    <motion.div
-      className="relative w-full md:w-[31%] min-h-[130px] md:min-h-[220px] bg-white rounded-[24px] px-5 sm:px-6 py-6 md:py-8 text-left shadow-[0_8px_35px_rgba(45,27,78,0.06)] border border-[#F3EDF8]"
-      variants={stepVariants}
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 260, damping: 20 }}
-    >
-      <div className="absolute -top-4 -left-4 w-11 h-11 rounded-full bg-[#6F35C4] text-white flex items-center justify-center text-lg font-bold shadow-lg">
-        {number}
-      </div>
-
-      <div className="flex items-center justify-between gap-4 h-full">
-        <div className="flex-1 min-w-0">
-          <h3 className="text-base md:text-lg font-bold text-[#2B2238] mb-2">
-            {title}
-          </h3>
-          <p className="text-sm text-[#8B8194] leading-relaxed">{desc}</p>
-        </div>
-
-        {customContent ? (
-          <PersonalizeBox />
-        ) : (
-          <div className="w-[110px] sm:w-[130px] h-[110px] sm:h-[130px] flex items-center justify-center flex-shrink-0">
-            {image && (
-              <Image
-                src={image}
-                alt={title}
-                width={190}
-                height={170}
-                className="object-contain drop-shadow-xl scale-110"
-              />
-            )}
-          </div>
-        )}
-      </div>
-    </motion.div>
-  )
-}
-
-function PersonalizeBox() {
-  return (
-    <div className="w-[150px] sm:w-[180px] flex-shrink-0 bg-white rounded-2xl border border-[#EFE6F7] shadow-[0_6px_25px_rgba(107,70,193,0.08)] p-3 sm:p-4">
-      <label className="text-[11px] text-[#8B8194] block mb-1">
-        Enter Name
-      </label>
-
-      <div className="h-9 rounded-md border border-[#E7DFF0] text-xs flex items-center px-3 text-[#2B2238] font-medium mb-3">
-        Ayesha
-      </div>
-
-      <p className="text-[11px] text-[#8B8194] mb-1">Choose Font</p>
-
-      <div className="flex gap-1.5 mb-3">
-        {["Abc", "Abc", "Abc"].map((font, index) => (
-          <span
-            key={index}
-            className="text-xs border border-[#E7DFF0] rounded px-2 py-1 text-[#2B2238]"
-          >
-            {font}
-          </span>
-        ))}
-      </div>
-
-      <p className="text-[11px] text-[#8B8194] mb-2">Thread Color</p>
-
-      <div className="flex gap-2">
-        {["#6F35C4", "#26A69A", "#4F8DF7", "#F6A623", "#E94B5A", "#111827"].map(
-          (color) => (
-            <span
-              key={color}
-              className="w-4 h-4 rounded-full border border-white shadow"
-              style={{ backgroundColor: color }}
-            />
-          )
-        )}
-      </div>
-    </div>
-  )
-}
-
-function ArrowRightIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 90 38"
-      fill="none"
-      className="w-24 h-12"
-    >
-      <path
-        d="M4 20 C 22 6, 36 34, 55 19 C 65 11, 75 14, 84 19"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeDasharray="5 6"
-        opacity="0.45"
-      />
-      <path
-        d="M77 12 L85 19 L77 26"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        opacity="0.55"
-      />
-    </svg>
-  )
-}
-
-function ArrowDownIcon() {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 38 70"
-      fill="none"
-      className="w-10 h-16"
-    >
-      <path
-        d="M19 4 C 6 20, 32 30, 18 52 C 14 60, 16 62, 19 66"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeDasharray="5 6"
-        opacity="0.45"
-      />
-      <path
-        d="M12 59 L19 67 L26 59"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        opacity="0.55"
-      />
-    </svg>
   )
 }
