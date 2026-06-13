@@ -15,7 +15,7 @@ export function CustomGiftBannerHer() {
         className="container px-4 sm:px-6 md:px-12 lg:px-24"
       >
         <div
-          className="rounded-3xl p-8 md:p-16 relative overflow-hidden flex items-center text-white shadow-xl border-2 border-primary/20 bg-cover bg-center bg-no-repeat min-h-[320px] md:min-h-[380px]"
+          className="group rounded-3xl p-8 md:p-16 relative overflow-hidden flex items-center text-white shadow-xl border-2 border-primary/20 bg-cover bg-center bg-no-repeat min-h-[320px] md:min-h-[380px] hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 hover:border-primary/40"
           style={{
             backgroundImage: "url('/images/custombanner/bannerimage.png')",
           }}
@@ -36,10 +36,10 @@ export function CustomGiftBannerHer() {
 
             <Button
               size="lg"
-              className="rounded-md bg-primary backdrop-blur-sm hover:bg-white text-white hover:text-primary border border-white h-12 px-8 font-bold transition-colors"
+              className="group/btn rounded-md bg-primary backdrop-blur-sm hover:bg-white text-white hover:text-primary border border-white h-12 px-8 font-bold transition-all duration-300"
             >
               Start Custom Order
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover/btn:translate-x-2" />
             </Button>
           </div>
 

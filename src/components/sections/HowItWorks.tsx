@@ -1,167 +1,270 @@
 "use client"
 
-import { motion } from "framer-motion"
-
-const headingVariants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" as const },
-  },
-}
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-}
-
-const stepVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" as const },
-  },
-}
-
-const arrowVariants = {
-  hidden: { opacity: 0, x: -10 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.4, ease: "easeOut" as const },
-  },
-}
+import Image from "next/image"
+import { motion, Variants } from "framer-motion"
+import { Smile, Eye } from "lucide-react"
 
 export function HowItWorks() {
+  const steps = [
+    {
+      image: "/images/icons/gift2.png", // Reusing gift icon for product selection
+      title: "Choose Product",
+      desc: "Pick your favorite product",
+    },
+    {
+      image: "/images/icons/personalize.png",
+      title: "Personalize It",
+      desc: "Add name, message or design",
+    },
+    {
+      icon: <Eye className="w-8 h-8 lg:w-10 lg:h-10 text-primary" />,
+      title: "Preview Design",
+      desc: "See exactly how it looks",
+    },
+    {
+      image: "/images/icons/craft.png", // Reuse craft for preview or just use craft
+      title: "We Craft It",
+      desc: "Our artisans handcraft with love",
+    },
+    {
+      image: "/images/icons/delivery.png",
+      title: "Delivered With Love",
+      desc: "Delivered to your doorstep on time",
+    },
+    {
+      icon: <Smile className="w-8 h-8 lg:w-10 lg:h-10 text-primary" />,
+      title: "Happy Customer",
+      desc: "A smile on their face",
+    },
+  ]
+
+  const containerVariants: Variants = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  }
+
+  const stepVariants: Variants = {
+    hidden: { opacity: 0, y: 30, scale: 0.8 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { 
+        type: "spring",
+        stiffness: 80,
+        damping: 12,
+      } 
+    },
+  }
+
+  const lineVariants: Variants = {
+    hidden: { pathLength: 0, opacity: 0 },
+    show: { 
+      pathLength: 1, 
+      opacity: 1,
+      transition: { 
+        duration: 0.8, 
+        ease: "easeInOut" 
+      } 
+    },
+  }
+
   return (
-    <section className="py-5 md:py-24">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 text-center">
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={headingVariants}
+    <section className="py-8 lg:py-24 px-4 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="bg-transparent lg:bg-secondary/20 border border-transparent lg:border-primary/10 rounded-[28px] lg:rounded-[40px] px-4 lg:px-10 py-8 lg:py-16 shadow-none"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Personalize Your Gift in <br className="block sm:hidden" /> <span className="text-primary">3 Simple Steps</span>
-          </h2>
-          <p className="text-muted-foreground text-sm mb-16 max-w-2xl mx-auto">
-            Create meaningful memories with our easy personalization process
-          </p>
+
+          {/* Heading */}
+          <div className="text-center mb-8 lg:mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground flex items-center justify-center gap-2">
+              How It Works
+            </h2>
+            <p className="text-muted-foreground mt-2 max-w-xl mx-auto">
+              Create meaningful memories with our easy personalization process
+            </p>
+          </div>
+
+          {/* MOBILE SNAKE GRID */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="lg:hidden grid grid-cols-2 gap-y-10 gap-x-4 relative"
+          >
+            {steps.map((step, index) => {
+              let orderClass = '';
+              if (index === 0) orderClass = 'col-start-1 row-start-1';
+              else if (index === 1) orderClass = 'col-start-2 row-start-1';
+              else if (index === 2) orderClass = 'col-start-2 row-start-2';
+              else if (index === 3) orderClass = 'col-start-1 row-start-2';
+              else if (index === 4) orderClass = 'col-start-1 row-start-3';
+              else if (index === 5) orderClass = 'col-start-2 row-start-3';
+
+              return (
+                <motion.div
+                  key={index}
+                  variants={stepVariants}
+                  className={`relative flex flex-col items-center text-center group ${orderClass}`}
+                >
+                  {/* Icon Circle - transparent background */}
+                  <div className="relative z-10 w-16 h-16 rounded-full bg-transparent border-2 border-primary/20 flex items-center justify-center mb-2 transition-all duration-500 group-hover:border-primary group-hover:-translate-y-1">
+                    <motion.div whileHover={{ scale: 1.1, rotate: [-5, 5, -5, 0] }} transition={{ duration: 0.4 }}>
+                      {step.icon ? (
+                        step.icon
+                      ) : (
+                        <Image
+                          src={step.image!}
+                          alt={step.title}
+                          width={30}
+                          height={30}
+                          className="object-contain"
+                        />
+                      )}
+                    </motion.div>
+                  </div>
+
+                  <h3 className="font-bold text-foreground text-[13px] leading-tight group-hover:text-primary transition-colors duration-300">
+                    {step.title}
+                  </h3>
+
+                  {/* Horizontal Line 1 -> 2 */}
+                  {index === 0 && (
+                    <div className="absolute top-8 left-[75%] w-[50%] z-0 pointer-events-none">
+                      <svg className="w-full h-[24px] overflow-visible" preserveAspectRatio="none">
+                        <motion.path d="M 0 12 L 100 12" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="4 4" fill="none" variants={lineVariants}/>
+                        <motion.path d="M 90 7 L 100 12 L 90 17" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={lineVariants}/>
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Vertical Line 2 -> 3 */}
+                  {index === 1 && (
+                    <div className="absolute top-[100%] left-1/2 w-[24px] h-[32px] z-0 pointer-events-none -translate-x-1/2 mt-1">
+                      <svg className="w-full h-full overflow-visible" preserveAspectRatio="none">
+                        <motion.path d="M 12 0 L 12 32" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="4 4" fill="none" variants={lineVariants}/>
+                        <motion.path d="M 6 26 L 12 32 L 18 26" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={lineVariants}/>
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Horizontal Line 3 -> 4 */}
+                  {index === 2 && (
+                    <div className="absolute top-8 right-[75%] w-[50%] z-0 pointer-events-none">
+                      <svg className="w-full h-[24px] overflow-visible" preserveAspectRatio="none">
+                        <motion.path d="M 100 12 L 0 12" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="4 4" fill="none" variants={lineVariants}/>
+                        <motion.path d="M 10 7 L 0 12 L 10 17" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={lineVariants}/>
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Vertical Line 4 -> 5 */}
+                  {index === 3 && (
+                    <div className="absolute top-[100%] left-1/2 w-[24px] h-[32px] z-0 pointer-events-none -translate-x-1/2 mt-1">
+                      <svg className="w-full h-full overflow-visible" preserveAspectRatio="none">
+                        <motion.path d="M 12 0 L 12 32" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="4 4" fill="none" variants={lineVariants}/>
+                        <motion.path d="M 6 26 L 12 32 L 18 26" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={lineVariants}/>
+                      </svg>
+                    </div>
+                  )}
+
+                  {/* Horizontal Line 5 -> 6 (Badge) */}
+                  {index === 4 && (
+                    <div className="absolute top-8 left-[75%] w-[50%] z-0 pointer-events-none">
+                      <svg className="w-full h-[24px] overflow-visible" preserveAspectRatio="none">
+                        <motion.path d="M 0 12 L 100 12" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeOpacity="0.3" strokeWidth="2" strokeDasharray="4 4" fill="none" variants={lineVariants}/>
+                        <motion.path d="M 90 7 L 100 12 L 90 17" vectorEffect="non-scaling-stroke" stroke="var(--primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" variants={lineVariants}/>
+                      </svg>
+                    </div>
+                  )}
+
+                </motion.div>
+              )
+            })}
+          </motion.div>
+
+          {/* DESKTOP FLEX ROW */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="hidden lg:flex flex-row items-center justify-between gap-4 relative"
+          >
+            {steps.map((step, index) => (
+              <motion.div
+                key={index}
+                variants={stepVariants}
+                className="relative flex flex-col items-center text-center group flex-1"
+              >
+                {/* Icon Circle */}
+                <div className="relative z-10 w-24 h-24 rounded-full bg-transparent border-2 border-primary/20 flex items-center justify-center mb-5 transition-all duration-500 group-hover:border-primary group-hover:shadow-[0_10px_30px_-5px_rgba(var(--primary),0.3)] group-hover:-translate-y-2">
+                  <motion.div whileHover={{ scale: 1.1, rotate: [-5, 5, -5, 0] }} transition={{ duration: 0.4 }}>
+                    {step.icon ? (
+                      step.icon
+                    ) : (
+                      <Image
+                        src={step.image!}
+                        alt={step.title}
+                        width={40}
+                        height={40}
+                        className="object-contain"
+                      />
+                    )}
+                  </motion.div>
+                </div>
+
+                <h3 className="font-bold text-foreground text-lg mb-2 group-hover:text-primary transition-colors duration-300">
+                  {step.title}
+                </h3>
+
+                <p className="text-sm text-muted-foreground leading-relaxed max-w-[150px]">
+                  {step.desc}
+                </p>
+
+                {/* Desktop Horizontal Connecting Arrow */}
+                {index < steps.length - 1 && (
+                  <div className="absolute top-12 left-[65%] w-[70%] z-0">
+                    <svg className="w-full h-[24px] overflow-visible" preserveAspectRatio="none">
+                      <motion.path 
+                        d="M 20 12 L 100 12" 
+                        vectorEffect="non-scaling-stroke"
+                        stroke="var(--primary)"
+                        strokeOpacity="0.3"
+                        strokeWidth="2" 
+                        strokeDasharray="6 6"
+                        fill="none" 
+                        variants={lineVariants}
+                      />
+                      <motion.path 
+                        d="M 95 7 L 102 12 L 95 17" 
+                        vectorEffect="non-scaling-stroke"
+                        stroke="var(--primary)" 
+                        strokeWidth="2" 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        fill="none" 
+                        variants={lineVariants}
+                      />
+                    </svg>
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
+
         </motion.div>
-
-        <motion.div
-          className="flex flex-col md:flex-row justify-center items-center gap-8 md:gap-16 max-w-5xl mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-        >
-          {/* Step 1 */}
-          <motion.div className="flex flex-col items-center flex-1" variants={stepVariants}>
-            <motion.div
-              className="w-24 h-24 rounded-full border-2 border-primary border-dashed flex items-center justify-center mb-6 bg-secondary/50 text-primary"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <GiftBoxIcon />
-            </motion.div>
-            <h3 className="font-bold text-lg mb-2">1. Choose Your Gift</h3>
-            <p className="text-sm text-muted-foreground">Pick your favorite product from our collection</p>
-          </motion.div>
-
-          {/* Arrow */}
-          <motion.div className="hidden md:block text-primary/30" variants={arrowVariants}>
-            <ArrowRightIcon />
-          </motion.div>
-
-          {/* Step 2 */}
-          <motion.div className="flex flex-col items-center flex-1" variants={stepVariants}>
-            <motion.div
-              className="w-24 h-24 rounded-full border-2 border-primary flex items-center justify-center mb-6 bg-primary text-primary-foreground"
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <PersonalizeIcon />
-            </motion.div>
-            <h3 className="font-bold text-lg mb-2">2. Personalize It</h3>
-            <p className="text-sm text-muted-foreground">Add name, message or choose a design</p>
-          </motion.div>
-
-          {/* Arrow */}
-          <motion.div className="hidden md:block text-primary/30" variants={arrowVariants}>
-            <ArrowRightIcon />
-          </motion.div>
-
-          {/* Step 3 */}
-          <motion.div className="flex flex-col items-center flex-1" variants={stepVariants}>
-            <motion.div
-              className="w-24 h-24 rounded-full border-2 border-primary border-dashed flex items-center justify-center mb-6 bg-secondary/50 text-primary"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-            >
-              <DeliveryIcon />
-            </motion.div>
-            <h3 className="font-bold text-lg mb-2">3. We Craft & Deliver</h3>
-            <p className="text-sm text-muted-foreground">Handmade with love & delivered to your doorstep</p>
-          </motion.div>
-        </motion.div>
-
       </div>
     </section>
-  )
-}
-
-function GiftBoxIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-      <rect x="3" y="8" width="18" height="4" rx="1" />
-      <path d="M5 12v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8" />
-      <path d="M12 8v14" />
-      <path d="M12 8A3 3 0 0 0 9 5c-1.5 0-3 1.5-3 3s1.5 3 3 3h3" />
-      <path d="M12 8A3 3 0 0 1 15 5c1.5 0 3 1.5 3 3s-1.5 3-3 3h-3" />
-    </svg>
-  )
-}
-
-function PersonalizeIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-      <path d="M5 19L17 7" />
-      <path d="M17 7c.8-.8 2-.8 2.8 0 .8.8.8 2 0 2.8L17 7z" />
-      <circle cx="18" cy="6" r="0.75" fill="currentColor" />
-      <path d="M18 6c2-2 4-1 4 2s-3 4-6 4-5-3-7-3-4 2-4 4" strokeWidth="1.5" />
-    </svg>
-  )
-}
-
-function DeliveryIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" className="w-10 h-10">
-      <path d="M2 9h13v8H2z" />
-      <path d="M15 9h4.5l3.5 3.5V17h-8z" />
-      <circle cx="6" cy="17" r="2.5" />
-      <circle cx="17" cy="17" r="2.5" />
-      <path d="M16 12h4" />
-      <path d="M2 6h3" />
-      <path d="M1 9h2" />
-      <path d="M2 12h2" />
-    </svg>
-  )
-}
-
-function ArrowRightIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="w-16 h-8 text-primary/40">
-      <path d="M2 12 C 12 4, 18 20, 28 12 C 34 8, 40 10, 44 12" strokeDasharray="5 5" />
-      <path d="m40 8 4 4-4 4" />
-    </svg>
   )
 }
