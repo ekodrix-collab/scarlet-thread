@@ -9,6 +9,7 @@ import { Testimonials } from "@/components/sections/Testimonials"
 import { SmileCTA } from "@/components/sections/SmileCTA"
 import ShopByOccasion from "@/components/sections/ShopByOcassion"
 import { CraftedGalleryHer } from "@/components/sections/gifts-for-her/CraftedGalleryHer"
+import { NewHowItWorks } from "@/components/sections/NewHowItWorks"
 
 export default function Home() {
   return (
@@ -17,7 +18,8 @@ export default function Home() {
       <ShopByOccasion/>
       {/* <Discover /> */} 
       {/* <Categories /> */}
-      <HowItWorks />
+      <NewHowItWorks />
+      {/* <HowItWorks /> */}
       <FeaturedBanner />
       <ProductGrid />
       <StoreFeatures />
