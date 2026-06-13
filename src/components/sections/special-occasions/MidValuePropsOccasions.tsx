@@ -84,7 +84,7 @@ export function MidValuePropsOccasions() {
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="rounded-[24px] bg-[#FAF5FF] border border-[#E9D5FF] px-8 py-6"
+          className="rounded-[24px] bg-transparent md:bg-[#FAF5FF] border border-transparent md:border-[#E9D5FF] px-4 md:px-8 py-2 md:py-6"
           style={{ transformPerspective: 1000 }}
         >
           <motion.div 
