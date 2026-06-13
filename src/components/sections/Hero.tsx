@@ -172,7 +172,7 @@ export function Hero() {
       <div className="lg:hidden flex flex-col w-full min-h-screen relative z-20">
 
         {/* Image — cross-fades, different src for mobile vs tablet */}
-        <div className="relative w-full flex-shrink-0 overflow-hidden" style={{ height: "90vh" }}>
+        <div className="relative w-full flex-shrink-0 overflow-hidden" style={{ height: "100vh" }}>
           <AnimatePresence mode="sync">
             <motion.div
               key={`mobile-img-${current}`}
