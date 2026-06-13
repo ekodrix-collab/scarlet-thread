@@ -2,11 +2,11 @@ import { Gift, Sparkles, Smile, Heart, Clock, HeartHandshake } from "lucide-reac
 
 export function ProductFeaturesRow() {
   const features = [
-    { icon: <Gift strokeWidth={1.5} className="w-8 h-8 text-primary" />, title: "Personalized\nJust For Him" },
-    { icon: <Sparkles strokeWidth={1.5} className="w-8 h-8 text-primary" />, title: "Premium\nEmbroidery" },
-    { icon: <HeartHandshake strokeWidth={1.5} className="w-8 h-8 text-primary" />, title: "Comfortable\n& Soft" },
-    { icon: <Heart strokeWidth={1.5} className="w-8 h-8 text-primary" />, title: "Perfect For Every\nOccasion" },
-    { icon: <Clock strokeWidth={1.5} className="w-8 h-8 text-primary" />, title: "Memories That\nLast Forever" },
+    { icon: <Gift strokeWidth={1.5} className="w-8 h-8 text-primary group-hover:text-white" />, title: "Personalized\nJust For Him" },
+    { icon: <Sparkles strokeWidth={1.5} className="w-8 h-8 text-primary group-hover:text-white" />, title: "Premium\nEmbroidery" },
+    { icon: <HeartHandshake strokeWidth={1.5} className="w-8 h-8 text-primary group-hover:text-white" />, title: "Comfortable\n& Soft" },
+    { icon: <Heart strokeWidth={1.5} className="w-8 h-8 text-primary group-hover:text-white" />, title: "Perfect For Every\nOccasion" },
+    { icon: <Clock strokeWidth={1.5} className="w-8 h-8 text-primary group-hover:text-white" />, title: "Memories That\nLast Forever" },
   ]
 
   return (

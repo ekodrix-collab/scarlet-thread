@@ -25,17 +25,17 @@ export default function ProductDetailPage() {
           </div>
 
           {/* Right: Configurator */}
-          <div className="flex-1 lg:w-1/2 sticky top-24 h-max">
+          <div className="flex-1 lg:w-1/2">
              <ProductConfigurator />
           </div>
           
         </div>
       </div>
 
-      <ProductLivePreview />
+      {/* <ProductLivePreview /> */}
       <ProductFeaturesRow />
       <ProductOccasionsGrid />
-      <ProductDetailsReviewsSplit />
+      {/* <ProductDetailsReviewsSplit /> */}
       <RelatedProductsCarousel />
       
       {/* Footer Trust Badges (Reusing from Him for similar styling) */}
