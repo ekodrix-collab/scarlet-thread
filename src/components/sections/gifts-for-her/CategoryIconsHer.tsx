@@ -58,7 +58,7 @@ export function CategoryIconsHer() {
               key={index}
               variants={fadeUp(0.6, 30)}
               whileHover={{ y: -6 }}
-              className="flex flex-col items-center gap-3 min-w-[90px] md:min-w-[110px] cursor-pointer group"
+              className="flex flex-col items-center gap-2 md:gap-3 min-w-[76px] md:min-w-[110px] cursor-pointer group"
             >
               <motion.div
                 whileHover={{
@@ -69,7 +69,7 @@ export function CategoryIconsHer() {
                   type: "spring",
                   stiffness: 300,
                 }}
-                className="w-[90px] h-[70px] md:w-[110px] md:h-[80px] rounded-xl bg-[#FFF8FB] border border-[#F5E8EE] flex items-center justify-center transition-all duration-300 hover:shadow-md hover:border-primary/30 overflow-hidden relative"
+                className="relative w-14 h-14 md:w-20 md:h-20 rounded-2xl bg-[#FFF8FB] border border-[#F5E8EE] flex items-center justify-center transition-all duration-300 hover:shadow-md hover:border-primary/30 overflow-hidden"
               >
                 {/* Glow Effect */}
                 <motion.div
@@ -107,7 +107,7 @@ export function CategoryIconsHer() {
 
               <motion.span
                 whileHover={{ y: -2 }}
-                className="text-[10px] md:text-xs font-medium text-center text-gray-700 leading-tight max-w-[90px] md:max-w-[110px]"
+                className="text-xs md:text-sm font-medium text-center text-gray-700 leading-tight group-hover:text-primary transition-colors duration-300 line-clamp-2"
               >
                 {cat.name}
               </motion.span>

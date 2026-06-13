@@ -97,12 +97,30 @@ export function HeroKids() {
               }}
               className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-3 sm:gap-4"
             >
-              <Button size="lg" className="rounded-full px-8 h-11 sm:h-12 text-sm sm:text-base shadow-lg shadow-[#6E3B9B]/20 bg-[#6E3B9B] hover:bg-[#5D2E85] text-white w-full sm:w-auto font-semibold">
-                Shop Best Sellers
-              </Button>
-              <Link href="/kids-babies" className="text-[#6E3B9B] hover:text-[#5D2E85] font-semibold flex items-center justify-center gap-2 text-sm sm:text-base py-2">
-                Explore Collection <ArrowRight className="w-4 h-4" />
-              </Link>
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto"
+              >
+                <Button size="lg" className="rounded-full px-8 h-11 sm:h-12 text-sm sm:text-base shadow-lg shadow-[#6E3B9B]/20 bg-[#6E3B9B] hover:bg-[#5D2E85] text-white w-full sm:w-auto font-semibold">
+                  Shop Best Sellers
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                className="w-full sm:w-auto"
+              >
+                <Link href="/kids-babies" className="text-[#6E3B9B] hover:text-[#5D2E85] font-semibold flex items-center justify-center gap-2 text-sm sm:text-base py-2">
+                  Explore Collection 
+                  <motion.div
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.div>
+                </Link>
+              </motion.div>
             </motion.div>
 
             {/* Trust Badges */}
@@ -155,6 +173,19 @@ export function HeroKids() {
           </motion.div>
         </div>
       </div>
+
+      {/* Floating Decorative Elements (matches Occasions) */}
+      <motion.div
+        className="hidden md:block absolute top-10 right-20 w-40 h-40 bg-[#FF69B4]/10 rounded-full blur-[80px] pointer-events-none"
+        animate={{ y: [0, -20, 0], x: [0, 15, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      />
+      
+      <motion.div
+        className="absolute -bottom-10 -right-10 w-32 h-32 md:w-48 md:h-48 bg-[#6E3B9B]/10 rounded-full blur-[60px] pointer-events-none"
+        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      />
     </section>
   )
 }
