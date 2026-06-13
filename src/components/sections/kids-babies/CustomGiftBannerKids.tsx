@@ -3,11 +3,18 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
+import { rotateXPerspective } from "@/lib/animations"
 
 export function CustomGiftBannerKids() {
   return (
-    <section className="py-8 md:py-12 bg-white">
-      <div className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-8 md:py-12 bg-white overflow-hidden" style={{ perspective: 1000 }}>
+      <motion.div 
+        variants={rotateXPerspective}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+        className="w-full max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div className="bg-primary rounded-[20px] sm:rounded-[32px] relative overflow-hidden flex flex-col md:flex-row items-stretch justify-between text-white shadow-xl min-h-[200px] sm:min-h-[220px] px-4 sm:px-8 md:px-12 lg:px-20">
 
           {/* Left Teddy Bear Image — hidden on mobile, shown md+ */}
@@ -87,7 +94,7 @@ export function CustomGiftBannerKids() {
           </motion.div>
 
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }
