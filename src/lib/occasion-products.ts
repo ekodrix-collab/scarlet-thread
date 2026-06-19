@@ -388,6 +388,9 @@ export const occasionMeta: Record<
 };
 
 export function getProductsByOccasion(slug: string): OccasionProduct[] {
+  if (slug === "all") {
+    return allOccasionProducts;
+  }
   if (slug === "under-200") {
     return allOccasionProducts.filter(
       (p) => p.occasions.includes(slug) && p.price <= 200

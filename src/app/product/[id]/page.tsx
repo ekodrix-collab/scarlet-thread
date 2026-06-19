@@ -21,7 +21,7 @@ export default function ProductDetailPage() {
           {/* Left: Gallery & Accordion */}
           <div className="flex-1 lg:w-1/2">
              <ProductGallery />
-             <ProductInfoAccordion />
+             {/* <ProductInfoAccordion /> */}
           </div>
 
           {/* Right: Configurator */}
@@ -33,13 +33,13 @@ export default function ProductDetailPage() {
       </div>
 
       {/* <ProductLivePreview /> */}
-      <ProductFeaturesRow />
-      <ProductOccasionsGrid />
+      {/* <ProductFeaturesRow /> */}
+      {/* <ProductOccasionsGrid /> */}
       {/* <ProductDetailsReviewsSplit /> */}
       <RelatedProductsCarousel />
       
       {/* Footer Trust Badges (Reusing from Him for similar styling) */}
-      <ValueProps />
+      {/* <ValueProps /> */}
     </div>
   )
 }

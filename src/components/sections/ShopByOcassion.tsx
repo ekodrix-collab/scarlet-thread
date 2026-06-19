@@ -168,8 +168,7 @@ function OccasionCard({ occasion }: { occasion: Occasion }) {
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
       className="w-full h-full"
     >
-      <Link
-        href={occasion.href}
+      <div
         className="flex flex-col items-center gap-3.5 p-4 sm:p-5 rounded-2xl border border-gray-100 bg-white hover:shadow-lg hover:border-violet-200 transition-all duration-300 group w-full h-full min-w-[110px]"
       >
         {/* Image container */}
@@ -196,7 +195,7 @@ function OccasionCard({ occasion }: { occasion: Occasion }) {
         <span className="text-center text-xs sm:text-sm leading-tight text-gray-700 font-semibold group-hover:text-violet-600 transition-colors whitespace-pre-line">
           {occasion.label}
         </span>
-      </Link>
+      </div>
     </motion.div>
   );
 }
