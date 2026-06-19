@@ -1,8 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Heart, Star, Check, Ruler, Crown, Car, Gift } from "lucide-react"
-import { Input } from "@/components/ui/input"
+import { Heart, Star, Check, Ruler, Sparkles, Truck, RefreshCcw } from "lucide-react"
+import { Button } from "@/components/ui/button"
 
 const COLORS = [
   { name: "Navy Blue", hex: "#1A237E" },
@@ -16,32 +16,14 @@ const COLORS = [
 
 const SIZES = ["S", "M", "L", "XL", "XXL", "3XL"]
 
-const THREADS = [
-  { name: "Gold",   hex: "#FACC15" },
-  { name: "White",  hex: "#FFFFFF" },
-  { name: "Black",  hex: "#1F2937" },
-  { name: "Silver", hex: "#D1D5DB" },
-  { name: "Navy",   hex: "#1E3A8A" },
-  { name: "Red",    hex: "#DC2626" },
-  { name: "Pink",   hex: "#F472B6" },
-]
 
-const ICONS = [
-  { id: "crown", label: "Crown", el: <Crown className="w-5 h-5 text-yellow-500" /> },
-  { id: "heart", label: "Heart", el: <Heart className="w-5 h-5 text-red-500" />   },
-  { id: "star",  label: "Star",  el: <Star  className="w-5 h-5 text-yellow-400" />},
-  { id: "car",   label: "Car",   el: <Car   className="w-5 h-5 text-blue-500" />  },
-  { id: "gift",  label: "Gift",  el: <Gift  className="w-5 h-5 text-pink-500" />  },
-]
 
 const LIGHT_COLORS = new Set(["#FFFFFF", "#D7CCC8", "#D1D5DB", "#F472B6", "#9E9E9E"])
 
 export function ProductConfigurator() {
   const [activeColor,  setActiveColor]  = useState("Navy Blue")
   const [activeSize,   setActiveSize]   = useState("M")
-  const [activeThread, setActiveThread] = useState("Gold")
-  const [activeIcon,   setActiveIcon]   = useState("crown")
-  const [personName,   setPersonName]   = useState("Dad")
+
   const [wishlisted,   setWishlisted]   = useState(false)
 
   return (
@@ -78,7 +60,22 @@ export function ProductConfigurator() {
         <span className="text-xs font-bold text-red-500 bg-red-50 px-2 py-1 rounded-md mb-1">25% OFF</span>
       </div>
 
+      {/* ── Description ── */}
+      <p className="text-foreground/80 text-sm mb-6">
+        A premium embroidered hoodie for the king of your heart. Custom crafted to order.
+      </p>
+
+      {/* ── Trust Badges ── */}
+      {/* <div className="flex flex-wrap gap-4 text-xs font-medium text-foreground/80 mb-6">
+        <div className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-primary" /> Premium Embroidery</div>
+        <div className="flex items-center gap-1.5"><Heart    className="w-4 h-4 text-primary" /> Made with Love</div>
+        <div className="flex items-center gap-1.5"><Truck    className="w-4 h-4 text-primary" /> 7-10 Days Delivery</div>
+        <div className="flex items-center gap-1.5"><RefreshCcw className="w-4 h-4 text-primary" /> Easy Returns</div>
+      </div> */}
+
       <div className="w-full h-px bg-border/60 mb-6" />
+
+
 
       {/* ── Color Selection ── */}
       <div className="mb-6">
@@ -141,86 +138,17 @@ export function ProductConfigurator() {
 
       <div className="w-full h-px bg-border/60 mb-6" />
 
-      {/* ── Personalization ── */}
-      <div className="mb-4">
-        <h3 className="font-bold text-base mb-4">Personalization Options</h3>
-
-        {/* Name */}
-        <div className="mb-5">
-          <label className="block text-xs text-muted-foreground mb-2">
-            Enter Name / Title (Max 15 characters)
-          </label>
-          <div className="relative">
-            <Input
-              type="text"
-              value={personName}
-              maxLength={15}
-              onChange={e => setPersonName(e.target.value)}
-              className="h-12 bg-secondary/30 border-border focus-visible:ring-primary/20 text-base font-medium rounded-[5px] pr-12"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-muted-foreground font-medium">
-              {personName.length}/15
-            </span>
-          </div>
-        </div>
-
-        {/* Thread Color */}
-        <div className="mb-5">
-          <div className="flex justify-between items-center mb-3">
-            <label className="text-xs text-muted-foreground">Embroidery Thread Color</label>
-            <span className="text-xs font-medium text-muted-foreground">{activeThread}</span>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {THREADS.map((thread) => {
-              const isActive = thread.name === activeThread
-              const isLight  = LIGHT_COLORS.has(thread.hex)
-              return (
-                <button
-                  key={thread.name}
-                  title={thread.name}
-                  onClick={() => setActiveThread(thread.name)}
-                  style={{ backgroundColor: thread.hex }}
-                  className={`w-9 h-9 rounded-full flex items-center justify-center transition-all border ${
-                    isActive
-                      ? "ring-2 ring-primary ring-offset-2 scale-110 border-transparent shadow-sm"
-                      : "border-border/50 hover:scale-105 hover:border-primary/30"
-                  }`}
-                >
-                  {isActive && (
-                    <Check
-                      className={`w-4 h-4 ${isLight ? "text-gray-800" : "text-white"}`}
-                      strokeWidth={3}
-                    />
-                  )}
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Icon Selector */}
-        <div>
-          <div className="flex justify-between items-center mb-3">
-            <label className="text-xs text-muted-foreground">Add Small Icon (Optional)</label>
-            <span className="text-xs font-medium text-muted-foreground capitalize">{activeIcon}</span>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {ICONS.map((item) => (
-              <button
-                key={item.id}
-                title={item.label}
-                onClick={() => setActiveIcon(item.id)}
-                className={`w-12 h-12 rounded-[5px] flex items-center justify-center border transition-all ${
-                  item.id === activeIcon
-                    ? "border-primary bg-primary/10 shadow-sm scale-105"
-                    : "border-border bg-secondary/30 hover:border-primary/40 hover:bg-secondary/60"
-                }`}
-              >
-                {item.el}
-              </button>
-            ))}
-          </div>
-        </div>
+      {/* ── Action Buttons ── */}
+      <div className="flex gap-3">
+        <Button
+          variant="outline"
+          className="flex-1 h-12 text-base font-semibold text-primary border-primary hover:bg-primary/5 rounded-[5px] transition-all"
+        >
+          Add to Cart
+        </Button>
+        <Button className="flex-1 h-12 text-base font-semibold bg-primary hover:bg-primary/90 text-primary-foreground rounded-[5px] shadow-md transition-all">
+          Buy Now
+        </Button>
       </div>
 
     </div>

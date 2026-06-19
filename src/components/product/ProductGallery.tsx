@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { Star, ChevronUp, ChevronDown, Sparkles, Truck, RefreshCcw, Heart } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Star, ChevronUp, ChevronDown } from "lucide-react"
+
 
 const thumbImages = [
   "/images/forhimpage/scarlet-kinghoodie.png",
@@ -81,37 +81,6 @@ export function ProductGallery() {
               />
             ))}
           </div>
-        </div>
-      </div>
-
-      {/* ── Description (moved from Configurator) ── */}
-      <p className="text-foreground/80 text-sm">
-        A premium embroidered hoodie for the king of your heart. Personalize it with name or title to make it truly special.
-      </p>
-
-      {/* ── Trust Badges (moved from Configurator) ── */}
-      <div className="flex flex-wrap gap-4 text-xs font-medium text-foreground/80">
-        <div className="flex items-center gap-1.5"><Sparkles className="w-4 h-4 text-primary" /> Premium Embroidery</div>
-        <div className="flex items-center gap-1.5"><Heart    className="w-4 h-4 text-primary" /> Made with Love</div>
-        <div className="flex items-center gap-1.5"><Truck    className="w-4 h-4 text-primary" /> 7-10 Days Delivery</div>
-        <div className="flex items-center gap-1.5"><RefreshCcw className="w-4 h-4 text-primary" /> Easy Returns</div>
-      </div>
-
-      {/* ── Action Buttons (moved from Configurator) ── */}
-      <div className="space-y-3">
-        <Button className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90 text-primary-foreground rounded-[5px] shadow-md transition-all">
-          Preview My Design <span className="ml-2">→</span>
-        </Button>
-        <div className="flex gap-3">
-          <Button
-            variant="outline"
-            className="flex-1 h-12 text-base font-semibold text-primary border-primary hover:bg-primary/5 rounded-[5px] transition-all"
-          >
-            Add to Cart
-          </Button>
-          <Button className="flex-1 h-12 text-base font-semibold bg-primary hover:bg-primary/90 text-primary-foreground rounded-[5px] shadow-md transition-all">
-            Buy Now
-          </Button>
         </div>
       </div>
 

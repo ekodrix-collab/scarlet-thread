@@ -39,7 +39,7 @@ export function CraftedGalleryHer() {
   }
 
   return (
-    <section className="py-16 bg-[#FAFAFA] overflow-hidden">
+    <section className="py-16 bg-[#F9F5FF] overflow-hidden">
       <motion.div
         variants={scaleUp(1.2, 0)}
         initial="hidden"

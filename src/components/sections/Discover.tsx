@@ -5,12 +5,12 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 
 const columnImages = [
-  "/images/scarlet-couple.png",
-  "/images/scarlet-homebanner.png",
-  "/images/scarlet-couple.png",
-  "/images/scarlet-homebanner.png",
-  "/images/scarlet-couple.png",
-  "/images/scarlet-homebanner.png",
+  "/images/scarlet-about5.png",
+  "/images/scarlet-about.png",
+  "/images/scarlet-about1.png",
+  "/images/scarlet-about2.png",
+  "/images/scarlet-about3.png",
+  "/images/scarlet-about4.png",
 ]
 
 function ImageColumn({
@@ -66,7 +66,7 @@ function ImageColumn({
 
 export function Discover() {
   return (
-    <section className="py-5 md:py-24 bg-[#fffafc]">
+    <section className="py-5 md:py-24 bg-[#F9F5FF]">
       <div className="w-full max-w-[1400px] mx-auto  px-4 sm:px-6 md:px-12 lg:px-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-7 md:gap-8 lg:gap-20 items-center">
 

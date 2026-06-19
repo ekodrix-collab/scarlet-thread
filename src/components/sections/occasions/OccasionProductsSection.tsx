@@ -82,6 +82,16 @@ export function OccasionProductsSection({
                 Filter by Occasion
               </h3>
               <div className="flex flex-col gap-1">
+                <Link
+                  href="/products"
+                  className={`text-left text-sm px-3 py-2.5 rounded-lg font-medium transition-all duration-200 block ${
+                    slug === "all"
+                      ? "bg-primary text-white shadow-sm"
+                      : "text-gray-600 hover:bg-violet-50 hover:text-primary"
+                  }`}
+                >
+                  All Gifts
+                </Link>
                 {Object.entries(occasionMeta).map(([key, meta]) => {
                   const isActive = slug === key;
                   return (
@@ -265,6 +275,17 @@ export function OccasionProductsSection({
                 </button>
               </div>
               <div className="flex flex-col gap-1.5 flex-1 overflow-y-auto">
+                <Link
+                  href="/products"
+                  onClick={() => setFilterDrawerOpen(false)}
+                  className={`text-left text-sm px-4 py-3 rounded-xl font-medium transition-all duration-200 block ${
+                    slug === "all"
+                      ? "bg-primary text-white shadow-sm"
+                      : "text-gray-600 hover:bg-violet-50 hover:text-primary"
+                  }`}
+                >
+                  All Gifts
+                </Link>
                 {Object.entries(occasionMeta).map(([key, meta]) => {
                   const isActive = slug === key;
                   return (

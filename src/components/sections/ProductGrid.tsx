@@ -109,7 +109,7 @@ function ProductCard({ product }: { product: typeof products[0] }) {
 
 export function ProductGrid() {
   return (
-    <section className="py-5 md:py-24">
+    <section className="py-5 md:py-24 bg-[#F9F5FF]">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
 
         {/* Heading */}
@@ -179,7 +179,9 @@ export function ProductGrid() {
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
         >
-          <Button size="lg" className="rounded-[5px] px-8 shadow-sm">View All Gifts</Button>
+          <Link href="/products">
+            <Button size="lg" className="rounded-[5px] px-8 shadow-sm">View All Gifts</Button>
+          </Link>
         </motion.div>
 
       </div>

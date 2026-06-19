@@ -41,7 +41,7 @@ const arrowVariants = {
 
 export function NewHowItWorks() {
   return (
-    <section className="py-10 md:py-20 bg-white">
+    <section className="py-10 md:py-20 bg-#F9F5FF">
       <div className="max-w-[1420px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 text-center">
         <motion.div
           initial="hidden"
