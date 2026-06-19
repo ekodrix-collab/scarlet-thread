@@ -41,66 +41,82 @@ const arrowVariants = {
 
 export function NewHowItWorks() {
   return (
-    <section className="py-10 md:py-20 bg-white">
-      <div className="max-w-[1420px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 text-center">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={headingVariants}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-[#262033] mb-2">
-            How Personalization Works
-          </h2>
-          <p className="text-[#7E7488] text-sm md:text-base mb-10">
-            Create a meaningful gift in 3 simple steps
-          </p>
-        </motion.div>
+    <section className="py-10 md:py-16 bg-white">
+      <div className="max-w-[1420px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
+        {/* ── Lavender outer rounded container ── */}
+        <div className="bg-[#EEE8FA] rounded-[28px] px-5 sm:px-8 md:px-12 py-10 md:py-12">
+          {/* Heading */}
+          <motion.h2
+            className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#1A1530] uppercase text-center tracking-wide mb-8 md:mb-10"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={headingVariants}
+          >
+            Creating Your Perfect Custom Gift
+          </motion.h2>
 
-        <motion.div
-          className="relative flex flex-col md:flex-row justify-between items-center gap-4 md:gap-2 bg-[#FCFAFF] rounded-[32px] px-5 sm:px-8 md:px-14 py-8 md:py-12 shadow-[0_10px_45px_rgba(107,70,193,0.08)] border border-[#F1EAF8]"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={containerVariants}
-        >
-          <StepCard
-            number="1"
-            title="Choose Your Product"
-            desc="Pick a product from our collection"
-            image="/images/personalise/scarlet-bride.png"
-          />
+          {/* ── Steps row ── */}
+          <motion.div
+            className="flex flex-col md:flex-row items-stretch gap-4 md:gap-2"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={containerVariants}
+          >
+            <StepCard
+              number="1"
+              title="Choose Your Product"
+              desc="Find your favorite base product and complete secure payment to lock in your order."
+              image="/images/heropage/scarlet-heartbag.png"
+            />
 
-          {/* Desktop: right arrow | Mobile: down arrow */}
-          <motion.div className="hidden md:block text-[#9B6BD3]" variants={arrowVariants}>
-            <ArrowRightIcon />
+            {/* Arrow */}
+            <motion.div className="hidden md:flex items-center flex-shrink-0 text-[#9B6BD3]" variants={arrowVariants}>
+              <ArrowRightIcon />
+            </motion.div>
+            <motion.div className="flex md:hidden justify-center text-[#9B6BD3]" variants={arrowVariants}>
+              <ArrowDownIcon />
+            </motion.div>
+
+            <StepCard
+              number="2"
+              title="WhatsApp Us Details"
+              desc="Check your email confirmation for your order details and share your design idea with us on WhatsApp."
+              image="/images/heropage/scarlet-phone.png"
+            />
+
+            {/* Arrow */}
+            <motion.div className="hidden md:flex items-center flex-shrink-0 text-[#9B6BD3]" variants={arrowVariants}>
+              <ArrowRightIcon />
+            </motion.div>
+            <motion.div className="flex md:hidden justify-center text-[#9B6BD3]" variants={arrowVariants}>
+              <ArrowDownIcon />
+            </motion.div>
+
+            <StepCard
+              number="3"
+              title="Mockup & Approval"
+              desc="We create a realistic digital mockup for your review. Give us your final thumbs up before we craft!"
+              image="/images/heropage/scarlet-laptop.png"
+            />
+
+            {/* Arrow */}
+            <motion.div className="hidden md:flex items-center flex-shrink-0 text-[#9B6BD3]" variants={arrowVariants}>
+              <ArrowRightIcon />
+            </motion.div>
+            <motion.div className="flex md:hidden justify-center text-[#9B6BD3]" variants={arrowVariants}>
+              <ArrowDownIcon />
+            </motion.div>
+
+            <StepCard
+              number="4"
+              title="We Craft & Ship"
+              desc="Once approved, our team creates your unique gift with care and ships it straight to your doorstep."
+              image="/images/heropage/scarlet-delivery.png"
+            />
           </motion.div>
-          <motion.div className="block md:hidden text-[#9B6BD3]" variants={arrowVariants}>
-            <ArrowDownIcon />
-          </motion.div>
-
-          <StepCard
-            number="2"
-            title="Personalize It"
-            desc="Add name, choose font, color & message"
-            customContent
-          />
-
-          {/* Desktop: right arrow | Mobile: down arrow */}
-          <motion.div className="hidden md:block text-[#9B6BD3]" variants={arrowVariants}>
-            <ArrowRightIcon />
-          </motion.div>
-          <motion.div className="block md:hidden text-[#9B6BD3]" variants={arrowVariants}>
-            <ArrowDownIcon />
-          </motion.div>
-
-          <StepCard
-            number="3"
-            title="We Make & Deliver"
-            desc="We craft with love & deliver to your doorstep"
-            image="/images/personalise/scarlet-giftbox.png"
-          />
-        </motion.div>
+        </div>
       </div>
     </section>
   )
@@ -111,48 +127,49 @@ function StepCard({
   title,
   desc,
   image,
-  customContent,
 }: {
   number: string
   title: string
   desc: string
   image?: string
-  customContent?: boolean
 }) {
   return (
     <motion.div
-      className="relative w-full md:w-[31%] min-h-[130px] md:min-h-[220px] bg-white rounded-[24px] px-5 sm:px-6 py-6 md:py-7 text-left shadow-[0_8px_35px_rgba(45,27,78,0.06)] border border-[#F3EDF8]"
+      className="relative flex-1 bg-white rounded-[18px] px-4 pt-7 pb-4 md:px-5 md:pt-8 md:pb-5
+                 shadow-[0_4px_20px_rgba(107,70,193,0.08)] border border-[#EDE6F8]
+                 flex flex-col overflow-visible"
       variants={stepVariants}
       whileHover={{ y: -4 }}
       transition={{ type: "spring", stiffness: 260, damping: 20 }}
     >
-      <div className="absolute -top-4 -left-4 w-11 h-11 rounded-full bg-[#6F35C4] text-white flex items-center justify-center text-lg font-bold shadow-lg">
+      {/* Number badge — overlaps top-left edge, overflow-visible keeps it visible */}
+      <div className="absolute -top-4 left-3 w-9 h-9 rounded-full bg-[#6F35C4] text-white flex items-center justify-center text-sm font-bold shadow-md z-10 select-none">
         {number}
       </div>
 
-      <div className="flex items-center justify-between gap-4 h-full">
-        <div className="flex-1 min-w-0">
-          <h3 className="text-base md:text-lg font-bold text-[#2B2238] mb-2">
+      {/* Row: text left + SVG placeholder right */}
+      <div className="flex items-end justify-between gap-2 flex-1">
+        {/* Text */}
+        <div className="flex-1 min-w-0 self-start">
+          <h3 className="text-[13px] md:text-sm font-bold text-[#1A1530] mb-1.5 leading-snug">
             {title}
           </h3>
-          <p className="text-sm text-[#8B8194] leading-relaxed">{desc}</p>
+          <p className="text-[11px] text-[#8B8194] leading-relaxed">
+            {desc}
+          </p>
         </div>
 
-        {customContent ? (
-          <PersonalizeBox />
-        ) : (
-          <div className="w-[110px] sm:w-[130px] h-[110px] sm:h-[130px] flex items-center justify-center flex-shrink-0">
-            {image && (
-              <Image
-                src={image}
-                alt={title}
-                width={190}
-                height={170}
-                className="object-contain drop-shadow-xl scale-170"
-              />
-            )}
-          </div>
-        )}
+        {/* SVG placeholder — drop your SVG illustration here */}
+        <div className="flex-shrink-0 self-end w-[100px] h-[150px] md:w-[115px] md:h-[115px] relative">
+          {image && (
+            <Image
+              src={image}
+              alt={title}
+              fill
+              className="object-cover"
+            />
+          )}
+        </div>
       </div>
     </motion.div>
   )
@@ -203,25 +220,28 @@ function ArrowRightIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 90 38"
+      viewBox="0 0 40 16"
       fill="none"
-      className="w-24 h-12"
+      className="w-8 h-4"
     >
-      <path
-        d="M4 20 C 22 6, 36 34, 55 19 C 65 11, 75 14, 84 19"
+      <line
+        x1="2"
+        y1="8"
+        x2="32"
+        y2="8"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.8"
         strokeLinecap="round"
-        strokeDasharray="5 6"
-        opacity="0.45"
+        strokeDasharray="4 4"
+        opacity="0.5"
       />
       <path
-        d="M77 12 L85 19 L77 26"
+        d="M28 4 L34 8 L28 12"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
-        opacity="0.55"
+        opacity="0.7"
       />
     </svg>
   )
