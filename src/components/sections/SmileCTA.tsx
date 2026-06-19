@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 
 export function SmileCTA() {
   return (
-    <section className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pb-10">
+    <section className="w-full max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 pb-10 bg-[#F9F5FF]">
       <div 
         className="relative overflow-hidden rounded-3xl bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: "url('/images/scarlet-couple.png')" }}
