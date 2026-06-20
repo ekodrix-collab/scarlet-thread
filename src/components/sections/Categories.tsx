@@ -8,7 +8,6 @@ const categories = [
   { id: 1, name: "Gifts for Him", icon: "/images/scarlet-gift1.png", href: "/gifts-for-him", bgColor: "#E0F2FE"},
   { id: 2, name: "Gifts for Her", icon: "/images/scarlet-gift2.png", href: "/gifts-for-her",bgColor: "#FCE7F3" },
   { id: 3, name: "Kids & Babies", icon: "/images/scarlet-gift3.png", href: "/kids-babies",bgColor: "#FEF3C7" },
-  { id: 4, name: "Special Occasions", icon: "/images/scarlet-gift4.png", href: "/special-occasions",bgColor: "#FEE2E2" },
   { id: 5, name: "Couple Gifts", icon: "/images/scarlet-couple.png", href: "/corporate",bgColor: "#FEE2E2" },
   { id: 6, name: "Faith Based", icon: "/images/scarlet-faith.png", href: "/custom",bgColor: "#E8D5C4" },
 ]
@@ -63,7 +62,7 @@ export function Categories() {
         </motion.div>
 
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-8"
+          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}

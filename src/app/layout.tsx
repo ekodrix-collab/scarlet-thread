@@ -3,6 +3,7 @@ import { fontSans, fontHeading } from "@/lib/fonts";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { WhatsAppWidget } from "@/components/layout/WhatsAppWidget";
 
 export const metadata: Metadata = {
   title: "The Scarlet Thread | Every Gift Tells A Story",
@@ -24,6 +25,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
+        <WhatsAppWidget />
       </body>
     </html>
   );

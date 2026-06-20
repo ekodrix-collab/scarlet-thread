@@ -21,11 +21,13 @@ export function Footer() {
                   src="/images/logo/logo.png"
                   alt="The Scarlet Thread Logo"
                   className="h-6 w-auto object-contain"
+                  style={{ filter: "hue-rotate(23deg) saturate(138%) brightness(70%) contrast(335%)" }}
                 />
                 <img
                   src="/images/logo/name.png"
                   alt="The Scarlet Thread"
                   className="h-7 w-auto object-contain"
+                  style={{ filter: "hue-rotate(12deg) saturate(76%) brightness(76%) contrast(315%)" }}
                 />
               </div>
               <p className="text-xs sm:text-sm text-white/70 max-w-xs leading-relaxed">
