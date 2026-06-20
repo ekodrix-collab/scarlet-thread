@@ -160,7 +160,7 @@ export function RelatedProductsCarousel() {
                       href={`/product/${product.id}`}
                       className={cn(
                         buttonVariants({ variant: "outline", size: "default" }),
-                        "w-full mt-auto rounded-lg text-primary border-primary hover:bg-primary/5 font-medium h-10"
+                        "w-full mt-auto rounded-lg bg-[#8059BB] text-white border-primary hover:bg-[#4B0082] hover:text-white font-medium h-10"
                       )}
                     >
                       Add to Cart
