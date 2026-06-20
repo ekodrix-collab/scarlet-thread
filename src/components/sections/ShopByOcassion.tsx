@@ -99,24 +99,6 @@ export default function ShopByOccasion() {
         <p className="text-gray-400 text-sm mt-2 max-w-xl mx-auto">
           Celebrate every milestone with handpicked, beautifully personalised gifts crafted to tell your unique story.
         </p>
-
-        {/* Mobile View All */}
-        <Link
-          href="/special-occasions"
-          className="text-xs text-violet-500 hover:text-violet-700 font-bold transition-colors whitespace-nowrap flex items-center justify-center gap-1 mt-3 sm:hidden group"
-        >
-          View All Occasions 
-          <span className="group-hover:translate-x-1 transition-transform">→</span>
-        </Link>
-
-        {/* Desktop View All absolute at the top right */}
-        <Link
-          href="/special-occasions"
-          className="absolute right-4 sm:right-6 md:right-12 lg:right-16 top-0 text-sm text-violet-500 hover:text-violet-700 font-bold transition-colors whitespace-nowrap hidden sm:flex items-center gap-1 group"
-        >
-          View All Occasions 
-          <span className="group-hover:translate-x-1 transition-transform">→</span>
-        </Link>
       </motion.div>
 
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">

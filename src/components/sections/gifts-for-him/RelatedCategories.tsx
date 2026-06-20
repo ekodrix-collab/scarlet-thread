@@ -16,11 +16,6 @@ export function RelatedCategories() {
       icon: "/images/relatedproduct/scarlet-teddy.png",
     },
     {
-      name: "Special Occasions",
-      href: "/special-occasions",
-      icon: "/images/relatedproduct/scarlet-balloon.png",
-    },
-    {
       name: "Custom Orders",
       href: "/custom",
       icon: "/images/relatedproduct/scarlet-pencil.png",
@@ -36,7 +31,7 @@ export function RelatedCategories() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-4xl mx-auto">
           {categories.map((cat, index) => (
             <Link
               key={index}

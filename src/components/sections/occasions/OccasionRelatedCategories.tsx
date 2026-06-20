@@ -23,12 +23,6 @@ const categories = [
     icon: "/images/relatedproduct/scarlet-teddy.png",
     description: "Adorable keepsakes for little ones",
   },
-  {
-    name: "Special Occasions",
-    href: "/special-occasions",
-    icon: "/images/relatedproduct/scarlet-balloon.png",
-    description: "Celebrate every milestone",
-  },
 ];
 
 export function OccasionRelatedCategories() {
@@ -51,7 +45,7 @@ export function OccasionRelatedCategories() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 max-w-4xl mx-auto">
             {categories.map((cat, index) => (
               <motion.div
                 key={cat.href}

@@ -74,7 +74,6 @@ export function Header() {
     { name: 'Gifts For Him', path: '/gifts-for-him', icon: Gift },
     { name: 'Gifts For Her', path: '/gifts-for-her', icon: Heart },
     { name: 'Kids & Babies', path: '/kids-babies', icon: Baby },
-    { name: 'Special Occasions', path: '/special-occasions', icon: Star },
     { name: 'Gallery', path: '/gallery', icon: Image },
   ]
 
@@ -117,11 +116,13 @@ export function Header() {
                 src="/images/logo/logo.png"
                 alt="The Scarlet Thread Logo"
                 className="h-5 w-10 lg:h-8 lg:w-8 object-contain"
+                style={{ filter: "hue-rotate(23deg) saturate(138%) brightness(70%) contrast(335%)" }}
               />
               <img
                 src="/images/logo/name.png"
                 alt="The Scarlet Thread"
                 className="h-8 w-auto object-contain"
+                style={{ filter: "hue-rotate(12deg) saturate(76%) brightness(76%) contrast(315%)" }}
               />
             </Link>
           </div>
