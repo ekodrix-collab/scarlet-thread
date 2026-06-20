@@ -71,8 +71,8 @@ const btnVariants = {
 
 const imageVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.7, ease: "easeOut" as const } },
-  exit: { opacity: 0, transition: { duration: 0.4, ease: "easeIn" as const } },
+  visible: { opacity: 1, transition: { duration: 0.4, ease: "easeOut" as const } },
+  exit: { opacity: 0, transition: { duration: 0.25, ease: "easeIn" as const } },
 }
 
 // ---------------------------------------------------------------------------
