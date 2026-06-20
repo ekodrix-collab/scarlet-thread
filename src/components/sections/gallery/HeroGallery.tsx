@@ -45,7 +45,7 @@ export function HeroGallery() {
           <h1 className="mb-3 font-sans text-[1.75rem] font-extrabold leading-[1.18] text-[#111] md:text-[2.2rem] lg:text-[2.6rem]">
             Real Gifts.<br />
             Real Smiles.<br />
-            Real <span className="text-[#8059BB]">Memories.</span>
+            Real <span className="text-[#4b0082]">Memories.</span>
           </h1>
 
           {/* Sub-text */}
@@ -57,7 +57,7 @@ export function HeroGallery() {
           <div className="mb-6 flex flex-wrap items-center gap-2.5">
             <Link
               href="/gifts-for-her"
-              className="inline-flex h-9 items-center rounded-[5px] border border-[#8059BB]/60  px-5 text-[0.78rem] bg-[#8059BB] text-white backdrop-blur-sm transition-all duration-200 hover:bg-[#996cdc] hover:-translate-y-px active:translate-y-0"
+              className="inline-flex h-9 items-center rounded-[5px] border border-[#8059BB]/60  px-5 text-[0.78rem] bg-[#4b0082] text-white backdrop-blur-sm transition-all duration-200 hover:bg-[#996cdc] hover:-translate-y-px active:translate-y-0"
             >
               Explore Our Collection
               <ArrowRight className="ml-1 h-3 w-3" />
