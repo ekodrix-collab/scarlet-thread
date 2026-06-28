@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { OccasionProductsSection } from "@/components/sections/occasions/OccasionProductsSection";
-import { OccasionRelatedCategories } from "@/components/sections/occasions/OccasionRelatedCategories";
+import { ProductCatalog } from "@/components/sections/ProductCatalog";
 
 export const metadata: Metadata = {
   title: "All Gifts | The Scarlet Thread",
@@ -10,8 +9,7 @@ export const metadata: Metadata = {
 export default function AllProductsPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <OccasionProductsSection slug="all" />
-      <OccasionRelatedCategories />
+      <ProductCatalog />
     </div>
   );
 }

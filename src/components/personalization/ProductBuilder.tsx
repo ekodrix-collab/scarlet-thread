@@ -231,7 +231,7 @@ export function ProductBuilder({ productId, baseImage }: ProductBuilderProps) {
         <div className="mt-8 pt-6 border-t border-border/50">
           <div className="flex items-center justify-between mb-4">
             <span className="font-semibold text-foreground">Personalization Addon</span>
-            <span className="font-bold text-lg text-primary">+₹199</span>
+            <span className="font-bold text-lg text-primary">+AED 199</span>
           </div>
           <Button size="lg" className="w-full rounded-full h-12 shadow-md" onClick={handleSavePreview}>
             <Save className="w-4 h-4 mr-2" /> Save & Add to Cart

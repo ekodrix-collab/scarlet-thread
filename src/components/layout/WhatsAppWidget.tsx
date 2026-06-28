@@ -4,7 +4,9 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Send } from 'lucide-react'
 
-const WHATSAPP_PHONE_NUMBER = "919876543210" // The Scarlet Thread business number
+import { useSettings } from '@/hooks/use-settings'
+
+const WHATSAPP_PHONE_NUMBER = "919876543210" // The Scarlet Thread business number fallback
 
 interface ChatOption {
   id: string
@@ -33,13 +35,17 @@ const chatOptions: ChatOption[] = [
 export function WhatsAppWidget() {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedOption, setSelectedOption] = useState<ChatOption | null>(null)
+  const { data: settings } = useSettings()
+
+  const rawPhone = settings?.whatsapp_number || WHATSAPP_PHONE_NUMBER
+  const cleanedPhone = rawPhone.replace(/\D/g, '')
 
   const handleOpenDirectChat = () => {
     const text = selectedOption 
       ? selectedOption.message 
       : 'Hello! I would like to make an inquiry.'
     
-    const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodeURIComponent(text)}`
+    const whatsappUrl = `https://wa.me/${cleanedPhone}?text=${encodeURIComponent(text)}`
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer')
   }
 

@@ -13,9 +13,11 @@ import {
   type CarouselApi,
 } from "@/components/ui/carousel"
 
+import { useTestimonials } from "@/hooks/use-cms"
+
 const testimonials = [
   {
-    id: 1,
+    id: "1",
     name: "Rahul Mehta",
     role: "Verified Buyer",
     content:
@@ -23,7 +25,7 @@ const testimonials = [
     avatar: "R",
   },
   {
-    id: 2,
+    id: "2",
     name: "Neha Kapoor",
     role: "Verified Buyer",
     content:
@@ -31,7 +33,7 @@ const testimonials = [
     avatar: "N",
   },
   {
-    id: 4,
+    id: "4",
     name: "Ananya Sharma",
     role: "Verified Buyer",
     content:
@@ -39,7 +41,7 @@ const testimonials = [
     avatar: "A",
   },
   {
-    id: 5,
+    id: "5",
     name: "Priya Nair",
     role: "Verified Buyer",
     content:
@@ -47,7 +49,7 @@ const testimonials = [
     avatar: "P",
   },
   {
-    id: 6,
+    id: "6",
     name: "Meera Das",
     role: "Verified Buyer",
     content:
@@ -60,6 +62,24 @@ export function Testimonials() {
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
   const [count, setCount] = React.useState(0)
+
+  const { data: dbTestimonials } = useTestimonials()
+
+  const displayedTestimonials = React.useMemo(() => {
+    if (!dbTestimonials || dbTestimonials.length === 0) {
+      return testimonials
+    }
+
+    return dbTestimonials
+      .filter((t) => t.is_active !== false)
+      .map((t) => ({
+        id: t.id,
+        name: t.name,
+        role: t.role || "Verified Buyer",
+        content: t.comment,
+        avatar: t.avatar_url || t.name.charAt(0).toUpperCase(),
+      }))
+  }, [dbTestimonials])
 
   React.useEffect(() => {
     if (!api) {
@@ -126,7 +146,7 @@ export function Testimonials() {
             className="w-full"
           >
             <CarouselContent className="-ml-6 py-6">
-              {testimonials.map((testimonial) => (
+              {displayedTestimonials.map((testimonial) => (
                 <CarouselItem key={testimonial.id} className="pl-6 md:basis-1/2 lg:basis-1/3">
                   <motion.div 
                     whileHover={{ y: -12, scale: 1.02 }} 
@@ -163,7 +183,11 @@ export function Testimonials() {
                         {/* User */}
                         <div className="flex items-center gap-4 mt-8 relative z-10">
                           <div className="relative w-14 h-14 rounded-full overflow-hidden border-[3px] border-background shadow-md group-hover:border-primary/20 transition-colors duration-300 flex items-center justify-center bg-primary/20 text-primary font-bold text-xl">
-                            {testimonial.avatar}
+                            {testimonial.avatar.startsWith("http") || testimonial.avatar.startsWith("/") ? (
+                              <img src={testimonial.avatar} alt={testimonial.name} className="w-full h-full object-cover" />
+                            ) : (
+                              testimonial.avatar
+                            )}
                           </div>
 
                           <div>

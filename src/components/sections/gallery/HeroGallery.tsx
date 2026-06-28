@@ -56,7 +56,7 @@ export function HeroGallery() {
           {/* CTA Buttons */}
           <div className="mb-6 flex flex-wrap items-center gap-2.5">
             <Link
-              href="/gifts-for-her"
+              href="/products"
               className="inline-flex h-9 items-center rounded-[5px] border border-[#8059BB]/60  px-5 text-[0.78rem] bg-[#4b0082] text-white backdrop-blur-sm transition-all duration-200 hover:bg-[#996cdc] hover:-translate-y-px active:translate-y-0"
             >
               Explore Our Collection

@@ -157,7 +157,7 @@ export function RelatedProductsCarousel() {
                     </div>
 
                     <Link
-                      href={`/product/${product.id}`}
+                      href={`/product/${(product as { slug?: string; id: number | string }).slug || product.id}`}
                       className={cn(
                         buttonVariants({ variant: "outline", size: "default" }),
                         "w-full mt-auto rounded-lg bg-[#8059BB] text-white border-primary hover:bg-[#4B0082] hover:text-white font-medium h-10"

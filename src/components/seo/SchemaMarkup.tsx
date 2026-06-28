@@ -12,12 +12,12 @@ export const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "The Scarlet Thread",
-  url: "https://thescarletthread.in",
-  logo: "https://thescarletthread.in/logo.png",
+  url: "https://thescarletthread.ae",
+  logo: "https://thescarletthread.ae/logo.png",
   description: "Personalized luxury gifts. Embroidered and made with love.",
   contactPoint: {
     "@type": "ContactPoint",
-    telephone: "+91-9876543210",
+    telephone: "+971-50-1234567",
     contactType: "customer service"
   },
   sameAs: [
@@ -35,8 +35,8 @@ export const generateProductSchema = (product: any) => ({
   sku: product.sku,
   offers: {
     "@type": "Offer",
-    url: `https://thescarletthread.in/product/${product.id}`,
-    priceCurrency: "INR",
+    url: `https://thescarletthread.ae/product/${product.slug || product.id}`,
+    priceCurrency: "AED",
     price: product.price,
     itemCondition: "https://schema.org/NewCondition",
     availability: product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
