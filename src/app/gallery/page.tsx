@@ -10,8 +10,6 @@ export default function GalleryPage() {
       <HeroGallery />
       <GalleryFilter />
       <MasonryGrid />
-      <SubmitPhotoBanner />
-      <HowToSubmitFlow />
     </div>
   )
 }

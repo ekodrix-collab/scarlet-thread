@@ -5,10 +5,13 @@ import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from "framer-motion"
 import { Search, Heart, User, ShoppingBag, Home, Gift, Baby, Star, Image, Menu, X, ChevronRight } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
+import { useCartStore } from '@/store/useCartStore'
+import { useWishlistStore } from '@/store/useWishlistStore'
+import { createClient } from '@/lib/supabase/client'
 
 const marqueeItems = [
-  "• Free Shipping Above ₹1499",
-  "• Made With Love In India",
+  "• Free Shipping Above AED 150",
+  "• Crafted With Love In UAE",
   "• Track Your Order",
 ]
 
@@ -18,7 +21,8 @@ export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
-  const [showBottomNav, setShowBottomNav] = useState(false)  // ← ADD THIS
+  const [showBottomNav, setShowBottomNav] = useState(false)
+  const [user, setUser] = useState<any>(null)
   const searchInputRef = useRef<HTMLInputElement>(null)
 
   const isActive = (path: string) => {
@@ -60,6 +64,19 @@ export function Header() {
     return () => window.removeEventListener("keydown", handleKey)
   }, [])
 
+  const [mounted, setMounted] = useState(false)
+  const cartItems = useCartStore((state) => state.items)
+  const wishlistItems = useWishlistStore((state) => state.items)
+
+  useEffect(() => {
+    setMounted(true)
+    const supabase = createClient()
+    supabase.auth.getUser().then(({ data }) => setUser(data.user))
+  }, [])
+
+  const cartCount = mounted ? cartItems.reduce((acc, item) => acc + item.quantity, 0) : 0
+  const wishlistCount = mounted ? wishlistItems.length : 0
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
     const q = searchQuery.trim()
@@ -74,17 +91,32 @@ export function Header() {
     { name: 'Gifts For Him', path: '/gifts-for-him', icon: Gift },
     { name: 'Gifts For Her', path: '/gifts-for-her', icon: Heart },
     { name: 'Kids & Babies', path: '/kids-babies', icon: Baby },
-    { name: 'Special Occasions', path: '/special-occasions', icon: Star },
     { name: 'Gallery', path: '/gallery', icon: Image },
   ]
 
-  const bottomNavLinks = [
+  const bottomNavLinksLeft = [
     { name: 'Home', path: '/', icon: Home },
-    { name: 'For Him', path: '/gifts-for-him', icon: Gift },
-    { name: 'For Her', path: '/gifts-for-her', icon: Heart },
-    { name: 'Kids', path: '/kids-babies', icon: Baby },
+    { name: 'Gifts', path: '/gifts-for-her', icon: Gift },
+  ]
+  
+  const bottomNavLinksRight = [
+    { name: 'Wishlist', path: '/wishlist', icon: Heart },
     { name: 'Account', path: '/account', icon: User },
   ]
+
+  const getFirstName = () => {
+    if (!user) return "";
+    const fullName = user.user_metadata?.full_name;
+    if (fullName) {
+      return fullName.split(" ")[0];
+    }
+    if (user.email) {
+      const parts = user.email.split("@")[0];
+      return parts.charAt(0).toUpperCase() + parts.slice(1);
+    }
+    return "User";
+  };
+  const firstName = getFirstName();
 
   return (
     <>
@@ -93,7 +125,7 @@ export function Header() {
         {/* Announcement Bar */}
         <div className="bg-primary text-primary-foreground py-1 text-center text-[12px] font-medium tracking-wider overflow-hidden">
           <div className="hidden lg:block px-4">
-            • Free Shipping Above ₹1499 &nbsp;&nbsp;• Made With Love In India &nbsp;&nbsp;• Track Your Order
+            • Free Shipping Above AED 150 &nbsp;&nbsp;• Crafted With Love In UAE &nbsp;&nbsp;• Track Your Order
           </div>
           <div className="lg:hidden overflow-hidden">
             <motion.div
@@ -117,22 +149,24 @@ export function Header() {
                 src="/images/logo/logo.png"
                 alt="The Scarlet Thread Logo"
                 className="h-5 w-10 lg:h-8 lg:w-8 object-contain"
+                style={{ filter: "hue-rotate(23deg) saturate(138%) brightness(70%) contrast(335%)" }}
               />
               <img
                 src="/images/logo/name.png"
                 alt="The Scarlet Thread"
                 className="h-8 w-auto object-contain"
+                style={{ filter: "hue-rotate(12deg) saturate(76%) brightness(76%) contrast(315%)" }}
               />
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center gap-6">
+          <nav className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 href={link.path}
-                className={`transition-colors font-semibold uppercase text-[12px] hover:text-primary ${
+                className={`transition-colors font-medium text-sm hover:text-primary ${
                   isActive(link.path) ? 'text-primary' : 'text-muted-foreground'
                 }`}
               >
@@ -153,17 +187,51 @@ export function Header() {
             >
               {searchOpen ? <X className="h-5 w-5" /> : <Search className="h-5 w-5" />}
             </button>
-            <Link href="/account" className="p-2 text-foreground hover:text-primary transition-colors hidden lg:block">
-              <User className="h-5 w-5" />
-            </Link>
-            <Link href="/wishlist" className="p-2 text-foreground hover:text-primary transition-colors hidden lg:block">
-              <Heart className="h-5 w-5" />
-            </Link>
+            {user ? (
+              <div className="relative group p-2 hidden lg:block">
+                <Link href="/account" className="flex items-center gap-1.5 text-foreground hover:text-primary transition-colors">
+                  <User className="h-5 w-5" />
+                  <span className="text-xs font-semibold max-w-[120px] truncate">Hi, {firstName}</span>
+                </Link>
+                
+                {/* User Dropdown (Logged In Only) */}
+                <div className="absolute top-full right-0 mt-1 w-52 bg-white border border-border shadow-xl rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  <div className="px-4 py-2 border-b border-border/50 mb-1">
+                    <p className="text-sm font-bold text-foreground truncate">Hi, {firstName}</p>
+                    <p className="text-[10px] text-muted-foreground truncate">{user.email}</p>
+                  </div>
+                  <Link href="/account" className="block px-4 py-2 text-sm text-foreground hover:bg-muted/50 hover:text-primary transition-colors">My Account</Link>
+                  <Link href="/orders" className="block px-4 py-2 text-sm text-foreground hover:bg-muted/50 hover:text-primary transition-colors">My Orders</Link>
+                  <Link href="/wishlist" className="px-4 py-2 text-sm text-foreground hover:bg-muted/50 hover:text-primary transition-colors flex justify-between items-center">
+                    Wishlist
+                    {wishlistCount > 0 && <span className="bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">{wishlistCount}</span>}
+                  </Link>
+                  <div className="h-px bg-border/50 my-1" />
+                  <button
+                    onClick={async () => {
+                      const supabase = createClient()
+                      await supabase.auth.signOut()
+                      setUser(null)
+                      router.push('/')
+                    }}
+                    className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                  >
+                    Sign Out
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <Link href="/login" className="hidden lg:flex items-center px-2 text-sm font-semibold text-foreground hover:text-primary transition-colors">
+                Sign In
+              </Link>
+            )}
             <Link href="/cart" className="p-2 text-foreground hover:text-primary transition-colors relative">
               <ShoppingBag className="h-5 w-5" />
-              <span className="absolute top-1 right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-bold text-primary-foreground flex items-center justify-center">
-                0
-              </span>
+              {cartCount > 0 && (
+                <span className="absolute top-1 right-1 h-4 w-4 rounded-full bg-primary text-[10px] font-bold text-primary-foreground flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
             </Link>
             <button
               className="lg:hidden p-2 text-foreground hover:text-primary transition-colors ml-1"
@@ -284,27 +352,66 @@ export function Header() {
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border shadow-[0_-2px_10px_rgba(0,0,0,0.08)]"
           >
-            <div className="flex items-center justify-around h-16 px-2">
-              {bottomNavLinks.map((link) => {
-                const Icon = link.icon
-                const active = isActive(link.path)
-                return (
-                  <Link
-                    key={link.path}
-                    href={link.path}
-                    onClick={() => setMenuOpen(false)}
-                    className={`flex flex-col items-center justify-center gap-1 flex-1 py-2 transition-colors relative ${
-                      active ? 'text-primary' : 'text-muted-foreground'
-                    }`}
-                  >
-                    <Icon className="h-5 w-5" />
-                    <span className="text-[10px] font-medium leading-none">{link.name}</span>
-                    {active && (
-                      <span className="absolute bottom-0 w-6 h-0.5 rounded-full bg-primary" />
-                    )}
-                  </Link>
-                )
-              })}
+            <div className="flex items-center justify-between h-16 px-4 relative w-full max-w-md mx-auto">
+              
+              {/* Left Links */}
+              <div className="flex items-center gap-8">
+                {bottomNavLinksLeft.map((link) => {
+                  const Icon = link.icon
+                  const active = isActive(link.path)
+                  return (
+                    <Link
+                      key={link.path}
+                      href={link.path}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex flex-col items-center justify-center gap-1 transition-colors relative ${
+                        active ? 'text-primary' : 'text-muted-foreground'
+                      }`}
+                    >
+                      <Icon className="h-5 w-5" />
+                      <span className="text-[10px] font-medium leading-none">{link.name}</span>
+                    </Link>
+                  )
+                })}
+              </div>
+
+              {/* Central Floating Cart Button */}
+              <div className="absolute left-1/2 -top-6 -translate-x-1/2">
+                <Link 
+                  href="/cart" 
+                  onClick={() => setMenuOpen(false)}
+                  className="flex flex-col items-center justify-center w-14 h-14 bg-primary text-primary-foreground rounded-full shadow-xl border-[3px] border-white hover:scale-105 transition-transform relative z-50"
+                >
+                  <ShoppingBag className="w-6 h-6" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-1 -right-1 h-[18px] w-[18px] rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center shadow-sm">
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
+              </div>
+
+              {/* Right Links */}
+              <div className="flex items-center gap-8">
+                {bottomNavLinksRight.map((link) => {
+                  const Icon = link.icon
+                  const active = isActive(link.path)
+                  return (
+                    <Link
+                      key={link.path}
+                      href={link.path}
+                      onClick={() => setMenuOpen(false)}
+                      className={`flex flex-col items-center justify-center gap-1 transition-colors relative ${
+                        active ? 'text-primary' : 'text-muted-foreground'
+                      }`}
+                    >
+                      <Icon className="h-5 w-5" />
+                      <span className="text-[10px] font-medium leading-none">{link.name}</span>
+                    </Link>
+                  )
+                })}
+              </div>
+
             </div>
           </motion.nav>
         )}

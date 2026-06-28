@@ -15,6 +15,7 @@ import {
   CarouselItem,
   type CarouselApi,
 } from "@/components/ui/carousel"
+import { useProducts } from "@/hooks/use-products"
 
 const products = [
   {
@@ -73,6 +74,29 @@ export function ProductCarousel() {
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
   const [count, setCount] = React.useState(0)
+
+  const { data: dbProducts = [] } = useProducts()
+
+  const displayProducts = React.useMemo(() => {
+    const catProducts = dbProducts.filter(
+      (p: any) => p.is_active && p.categories?.name === "Gifts For Him"
+    )
+    if (catProducts.length > 0) {
+      return catProducts.map((p) => ({
+        id: p.id,
+        name: p.name,
+        price: p.price,
+        rating: 4.9,
+        reviews: 100,
+        image: p.images?.[0]?.url || "/images/scarlet-lovedgift1.png",
+        imagePlaceholder: p.sku || "Custom",
+        bestSeller: p.featured,
+        slug: p.slug,
+        is_personalized: p.is_personalized
+      }))
+    }
+    return products
+  }, [dbProducts])
 
   const plugin = React.useRef(
     Autoplay({ delay: 3000, stopOnInteraction: true })
@@ -148,7 +172,7 @@ export function ProductCarousel() {
             onMouseLeave={plugin.current.reset}
           >
             <CarouselContent className="-ml-4 md:-ml-6">
-              {products.map((product) => (
+              {displayProducts.map((product) => (
                 <CarouselItem key={product.id} className="pl-4 md:pl-6 basis-[55%] sm:basis-[40%] md:basis-[33.33%] lg:basis-[20%]">
                   <div className="h-full pt-2 pb-6 group cursor-grab active:cursor-grabbing">
                     
@@ -161,6 +185,7 @@ export function ProductCarousel() {
                               src={product.image}
                               alt={product.name}
                               fill
+                              unoptimized
                               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                               className="object-cover"
                             />
@@ -205,7 +230,7 @@ export function ProductCarousel() {
 
                           <div className="flex items-center justify-between mb-3">
                             <div className="text-primary font-bold text-lg">
-                              ₹{product.price}
+                              AED {product.price}
                             </div>
                             <div className="flex items-center gap-1 text-xs text-muted-foreground font-medium">
                               <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
@@ -217,13 +242,13 @@ export function ProductCarousel() {
 
                         <div className="mt-auto">
                           <Link
-                            href={`/product/${product.id}`}
+                            href={`/product/${(product as { slug?: string; id: number | string }).slug || product.id}`}
                             className={cn(
                               buttonVariants({ variant: "default" }),
                               "w-full h-9 rounded-xl text-xs font-bold bg-primary hover:bg-primary/90 transition-transform hover:-translate-y-0.5 active:translate-y-0 shadow-sm"
                             )}
                           >
-                            Personalize Now
+                            Add to Cart
                           </Link>
                         </div>
                       </CardContent>

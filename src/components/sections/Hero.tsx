@@ -14,66 +14,54 @@ import { motion, AnimatePresence } from "framer-motion"
 //   - mobile image  (xs, shown in the top image block)
 //   - heading / description / cta link
 // ---------------------------------------------------------------------------
-const slides = [
+// ---------------------------------------------------------------------------
+// Slide data
+// Each slide carries:
+//   - desktop background (replaces scarlet-homebanner.png per slide)
+//   - tablet image  (sm–md, shown in the top image block)
+//   - mobile image  (xs, shown in the top image block)
+//   - heading / description / cta link
+// ---------------------------------------------------------------------------
+const STATIC_SLIDES = [
   {
     id: 0,
-    desktopBg: "/images/scarlet-bestseller-banner.png",
-    tabletImg: "/images/mobile-view-enog.png",
-    mobileImg: "/images/home/mobile-view-enog.png",
-    heading: (
-      <>
-        Because Just A Gift<br />
-        Was Never <span className="text-primary">Enough</span>
-      </>
-    ),
-    mobileHeading: (
-      <>
-        Because Just A Gift<br className="block sm:hidden" />
-        Was Never <span className="text-primary">Enough</span>
-      </>
-    ),
-    description: "Personalized, embroidered & made with love for your special moments.",
-    ctaLink: "/gifts",
+    desktopBg: "/images/heropage/scarlet-couple1.png",
+    tabletImg: "/images/heropage/scarlet-couple1.png",
+    mobileImg: "/images/heropage/scarlet-mobile.png",
+    ctaLink: "/products",
+    title: "",
+    subtitle: "",
+    buttonText: "Shop Now",
   },
   {
     id: 1,
-    desktopBg: "/images/special_occasions2.png",
-    tabletImg: "/images/home/mobile-view-eid.png",
-    mobileImg: "/images/home/mobile-view-eid.png",
-    heading: (
-      <>
-        Gifts That Tell<br />
-        Your <span className="text-primary">Story</span>
-      </>
-    ),
-    mobileHeading: (
-      <>
-        Gifts That Tell<br className="block sm:hidden" />
-        Your <span className="text-primary">Story</span>
-      </>
-    ),
-    description: "Custom keepsakes crafted to capture every precious memory and milestone.",
-    ctaLink: "/gifts",
+    desktopBg: "/images/heropage/scarlet-baby1.png",
+    tabletImg: "/images/heropage/scarlet-baby1.png",
+    mobileImg: "/images/heropage/scarlet-mobilebaby.png",
+    ctaLink: "/products",
+    title: "",
+    subtitle: "",
+    buttonText: "Shop Now",
   },
   {
     id: 2,
-    desktopBg: "/images/scarlet-homebanner.png",
-    tabletImg: "/images/home/hero-1.png",
-    mobileImg: "/images/home/hero-1.png",
-    heading: (
-      <>
-        Handcrafted With<br />
-        Pure <span className="text-primary">Love</span>
-      </>
-    ),
-    mobileHeading: (
-      <>
-        Handcrafted With<br className="block sm:hidden" />
-        Pure <span className="text-primary">Love</span>
-      </>
-    ),
-    description: "Every stitch, every detail — thoughtfully designed to make them feel truly special.",
-    ctaLink: "/gifts",
+    desktopBg: "/images/heropage/scarlet-couple2.png",
+    tabletImg: "/images/heropage/scarlet-couple2.png",
+    mobileImg: "/images/heropage/scarlet-mobilecouple.png",
+    ctaLink: "/products",
+    title: "",
+    subtitle: "",
+    buttonText: "Shop Now",
+  },
+  {
+    id: 3,
+    desktopBg: "/images/heropage/scarlet-lady2.png",
+    tabletImg: "/images/heropage/scarlet-lady2.png",
+    mobileImg: "/images/heropage/scarlet-mobilelady.png",
+    ctaLink: "/products",
+    title: "",
+    subtitle: "",
+    buttonText: "Shop Now",
   },
 ]
 
@@ -103,8 +91,8 @@ const btnVariants = {
 
 const imageVariants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.7, ease: "easeOut" as const } },
-  exit: { opacity: 0, transition: { duration: 0.4, ease: "easeIn" as const } },
+  visible: { opacity: 1, transition: { duration: 0.4, ease: "easeOut" as const } },
+  exit: { opacity: 0, transition: { duration: 0.25, ease: "easeIn" as const } },
 }
 
 // ---------------------------------------------------------------------------
@@ -118,11 +106,10 @@ function Dots({ total, active, onChange }: { total: number; active: number; onCh
           key={i}
           onClick={() => onChange(i)}
           aria-label={`Go to slide ${i + 1}`}
-          className={`rounded-full transition-all duration-300 ${
-            i === active
+          className={`rounded-full transition-all duration-300 ${i === active
               ? "bg-primary w-5 h-2"
               : "bg-primary/30 hover:bg-primary/60 w-2 h-2"
-          }`}
+            }`}
         />
       ))}
     </div>
@@ -132,11 +119,90 @@ function Dots({ total, active, onChange }: { total: number; active: number; onCh
 // ---------------------------------------------------------------------------
 // Hero
 // ---------------------------------------------------------------------------
+// Helper to format the global title, splitting it nicely and applying primary color to the last word
+function formatHeroTitle(titleStr: string, isMobile: boolean) {
+  if (!titleStr) return "";
+  
+  const lower = titleStr.toLowerCase();
+  if (lower.includes("more than a gift") && lower.includes("memory in the making")) {
+    return (
+      <>
+        More Than a Gift.{isMobile ? <br className="block sm:hidden" /> : <br />}
+        A Memory in the <span className="text-primary">Making</span>
+      </>
+    );
+  }
+  
+  const parts = titleStr.split(". ");
+  if (parts.length > 1) {
+    const firstPart = parts[0] + ".";
+    const secondPart = parts.slice(1).join(". ");
+    const words = secondPart.split(" ");
+    if (words.length > 0) {
+      const lastWord = words[words.length - 1];
+      const remainingWords = words.slice(0, -1).join(" ");
+      return (
+        <>
+          {firstPart}{isMobile ? <br className="block sm:hidden" /> : <br />}
+          {remainingWords} <span className="text-primary">{lastWord}</span>
+        </>
+      );
+    }
+  }
+
+  // Fallback for strings without a period (e.g. "CUSTOM BABY HOODED TOWELS")
+  const words = titleStr.split(" ");
+  if (words.length > 1) {
+    const lastWord = words[words.length - 1];
+    const remainingWords = words.slice(0, -1).join(" ");
+    return (
+      <>
+        {remainingWords} <span className="text-primary">{lastWord}</span>
+      </>
+    );
+  }
+
+  return titleStr;
+}
+
+// Hero
+// ---------------------------------------------------------------------------
 export function Hero() {
+  const [slides, setSlides] = useState<any[]>(STATIC_SLIDES)
   const [current, setCurrent] = useState(0)
   const [paused, setPaused] = useState(false)
 
-  const next = useCallback(() => setCurrent((c) => (c + 1) % slides.length), [])
+  useEffect(() => {
+    async function loadSlides() {
+      try {
+        const res = await fetch("/api/admin/cms/hero-slides");
+        if (res.ok) {
+          const data = await res.json();
+          // Filter to active ones
+          const activeSlides = data.filter((slide: any) => slide.is_active);
+          if (activeSlides.length > 0) {
+            setSlides(
+              activeSlides.map((slide: any, index: number) => ({
+                id: index,
+                desktopBg: slide.image_desktop,
+                tabletImg: slide.image_desktop,
+                mobileImg: slide.image_mobile || slide.image_desktop,
+                ctaLink: slide.button_link || "/products",
+                title: slide.title || "",
+                subtitle: slide.subtitle || "",
+                buttonText: slide.button_text || "Shop Now",
+              }))
+            );
+          }
+        }
+      } catch (err) {
+        console.warn("Failed to load slides from Supabase CMS, using static fallback:", err);
+      }
+    }
+    loadSlides();
+  }, []);
+
+  const next = useCallback(() => setCurrent((c) => (c + 1) % slides.length), [slides.length])
 
   // Auto-advance every 5 s
   useEffect(() => {
@@ -145,7 +211,13 @@ export function Hero() {
     return () => clearInterval(id)
   }, [paused, next])
 
-  const slide = slides[current]
+  const slide = slides[current] || STATIC_SLIDES[0]
+
+  // Find global title/subtitle from first slide that has them, or fallback
+  const firstWithTitle = slides.find(s => s.title);
+  const firstWithSub = slides.find(s => s.subtitle);
+  const heroTitle = firstWithTitle?.title || "More Than a Gift. A Memory in the Making";
+  const heroSubtitle = firstWithSub?.subtitle || "Whether you're celebrating someone special or treating yourself, make it uniquely personal.";
 
   return (
     <section
@@ -154,91 +226,85 @@ export function Hero() {
       onMouseLeave={() => setPaused(false)}
     >
       {/* ── Desktop background — cross-fades per slide ── */}
-      <AnimatePresence mode="sync">
-        <motion.div
-          key={`desktop-bg-${current}`}
-          className="absolute inset-0 z-0 select-none pointer-events-none bg-cover bg-right hidden lg:block"
-          style={{ backgroundImage: `url('${slide.desktopBg}')` }}
-          variants={imageVariants}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
+      {slides.map((s, idx) => (
+        <div
+          key={`desktop-bg-${s.id}`}
+          className={`absolute inset-0 z-0 select-none pointer-events-none bg-cover bg-right transition-opacity duration-700 ease-in-out hidden lg:block ${
+            idx === current ? "opacity-100" : "opacity-0"
+          }`}
+          style={{ backgroundImage: `url('${s.desktopBg}')` }}
         />
-      </AnimatePresence>
+      ))}
 
       {/* ══════════════════════════════════════════════
           Mobile / Tablet layout  (< lg)
       ══════════════════════════════════════════════ */}
-      <div className="lg:hidden flex flex-col w-full min-h-screen relative z-20">
+      <div className="lg:hidden flex flex-col w-full h-[100svh] relative z-20">
 
         {/* Image — cross-fades, different src for mobile vs tablet */}
-        <div className="relative w-full flex-shrink-0 overflow-hidden" style={{ height: "100vh" }}>
-          <AnimatePresence mode="sync">
-            <motion.div
-              key={`mobile-img-${current}`}
-              className="absolute inset-0 bg-cover bg-top sm:bg-center"
-              // mobile: mobileImg, sm+: tabletImg via inline style trick using CSS custom property
-              style={{
-                backgroundImage: `url('${slide.mobileImg}')`,
-              }}
-              variants={imageVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+        <div className="relative w-full flex-shrink-0 overflow-hidden" style={{ height: "100svh" }}>
+          {slides.map((s, idx) => (
+            <div
+              key={`mobile-bg-${s.id}`}
+              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ease-in-out sm:hidden ${
+                idx === current ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ backgroundImage: `url('${s.mobileImg}')` }}
             />
-          </AnimatePresence>
-
-          {/* Tablet override via a second layer visible only sm+ */}
-          <AnimatePresence mode="sync">
-            <motion.div
-              key={`tablet-img-${current}`}
-              className="absolute inset-0 bg-cover bg-center hidden sm:block"
-              style={{ backgroundImage: `url('${slide.tabletImg}')` }}
-              variants={imageVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+          ))}
+          {slides.map((s, idx) => (
+            <div
+              key={`tablet-bg-${s.id}`}
+              className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ease-in-out hidden sm:block ${
+                idx === current ? "opacity-100" : "opacity-0"
+              }`}
+              style={{ backgroundImage: `url('${s.tabletImg}')` }}
             />
-          </AnimatePresence>
+          ))}
         </div>
 
-        {/* Content — pinned to bottom, same position as before */}
-        <div className="flex-1 absolute bottom-20 left-0 px-4 sm:px-8 py-6 flex flex-col items-start sm:items-center justify-center pb-8 space-y-3 sm:w-full sm:max-w-full">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`mobile-content-${current}`}
-              className="flex flex-col items-start sm:items-center space-y-3"
-              variants={contentVariants}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
+        {/* Content — pinned to top on mobile */}
+        <div className="absolute top-28 left-0 w-full px-4 sm:px-8 py-6 flex flex-col items-start sm:items-center space-y-3 z-30">
+          <motion.div
+            className="flex flex-col items-start sm:items-center space-y-3"
+            variants={contentVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.h1
+              className="text-3xl font-bold uppercase text-foreground text-left sm:text-center"
+              variants={headingVariants}
             >
-              <motion.h1
-                className="text-3xl font-bold uppercase text-foreground"
-                variants={headingVariants}
-              >
-                {slide.mobileHeading}
-              </motion.h1>
+              {formatHeroTitle(heroTitle, true)}
+            </motion.h1>
 
-              <motion.p
-                className="text-sm text-muted-foreground sm:text-center max-w-xs"
-                variants={descVariants}
-              >
-                {slide.description}
-              </motion.p>
+            <motion.p
+              className="text-sm text-muted-foreground text-left sm:text-center max-w-xs"
+              variants={descVariants}
+            >
+              {heroSubtitle}
+            </motion.p>
 
-              <motion.div className="pt-1" variants={btnVariants}>
+            <motion.div className="pt-1 flex flex-wrap items-center gap-4 sm:justify-center w-full" variants={btnVariants}>
+              <Link href="/products">
                 <Button size="lg" className="text-base h-12 px-8 bg-primary cursor-pointer hover:bg-primary/90 text-primary-foreground font-semibold rounded-[5px] shadow-md transition-all">
                   Shop Now
                 </Button>
-              </motion.div>
+              </Link>
+              {slide.buttonText && slide.ctaLink && (
+                <Link href={slide.ctaLink}>
+                  <span className="text-primary font-semibold flex items-center gap-2 text-base py-2 cursor-pointer hover:underline transition-all">
+                    {slide.buttonText} <span className="text-lg">→</span>
+                  </span>
+                </Link>
+              )}
             </motion.div>
-          </AnimatePresence>
+          </motion.div>
+        </div>
 
-          {/* Dots */}
-          <div className="pt-3 sm:flex sm:justify-center">
-            <Dots total={slides.length} active={current} onChange={setCurrent} />
-          </div>
+        {/* Dots — pinned to bottom on mobile */}
+        <div className="absolute bottom-10 left-0 w-full flex justify-start sm:justify-center px-4 sm:px-8 z-30">
+          <Dots total={slides.length} active={current} onChange={setCurrent} />
         </div>
       </div>
 
@@ -258,42 +324,44 @@ export function Hero() {
             </div>
 
             {/* Animated content block */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`desktop-content-${current}`}
-                className="space-y-5"
-                variants={contentVariants}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
+            <motion.div
+              className="space-y-5"
+              variants={contentVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <motion.h1
+                className="text-3xl md:text-4xl lg:text-5xl font-bold uppercase text-foreground"
+                variants={headingVariants}
               >
-                <motion.h1
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold uppercase text-nowrap text-foreground"
-                  variants={headingVariants}
-                >
-                  {slide.heading}
-                </motion.h1>
+                {formatHeroTitle(heroTitle, false)}
+              </motion.h1>
 
-                <motion.p
-                  className="text-sm text-muted-foreground max-w-md"
-                  variants={descVariants}
-                >
-                  {slide.description}
-                </motion.p>
+              <motion.p
+                className="text-sm text-muted-foreground max-w-md"
+                variants={descVariants}
+              >
+                {heroSubtitle}
+              </motion.p>
 
-                <motion.div
-                  className="flex items-center gap-6 pt-2"
-                  variants={btnVariants}
-                >
+              <motion.div
+                className="flex items-center gap-6 pt-2"
+                variants={btnVariants}
+              >
+                <Link href="/products">
                   <Button size="lg" className="text-base h-12 px-8 bg-primary cursor-pointer hover:bg-primary/90 text-primary-foreground font-semibold rounded-[5px] shadow-md transition-all">
                     Shop Now
                   </Button>
-                  <Link href={slide.ctaLink} className="text-primary hover:text-primary/80 font-semibold flex items-center gap-2 transition-colors text-base py-2">
-                    Explore Gifts <span className="text-lg">→</span>
+                </Link>
+                {slide.buttonText && slide.ctaLink && (
+                  <Link href={slide.ctaLink}>
+                    <span className="text-primary font-semibold flex items-center gap-2 text-base py-2 cursor-pointer hover:underline transition-all">
+                      {slide.buttonText} <span className="text-lg">→</span>
+                    </span>
                   </Link>
-                </motion.div>
+                )}
               </motion.div>
-            </AnimatePresence>
+            </motion.div>
 
             {/* Badge strip — static, unchanged */}
             <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 pt-6 mt-6 border-t border-primary/30">

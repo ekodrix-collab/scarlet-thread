@@ -1,118 +1,161 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Package, User, Heart, MapPin } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useState } from "react";
+import { useCustomerOrders } from "@/hooks/use-orders";
+import { createClient } from "@/lib/supabase/client";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { format } from "date-fns";
+import { ShoppingBag, Heart, Calendar, ArrowRight, User, Loader2 } from "lucide-react";
+import Link from "next/link";
+import { useWishlistStore } from "@/store/useWishlistStore";
 
-export default function AccountPage() {
+export default function CustomerDashboardIndex() {
+  const supabase = createClient();
+  const [profile, setProfile] = useState<any>(null);
+  const { data: orders, isLoading } = useCustomerOrders();
+  const { items: wishlistItems } = useWishlistStore();
+
+  useEffect(() => {
+    async function loadProfile() {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: prof } = await supabase
+          .from("users")
+          .select("*")
+          .eq("id", user.id)
+          .single();
+        if (prof) {
+          setProfile(prof);
+        }
+      }
+    }
+    loadProfile();
+  }, []);
+
+  const recentOrders = orders?.slice(0, 3) || [];
+
   return (
-    <div className="container mx-auto px-4 py-12">
-      <h1 className="text-3xl font-heading font-bold mb-8">My Account</h1>
-      
-      <Tabs defaultValue="orders" className="flex flex-col md:flex-row gap-8">
-        <TabsList className="flex flex-col h-auto w-full md:w-64 bg-transparent gap-2 items-start justify-start p-0">
-          <TabsTrigger value="orders" className="w-full justify-start py-3 px-4 data-[state=active]:bg-secondary data-[state=active]:text-primary border border-transparent data-[state=active]:border-border rounded-xl">
-            <Package className="w-4 h-4 mr-3" /> Orders
-          </TabsTrigger>
-          <TabsTrigger value="profile" className="w-full justify-start py-3 px-4 data-[state=active]:bg-secondary data-[state=active]:text-primary border border-transparent data-[state=active]:border-border rounded-xl">
-            <User className="w-4 h-4 mr-3" /> Profile
-          </TabsTrigger>
-          <TabsTrigger value="wishlist" className="w-full justify-start py-3 px-4 data-[state=active]:bg-secondary data-[state=active]:text-primary border border-transparent data-[state=active]:border-border rounded-xl">
-            <Heart className="w-4 h-4 mr-3" /> Wishlist
-          </TabsTrigger>
-          <TabsTrigger value="addresses" className="w-full justify-start py-3 px-4 data-[state=active]:bg-secondary data-[state=active]:text-primary border border-transparent data-[state=active]:border-border rounded-xl">
-            <MapPin className="w-4 h-4 mr-3" /> Addresses
-          </TabsTrigger>
-          
-          <div className="mt-8 pt-4 border-t w-full">
-            <Button variant="ghost" className="w-full justify-start text-red-500 hover:text-red-600 hover:bg-red-50">
-              Logout
-            </Button>
-          </div>
-        </TabsList>
-        
-        <div className="flex-1">
-          <TabsContent value="orders" className="m-0">
-            <Card className="shadow-sm border-border">
-              <CardHeader>
-                <CardTitle>Order History</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-12">
-                  <Package className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-50" />
-                  <h3 className="text-lg font-medium mb-2">No orders yet</h3>
-                  <p className="text-muted-foreground">When you buy a gift, your order will appear here.</p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          
-          <TabsContent value="profile" className="m-0">
-            <Card className="shadow-sm border-border">
-              <CardHeader>
-                <CardTitle>Profile Information</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-sm text-muted-foreground block mb-1">Full Name</label>
-                    <div className="font-medium">John Doe</div>
-                  </div>
-                  <div>
-                    <label className="text-sm text-muted-foreground block mb-1">Email</label>
-                    <div className="font-medium">john.doe@example.com</div>
-                  </div>
-                  <Button className="mt-4">Edit Profile</Button>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
-          
-          <TabsContent value="wishlist" className="m-0">
-            <Card className="shadow-sm border-border">
-              <CardHeader>
-                <CardTitle>My Wishlist</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-center py-12">
-                  <Heart className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-50" />
-                  <h3 className="text-lg font-medium mb-2">Your wishlist is empty</h3>
-                  <p className="text-muted-foreground">Save items you love to view them later.</p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold tracking-tight text-slate-800 dark:text-slate-100">
+          Welcome back, {profile?.full_name || "Shopper"}!
+        </h1>
+        <p className="text-sm text-muted-foreground mt-1">
+          Here is a quick overview of your customized embroidery orders and profile settings.
+        </p>
+      </div>
 
-          <TabsContent value="addresses" className="m-0">
-            <Card className="shadow-sm border-border">
-              <CardHeader>
-                <CardTitle>Saved Addresses</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Button variant="outline" className="w-full py-8 border-dashed border-2 mb-4">
-                  + Add New Address
-                </Button>
-                <div className="border rounded-xl p-4 bg-secondary/20">
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="font-bold bg-white px-2 py-1 rounded text-xs">Home</span>
-                    <div className="flex gap-2 text-sm">
-                      <button className="text-primary hover:underline">Edit</button>
-                      <button className="text-red-500 hover:underline">Delete</button>
-                    </div>
-                  </div>
-                  <p className="font-medium">John Doe</p>
-                  <p className="text-sm text-muted-foreground mt-1">
-                    123 Main St, Apt 4B<br/>
-                    Mumbai, Maharashtra 400001<br/>
-                    India
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </TabsContent>
+      {/* Quick Stats Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Card className="border-slate-200/60 dark:border-slate-800/80 rounded-2xl shadow-sm">
+          <CardContent className="p-6 flex items-center justify-between">
+            <div className="space-y-1">
+              <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wider">Orders Placed</span>
+              <div className="text-2xl font-extrabold text-slate-800 dark:text-slate-100">{orders?.length || 0}</div>
+            </div>
+            <div className="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-xl text-blue-500">
+              <ShoppingBag className="w-5 h-5" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Link href="/account/wishlist" className="block group">
+          <Card className="border-slate-200/60 dark:border-slate-800/80 rounded-2xl shadow-sm hover:border-primary/40 transition duration-200">
+            <CardContent className="p-6 flex items-center justify-between">
+              <div className="space-y-1">
+                <span className="text-xs text-muted-foreground font-semibold uppercase tracking-wider group-hover:text-primary transition-colors">Saved Favourites</span>
+                <div className="text-2xl font-extrabold text-slate-800 dark:text-slate-100">{wishlistItems?.length || 0}</div>
+              </div>
+              <div className="p-3 bg-red-50 dark:bg-red-950/40 rounded-xl text-red-500 group-hover:bg-red-100 dark:group-hover:bg-red-900/60 transition duration-200">
+                <Heart className="w-5 h-5 fill-red-500" />
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+      </div>
+
+      {/* Profile Overview Card */}
+      <Card className="border-slate-200/60 dark:border-slate-800/80 rounded-2xl shadow-sm">
+        <CardContent className="p-6 space-y-4">
+          <h3 className="font-bold text-sm text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+            <User className="w-4 h-4 text-primary" /> Profile Overview
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-600 dark:text-slate-400">
+            <div>
+              <span className="block text-xs text-muted-foreground font-semibold">Full Name</span>
+              <span className="font-semibold text-slate-800 dark:text-slate-200 mt-0.5 block">
+                {profile?.full_name || "Not set"}
+              </span>
+            </div>
+            <div>
+              <span className="block text-xs text-muted-foreground font-semibold">Phone Contact</span>
+              <span className="font-semibold text-slate-800 dark:text-slate-200 mt-0.5 block">
+                {profile?.phone || "Not set"}
+              </span>
+            </div>
+          </div>
+          <Link href="/account/profile">
+            <Button variant="outline" size="sm" className="rounded-lg text-xs mt-2">
+              Edit Account Info
+            </Button>
+          </Link>
+        </CardContent>
+      </Card>
+
+      {/* Recent Orders List */}
+      <Card className="border-slate-200/60 dark:border-slate-800/80 rounded-2xl shadow-sm">
+        <div className="px-6 py-4 border-b flex justify-between items-center bg-slate-50/50 dark:bg-slate-950/20">
+          <h3 className="font-bold text-sm text-slate-700 dark:text-slate-300 uppercase tracking-wider">Recent Orders</h3>
+          {orders && orders.length > 3 && (
+            <Link href="/account/orders" className="text-xs text-primary hover:underline font-semibold flex items-center gap-1">
+              View All <ArrowRight className="w-3 h-3" />
+            </Link>
+          )}
         </div>
-      </Tabs>
+        <CardContent className="p-6">
+          {isLoading ? (
+            <div className="flex items-center justify-center py-6">
+              <Loader2 className="w-6 h-6 text-primary animate-spin" />
+            </div>
+          ) : recentOrders.length > 0 ? (
+            <div className="divide-y">
+              {recentOrders.map((order: any) => (
+                <div key={order.id} className="py-4 first:pt-0 last:pb-0 flex items-center justify-between gap-4">
+                  <div>
+                    <Link 
+                      href={`/account/orders/${order.id}`}
+                      className="font-mono font-bold text-primary hover:underline block text-sm"
+                    >
+                      {order.order_number}
+                    </Link>
+                    <span className="text-xs text-muted-foreground block mt-0.5">
+                      Placed on {format(new Date(order.created_at), "PPP")}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <Badge className="capitalize font-semibold text-[10px]">
+                      {order.status}
+                    </Badge>
+                    <span className="font-bold text-slate-800 dark:text-slate-200 text-sm">
+                      AED {parseFloat(order.total_amount).toFixed(2)}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-10">
+              <ShoppingBag className="w-8 h-8 text-slate-300 mx-auto mb-2" />
+              <p className="text-sm text-slate-400">No orders registered yet.</p>
+              <Link href="/products" className="text-xs text-primary hover:underline font-semibold mt-2 inline-block">
+                Start shopping personalized gifts
+              </Link>
+            </div>
+          )}
+        </CardContent>
+      </Card>
     </div>
-  )
+  );
 }

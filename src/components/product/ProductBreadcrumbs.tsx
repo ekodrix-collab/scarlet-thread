@@ -1,16 +1,22 @@
-import Link from "next/link"
-import { ChevronRight } from "lucide-react"
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 
-export function ProductBreadcrumbs() {
+interface ProductBreadcrumbsProps {
+  product?: any;
+}
+
+export function ProductBreadcrumbs({ product }: ProductBreadcrumbsProps) {
+  const productName = product?.name || "Personalized Hoodie";
+  const categoryName = product?.categories?.name || "Gifts For Him";
+  const categorySlug = product?.categories?.slug || "gifts-for-him";
+
   return (
-    <nav className="flex items-center text-xs text-muted-foreground py-4">
-      <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+    <nav className="flex items-center text-xs text-slate-400 py-4 font-medium">
+      <Link href="/" className="hover:text-purple-600 transition-colors">Home</Link>
       <ChevronRight className="w-3 h-3 mx-2" />
-      <Link href="/gifts-for-him" className="hover:text-primary transition-colors">Gifts For Him</Link>
+      <Link href={`/${categorySlug}`} className="hover:text-purple-600 transition-colors">{categoryName}</Link>
       <ChevronRight className="w-3 h-3 mx-2" />
-      <Link href="/gifts-for-him/hoodies" className="hover:text-primary transition-colors">Hoodies</Link>
-      <ChevronRight className="w-3 h-3 mx-2" />
-      <span className="text-foreground font-medium">King Dad Hoodie</span>
+      <span className="text-slate-600 dark:text-slate-300 font-bold">{productName}</span>
     </nav>
-  )
+  );
 }
