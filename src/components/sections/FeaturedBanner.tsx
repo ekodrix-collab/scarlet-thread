@@ -3,8 +3,55 @@
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import { motion } from "framer-motion"
+import Link from "next/link"
+import { useBanners } from "@/hooks/use-cms"
+import { useMemo } from "react"
 
 export function FeaturedBanner() {
+  const { data: dbBanners } = useBanners()
+
+  const featuredBanner = useMemo(() => {
+    if (!dbBanners || dbBanners.length === 0) {
+      return {
+        badge: "Best Seller",
+        title: "New Born Gift Sets",
+        subtitle: "Thoughtful & adorable gifts for your little ones.",
+        imageUrl: "/images/scarlet-bestseller-banner.png",
+        linkUrl: "/products",
+      }
+    }
+
+    // Find first active banner of type 'featured_banner'
+    const fb = dbBanners.find((b) => b.is_active && b.banner_type === "featured_banner")
+    if (!fb) {
+      const activeAny = dbBanners.find((b) => b.is_active)
+      if (!activeAny) {
+        return {
+          badge: "Best Seller",
+          title: "New Born Gift Sets",
+          subtitle: "Thoughtful & adorable gifts for your little ones.",
+          imageUrl: "/images/scarlet-bestseller-banner.png",
+          linkUrl: "/products",
+        }
+      }
+      return {
+        badge: "Special Offer",
+        title: activeAny.title || "Featured Banner",
+        subtitle: activeAny.subtitle || "",
+        imageUrl: activeAny.image_url || "/images/scarlet-bestseller-banner.png",
+        linkUrl: activeAny.link_url || "/products",
+      }
+    }
+
+    return {
+      badge: "Best Seller",
+      title: fb.title || "Featured Banner",
+      subtitle: fb.subtitle || "",
+      imageUrl: fb.image_url || "/images/scarlet-bestseller-banner.png",
+      linkUrl: fb.link_url || "/products",
+    }
+  }, [dbBanners])
+
   return (
     <section className="py-5 md:py-24">
       <div className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16">
@@ -22,8 +69,8 @@ export function FeaturedBanner() {
             transition={{ duration: 0.9, ease: "easeOut" }}
           >
             <Image
-              src="/images/scarlet-bestseller-banner.png"
-              alt="New Born Gift Sets Bestseller Banner"
+              src={featuredBanner.imageUrl}
+              alt={featuredBanner.title}
               fill
               className="object-cover"
               priority
@@ -38,7 +85,7 @@ export function FeaturedBanner() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3, ease: "easeOut" }}
             >
-              Best Seller
+              {featuredBanner.badge}
             </motion.div>
 
             {/* Heading */}
@@ -48,7 +95,7 @@ export function FeaturedBanner() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.45, ease: "easeOut" }}
             >
-              New Born Gift Sets
+              {featuredBanner.title}
             </motion.h2>
 
             {/* Description */}
@@ -58,7 +105,7 @@ export function FeaturedBanner() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.6, ease: "easeOut" }}
             >
-              Thoughtful & adorable gifts for your little ones.
+              {featuredBanner.subtitle}
             </motion.p>
 
             {/* Button */}
@@ -67,9 +114,11 @@ export function FeaturedBanner() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.75, ease: "easeOut" }}
             >
-              <Button size="lg" className="w-max px-8 text-base shadow-md h-12 rounded-[5px]">
-                Shop Now
-              </Button>
+              <Link href={featuredBanner.linkUrl}>
+                <Button size="lg" className="w-max px-8 text-base shadow-md h-12 rounded-[5px]">
+                  Shop Now
+                </Button>
+              </Link>
             </motion.div>
           </div>
         </motion.div>

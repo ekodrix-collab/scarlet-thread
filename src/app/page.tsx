@@ -7,7 +7,6 @@ import { ProductGrid } from "@/components/sections/ProductGrid"
 import { StoreFeatures } from "@/components/sections/StoreFeatures"
 import { Testimonials } from "@/components/sections/Testimonials"
 import { SmileCTA } from "@/components/sections/SmileCTA"
-import ShopByOccasion from "@/components/sections/ShopByOcassion"
 import { CraftedGalleryHer } from "@/components/sections/gifts-for-her/CraftedGalleryHer"
 import { NewHowItWorks } from "@/components/sections/NewHowItWorks"
 
@@ -17,7 +16,6 @@ export default function Home() {
       <Hero />
        <Discover /> 
         <ProductGrid />
-      {/* <ShopByOccasion/> */}
      
       {/* <Categories /> */}
       <NewHowItWorks />
