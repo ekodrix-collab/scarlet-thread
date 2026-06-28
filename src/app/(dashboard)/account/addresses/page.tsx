@@ -392,7 +392,7 @@ export default function AccountAddresses() {
                 <Label htmlFor="emirate" className="font-semibold text-slate-700 dark:text-slate-300">Emirate *</Label>
                 <Select
                   value={form.emirate}
-                  onValueChange={(val) => setForm((p) => ({ ...p, emirate: val }))}
+                  onValueChange={(val) => setForm((p) => ({ ...p, emirate: val ?? "" }))}
                 >
                   <SelectTrigger id="emirate" className="w-full h-10 rounded-lg border border-slate-200 bg-white dark:bg-slate-900 pr-3">
                     <SelectValue placeholder="Select Emirate" />
